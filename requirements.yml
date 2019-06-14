@@ -1,0 +1,17 @@
+name: env_UncertaintyForecasting
+channels:
+- conda-forge
+- pytorch
+dependencies:
+  - python==3.6
+  - seaborn
+  - pandas
+  - numpy
+  - matplotlib
+  - psycopg2
+  - cudatoolkit=9.0
+  - pip:
+    - pyro-ppl
+    - prettytable
+
+
