@@ -122,3 +122,11 @@ def show_marginal_calibration(y_pred, y_true):
     return deviation_score_marginal_calibration
 
 
+def empiral_confidance_interval():
+    
+    alpha = 0.95
+    p = ((1.0 - alpha) / 2.0) * 100
+    lower = max(0.0, np.percentile(means_of_random_samples, p))
+    p = (alpha + ((1.0 - alpha) / 2.0)) * 100
+    upper = min(1.0, np.percentile(means_of_random_samples, p))
+    print('%.1f confidence interval %.4f and %.4f' % (alpha * 100, lower, upper))
