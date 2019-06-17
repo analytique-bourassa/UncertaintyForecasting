@@ -1,36 +1,23 @@
 import matplotlib.pyplot as plt
-from models.calibration.diagnostics import show_empirical_cdf, show_in_intervals,show_marginal_calibration
+import numpy as np
 
-
+from models.calibration.diagnostics import show_empirical_cdf, show_in_intervals, show_marginal_calibration
+from data_generation.data_generator import return_arma_data, return_sinus_data
 #####################
 # Set parameters
 #####################
 n_data = 300
-
-
-
-import numpy as np
-import statsmodels.api as sm
-
-np.random.seed(12345)
-arparams = np.array([.3, -.2, 0.2, 0.1])
-maparams = np.array([.65, .35])
-ar = np.r_[1, -arparams] # add zero-lag and negate
-ma = np.r_[1, maparams] # add zero-lag
-y = sm.tsa.arma_generate_sample(ar, ma, n_data)
-
+y = return_arma_data(n_data)
 plt.plot(y)
 plt.show()
-
-
-
-
 
 #####################
 # Generate data_handling
 #####################
 
-data = np.sin(0.2*np.linspace(0, 200, n_data)) + np.random.normal(0,0.1,n_data) #y#
+data = return_sinus_data(n_data) + np.random.normal(0, 0.1, n_data) #y#
+
+#+ np.random.normal(0, 0.1, n_data)  # y#
 y_true = data
 ########################
 # Models predictions

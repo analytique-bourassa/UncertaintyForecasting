@@ -123,7 +123,7 @@ def show_marginal_calibration(y_pred, y_true):
 
 
 def empiral_confidance_interval():
-    
+
     alpha = 0.95
     p = ((1.0 - alpha) / 2.0) * 100
     lower = max(0.0, np.percentile(means_of_random_samples, p))

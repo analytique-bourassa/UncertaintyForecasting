@@ -1,5 +1,5 @@
 import torch
-from models.LSTM_Bayesian.data_generation.generate_data import *
+from data_generation.generate_data import *
 import matplotlib.pyplot as plt
 from models.LSTM_VAR.BayesianLSTM import LSTM
 from math import floor
