@@ -7,7 +7,7 @@ BIAS = 0.1
 n_samples = 100
 
 
-def ideal_forecaster(mean_values):
+def generate_ideal_forecaster_values(mean_values):
 
     n_data = mean_values.shape[KEY_N_DATA]
     ideal_forecaster = np.zeros((n_samples, n_data))
@@ -18,7 +18,7 @@ def ideal_forecaster(mean_values):
     return ideal_forecaster
 
 
-def unfocused_forecaster(mean_values):
+def generate_unfocused_forecaster_values(mean_values):
 
     n_data = mean_values.shape[KEY_N_DATA]
     unfocused_forecaster = np.zeros((n_samples, n_data))
@@ -30,7 +30,7 @@ def unfocused_forecaster(mean_values):
     return unfocused_forecaster
 
 
-def asymetric_bias_forecaster(mean_values):
+def generate_asymetric_bias_forecaster_values(mean_values):
 
     n_data = mean_values.shape[KEY_N_DATA]
     asymetric_bias_forecaster = np.zeros((n_samples, n_data))
@@ -40,5 +40,5 @@ def asymetric_bias_forecaster(mean_values):
         asymetric_bias_forecaster[index_sample] += BIAS * np.sign(asymetric_bias_forecaster[index_sample])
         asymetric_bias_forecaster[index_sample] += np.random.normal(NOISE_MEAN, NOISE_STD, n_data)
 
-    return unfocused_forecaster
+    return asymetric_bias_forecaster
 

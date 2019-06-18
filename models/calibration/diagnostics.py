@@ -10,7 +10,54 @@ def in_interval(y_mean, y_true, sigma):
     else:
         return False
 
+def calculate_lower_upper_confidence_interval(random_samples, alpha):
+
+    p = ((1.0 - alpha) / 2.0) * 100
+
+
+    lower =  np.percentile(random_samples, p)
+
+    p = (alpha + ((1.0 - alpha) / 2.0)) * 100
+    upper = np.percentile(random_samples, p)
+
+    return lower, upper
+
 def show_in_intervals(y_pred, y_true):
+
+    n_intervals = 21
+    intervals = np.linspace(0., 1, n_intervals)
+    n_time_steps = y_pred.shape[0]
+
+    counts = np.zeros(n_intervals)
+
+    for index_interval, interval in enumerate(intervals):
+
+        for index_y, y_true_value in enumerate(y_true):
+
+            samples_y_pred = y_pred[index_y]
+
+            lower, upper = calculate_lower_upper_confidence_interval(samples_y_pred, interval)
+
+            if lower <= y_true_value <= upper:
+                counts[index_interval] += 1
+
+    counts /= n_time_steps
+    counts[0] = 0
+    counts[-1] = 1.0
+
+    plt.plot(intervals, counts)
+    plt.plot(intervals, intervals, "-")
+    plt.xlabel("confidence intervale")
+    plt.ylabel("frequency ratio in confidence interval")
+    plt.title("calibration")
+    plt.show()
+
+    deviations = np.abs(counts - intervals)
+    deviation_score_probabilistic_calibration = (intervals[1] - intervals[0])*deviations.sum()
+
+    return deviation_score_probabilistic_calibration
+
+def show_in_intervals_guassian_forecast(y_pred, y_true):
 
 
     y_mean = np.mean(y_pred, axis=1)

@@ -48,24 +48,11 @@ class LSTM(nn.Module):
 
         # Only take the output from the final timetep
         # Can pass on the entirety of lstm_out to the next layer if it is a seq2seq prediction
-        if self.training:
-            y_pred = self.linear(lstm_out[-1].view(self.batch_size, -1)).view(-1)
-        else:
-            epsilon = 0.14
-            number_of_samples = 100
-            y_pred = torch.ones((self.batch_size, number_of_samples))
+        #if self.training:
+        y_pred = self.linear(lstm_out[-1].view(self.batch_size, -1))
 
-            weights = self.linear.weight
-            bias = self.linear.bias
+        return y_pred.view(-1)
 
-            for sample_index in range(number_of_samples):
-
-                shape_for_noise = weights.size()
-                noise_generator = Normal(loc=0, scale=epsilon)
-                new_weights = weights + noise_generator.rsample(shape_for_noise)
-
-                output_value = F.linear(lstm_out[-1].view(self.batch_size, -1), new_weights, bias)
-
-                y_pred[:, sample_index] = output_value.reshape(-1)
-
-        return y_pred
+    def return_last_layer(self, input):
+        lstm_out, self.hidden = self.lstm(input.view(len(input), self.batch_size, -1))
+        return lstm_out[-1].view(self.batch_size, -1)

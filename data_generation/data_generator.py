@@ -9,7 +9,7 @@ ma = np.r_[1, maparams] # add zero-lag
 
 
 def return_arma_data(n_data):
-    return sm.tsa.arma_generate_sample(ar, ma, n_data, sigma=0.0)
+    return sm.tsa.arma_generate_sample(ar, ma, n_data)
 
 def return_sinus_data(n_data):
     return np.sin(0.2 * np.linspace(0, n_data, n_data))
