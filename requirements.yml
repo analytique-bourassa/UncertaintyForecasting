@@ -3,13 +3,14 @@ channels:
 - conda-forge
 - pytorch
 dependencies:
-  - python==3.6
+  - python==3.6.1
   - seaborn
   - pandas
   - numpy
   - matplotlib
-  - psycopg2
   - cudatoolkit=9.0
+  - pymc3
+  - scikit-learn
   - pip:
     - pyro-ppl
     - prettytable
