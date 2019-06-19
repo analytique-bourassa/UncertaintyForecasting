@@ -14,6 +14,8 @@ def show_analysis(forecasting_values, y_true, name="ideal forecaster"):
 
     plt.plot(x, y_mean, label="Preds")
     plt.plot(x, y_true, label="Data")
+    plt.xlabel("time")
+    plt.ylabel("y (value to forecast)")
     plt.title(name)
     plt.fill_between(x, y_mean - error, y_mean + error, alpha=0.5)
     plt.legend()

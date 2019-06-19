@@ -47,9 +47,9 @@ def show_in_intervals(y_pred, y_true):
 
     plt.plot(intervals, counts)
     plt.plot(intervals, intervals, "-")
-    plt.xlabel("confidence intervale")
+    plt.xlabel("Confidence intervals")
     plt.ylabel("frequency ratio in confidence interval")
-    plt.title("calibration")
+    plt.title("Confidence interval calibration")
     plt.show()
 
     deviations = np.abs(counts - intervals)
@@ -82,9 +82,9 @@ def show_in_intervals_guassian_forecast(y_pred, y_true):
 
     plt.plot(intervals, counts)
     plt.plot(intervals, intervals, "-")
-    plt.xlabel("confidence intervale")
+    plt.xlabel("Confidence intervals")
     plt.ylabel("frequency ratio in confidence interval")
-    plt.title("calibration")
+    plt.title("Confidence interval calibration")
     plt.show()
 
     deviation_score_probabilistic_calibration = (intervals[1] - intervals[0])*np.abs(counts - intervals).sum()
@@ -120,15 +120,15 @@ def show_empirical_cdf(y_pred, y_true):
     plt.plot(p_values, cdf_empirical)
     plt.plot(p_values, p_values, "-")
     plt.xlabel("p")
-    plt.ylabel("cdf empirical")
-    plt.title("calibration  cdf")
+    plt.ylabel("Cumulative distribution function estimate")
+    plt.title("Calibration of the cumulative distribution function")
 
     plt.subplot(122)
     plt.bar(p_values[1:], relative_frequency, align='center', width=0.02, alpha=0.7)
     plt.plot(p_values, np.ones(p_values.shape[0]), "-")
     plt.xlabel("p")
     plt.ylabel("relative frequency")
-    plt.title("calibration  cdf")
+    plt.title("Calibration of the cumulative distribution function")
     plt.show()
 
     deviation_score_exceedance_calibration = (p_values[1] - p_values[0]) * np.abs(cdf_empirical - p_values).sum()
@@ -155,25 +155,16 @@ def show_marginal_calibration(y_pred, y_true):
         cdf_forecast[index_y] = sum(1*(y_mean <= y_value*np.ones(n_predictions)))/n_predictions
         cdf_true[index_y] = sum(1 * (y_true <= y_value * np.ones(n_predictions))) / n_predictions
 
-    plt.xlabel("cdf true")
-    plt.ylabel("cdf forcecasts")
+    plt.xlabel("CDF of observations")
+    plt.ylabel("CDF of  forecasts")
     p_values = np.linspace(0,1,n_possible_values+1)
 
     plt.plot(cdf_true, cdf_forecast)
     plt.plot(p_values, p_values, "--")
 
-    plt.title("marginal calibration")
+    plt.title("Marginal calibration")
     plt.show()
 
     deviation_score_marginal_calibration = ((cdf_true[1:] - cdf_true[:-1]) * np.abs(cdf_true[1:] - cdf_forecast[1:])).sum()
     return deviation_score_marginal_calibration
 
-
-def empiral_confidance_interval():
-
-    alpha = 0.95
-    p = ((1.0 - alpha) / 2.0) * 100
-    lower = max(0.0, np.percentile(means_of_random_samples, p))
-    p = (alpha + ((1.0 - alpha) / 2.0)) * 100
-    upper = min(1.0, np.percentile(means_of_random_samples, p))
-    print('%.1f confidence interval %.4f and %.4f' % (alpha * 100, lower, upper))
