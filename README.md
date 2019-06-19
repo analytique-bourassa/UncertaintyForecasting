@@ -77,10 +77,24 @@ The deviation scoring for the marginal calibration is defined by
 
 ## 2.1 Ideal forecaster
 
+<img src="./models/figures/ideal_forecaster/data.png" width="400">
+<img src="./models/figures/ideal_forecaster/confidence_interval.png" width="400">
+<img src="./models/figures/ideal_forecaster/cdf_calibration.png" width="400">
+<img src="./models/figures/ideal_forecaster/marginal_calibration.png" width="400">
+
 ## 2.2 Unfocused forecasster
+
+<img src="./models/figures/unfocused_forecaster/data.png" width="400">
+<img src="./models/figures/unfocused_forecaster/confidence_interval_calibration.png" width="400">
+<img src="./models/figures/unfocused_forecaster/cdf_calibration.png" width="400">
+<img src="./models/figures/unfocused_forecaster/marginal_calibration.png" width="400">
 
 ## 2.3 Asymetric bias forecaster
 
+<img src="./models/figures/asymetric_unfocused_forecaster/data.png" width="400">
+<img src="./models/figures/asymetric_unfocused_forecaster/confidence_interval.png" width="400">
+<img src="./models/figures/asymetric_unfocused_forecaster/cdf_calibration.png" width="400">
+<img src="./models/figures/asymetric_unfocused_forecaster/marginal_calibration.png" width="400">
 
 # 3 - LSTM-MCMC forecaster
 
