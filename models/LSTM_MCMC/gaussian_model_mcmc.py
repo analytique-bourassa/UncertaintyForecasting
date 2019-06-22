@@ -1,20 +1,26 @@
 from theano import shared
 import pymc3 as pm
 import matplotlib.pyplot as plt
+import numpy as np
 
 from probabilitic_predictions.probabilistic_predictions import ProbabilisticPredictions
 
 class GaussianLinearModel_MCMC():
 
-    def __init__(self, X_train, y_train):
+    def __init__(self, X_train, y_train, priors_beta=None):
 
         n_features = X_train.shape[1]
+
         self.X_data = X_train
         self.y_data = y_train
         self.mu_prior = y_train.mean()
+
         #Preprocess data for Modeling
         self.shA_X = shared(X_train)
+        self.shA_y = shared(y_train)
 
+        if priors_beta is None:
+            priors_beta = 1.
 
         #Generate Model
         self.linear_model = pm.Model()
@@ -22,16 +28,21 @@ class GaussianLinearModel_MCMC():
         with self.linear_model:
             # Priors for unknown model parameters
             alpha = pm.Normal("alpha", mu=self.mu_prior, sd=2)
-            betas = pm.Normal("betas", mu=1, sd=2, shape=n_features)
+            betas = pm.Normal("betas", mu=priors_beta, sd=2, shape=n_features)
             sigma = pm.HalfNormal("sigma", sd=10)  # you could also try with a HalfCauchy that has longer/fatter tails
             mu = alpha + pm.math.dot(betas, self.shA_X.T)
-            self.likelihood = pm.Normal("likelihood", mu=mu, sd=sigma, observed=y_train)
+            self.likelihood = pm.Normal("likelihood", mu=mu, sd=sigma, observed=self.shA_y)
 
     def sample(self):
 
+        SMOKE_TEST = False
+
+        number_of_samples = 1000 if not SMOKE_TEST else 1
+        number_of_tuning_step = 2000 if not SMOKE_TEST else 1
+
         with self.linear_model:
             step = pm.NUTS()
-            self.trace = pm.sample(1000, step, tune=2000)
+            self.trace = pm.sample(number_of_samples, step, tune=number_of_tuning_step)
 
     def show_trace(self):
 
@@ -51,10 +62,13 @@ class GaussianLinearModel_MCMC():
         # Prediction
 
         self.shA_X.set_value(X_test)
+
+        zeros = np.zeros(X_test.shape[0], dtype=np.float32)
+        self.shA_y.set_value(zeros)
+
         ppc = pm.sample_ppc(self.trace,
                             model=self.linear_model,
                             samples=number_of_samples)
-
 
         for idx in range(y_test.shape[0]):
             predictions.values[idx] = list(ppc.items())[0][1].T[idx]
@@ -62,4 +76,3 @@ class GaussianLinearModel_MCMC():
 
         return predictions
 
-#Looks like I need to transpose it to get `X_te` samples on rows and posterior distribution samples on cols

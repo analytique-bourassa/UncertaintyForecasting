@@ -15,7 +15,7 @@ def data_loader(data, batch_size, random=True):
         batch_first_index = index_batch * batch_size
         batch_last_index = (index_batch + 1) * batch_size
 
-        X_numpy = data[:, batch_first_index:batch_last_index, 0]
+        X_numpy = data[:-1, batch_first_index:batch_last_index, 0]
         X_torch = torch.from_numpy(X_numpy).type(torch.Tensor)
 
         y_numpy = data[-1, batch_first_index:batch_last_index, 0]

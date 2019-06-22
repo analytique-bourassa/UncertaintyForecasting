@@ -56,3 +56,7 @@ class LSTM(nn.Module):
     def return_last_layer(self, input):
         lstm_out, self.hidden = self.lstm(input.view(len(input), self.batch_size, -1))
         return lstm_out[-1].view(self.batch_size, -1)
+
+    @property
+    def last_layers_weights(self):
+        return self.linear.weight.view(-1).detach().numpy(), self.linear.bias.detach().numpy()
