@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 from models.LSTM_MCMC.LSTM import LSTM
 from models.model_data_feeder import *
 import numpy as np
-from data_generation.data_generator import return_arma_data, return_sinus_data
-
+from models.LSTM_MCMC.gaussian_model_mcmc import GaussianLinearModel_MCMC
+from models.calibration.analysis import show_analysis
 #####################
 # Set parameters
 #####################
@@ -41,7 +41,8 @@ length_of_sequences = 10
 # Generate data_handling
 #####################
 
-data = np.sin(0.2*np.linspace(0, 200, n_data))
+data = np.sin(0.2*np.linspace(0, 200, n_data)) + np.random.normal(0, 0.1, n_data)
+
 number_of_sequences = n_data - length_of_sequences+ 1
 
 sequences = list()
@@ -126,85 +127,22 @@ if SHOW_FIGURES:
     plt.show()
 
 
-
-
-
-import pymc3 as pm
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns; sns.set()
-from scipy import stats, optimize
-from sklearn.datasets import load_diabetes
-from sklearn.model_selection import train_test_split
-from theano import shared
-
 np.random.seed(9)
 
-
-#Load the Data
-diabetes_data = load_diabetes()
 X = features
 y_ = y_pred
-#Split Data
-X_tr, X_te, y_tr, y_te = X[:275], X[275:], y_[:275], y_[275:]
 
-#Shapes
-print(X.shape, y_.shape, X_tr.shape, X_te.shape)
-#((442, 10), (442,), (331, 10), (111, 10))
+X_train, X_test, y_train, y_test = X[:275], X[275:], y_[:275], y_[275:]
 
-#Preprocess data for Modeling
-#shA_X = shared(X)
+print(X.shape, y_.shape, X_train.shape, X_test.shape)
 
-from models.LSTM_MCMC.gaussian_model_mcmc import GaussianLinearModel_MCMC
 
-model_linear_mcmc = GaussianLinearModel_MCMC(X, y_)
+
+model_linear_mcmc = GaussianLinearModel_MCMC(X_train, y_train)
 model_linear_mcmc.sample()
 model_linear_mcmc.show_trace()
-predictions = model_linear_mcmc.make_predictions()
+predictions = model_linear_mcmc.make_predictions(X_test, y_test)
 
 predictions.show_predictions_with_confidence_interval(confidence_interval=0.95)
-#Generate Model
-"""
-linear_model = pm.Model()
 
-with linear_model:
-    # Priors for unknown model parameters
-    alpha = pm.Normal("alpha", mu=y_.mean(), sd=2)
-    betas = pm.Normal("betas", mu=1, sd=2, shape=X.shape[1])
-    sigma = pm.HalfNormal("sigma", sd=10)  # you could also try with a HalfCauchy that has longer/fatter tails
-    mu = alpha + pm.math.dot(betas, X.T)
-    likelihood = pm.Normal("likelihood", mu=mu, sd=sigma, observed=y_)
-    step = pm.NUTS()
-    trace = pm.sample(1000, step, tune=2000)
-
-#Traceplot
-pm.traceplot(trace)
-plt.show()
-
-# Prediction
-#shA_X.set_value(X_te)
-ppc = pm.sample_ppc(trace, model=linear_model, samples=1000)
-
-#What's the shape of this?
-list(ppc.items())[0][1].shape #(1000, 111) it looks like 1000 posterior samples for the 111 test samples (X_te) I gave it
-
-#Looks like I need to transpose it to get `X_te` samples on rows and posterior distribution samples on cols
-
-predicted_yi_list = list()
-actual_yi_list = list()
-
-for idx in range(y_.shape[0]):
-
-    predicted_yi = list(ppc.items())[0][1].T[idx].mean()
-    actual_yi = y_[idx]
-
-    predicted_yi_list.append(predicted_yi)
-    actual_yi_list.append(actual_yi)
-
-
-plt.plot(predicted_yi_list, label="Preds")
-plt.plot(actual_yi_list, label="Data")
-plt.legend()
-plt.show()
-"""
+show_analysis(predictions.values, predictions.true_values, name="LSTM + MCMC")
