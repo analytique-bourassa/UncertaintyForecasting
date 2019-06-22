@@ -1,7 +1,7 @@
 import torch
 import matplotlib.pyplot as plt
 from models.LSTM_MCMC.LSTM import LSTM
-from math import floor
+from models.model_data_feeder import *
 import numpy as np
 from data_generation.data_generator import return_arma_data, return_sinus_data
 
@@ -89,43 +89,6 @@ optimiser = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 hist = np.zeros(num_epochs)
 
-def data_loader(data, batch_size, random=True):
-
-    number_of_batches = int(floor(data.shape[1] / batch_size))
-    if random:
-        indexes_of_batch = np.random.choice(range(number_of_batches),
-                                            number_of_batches, replace=False)
-    else:
-        indexes_of_batch = range(number_of_batches)
-
-    for index_batch in indexes_of_batch:
-        batch_first_index = index_batch * batch_size
-        batch_last_index = (index_batch + 1) * batch_size
-
-        X_numpy = data[:, batch_first_index:batch_last_index, 0]
-        X_torch = torch.from_numpy(X_numpy).type(torch.Tensor)
-
-        y_numpy = data[-1, batch_first_index:batch_last_index, 0]
-        y_torch = torch.from_numpy(y_numpy).type(torch.Tensor)
-
-        yield X_torch, y_torch
-
-def make_forward_pass(data_loader, model, loss_fn):
-
-    losses = None
-    N_data = 0
-
-    for X_train, y_train in data_loader(training_data, batch_size):
-
-        N_data += batch_size
-        y_pred = model(X_train)
-
-        if losses is None:
-            losses = loss_fn(y_pred, y_train)
-        else:
-            losses += loss_fn(y_pred, y_train)
-
-    return losses, N_data
 
 for t in range(num_epochs):
     # Initialise hidden state
@@ -134,7 +97,7 @@ for t in range(num_epochs):
 
     # Forward pass
 
-    losses, N_data = make_forward_pass(data_loader, model, loss_fn)
+    losses, N_data = make_forward_pass(data_loader, model, loss_fn, training_data, batch_size)
     if t % 10 == 0:
         print("Epoch ", t, "MSE: ", losses.item())
 
@@ -149,61 +112,8 @@ for t in range(num_epochs):
 #####################
 
 
-def make_predictions(data_loader, model):
-    """
-       NOTE: the feature index for the noise is based on the keeped indexes!!
-    """
-    model.eval()
-
-    y_pred_all = None
-    y_test_all = None
-
-    for X_train, y_train in data_loader(training_data, batch_size, random=False):
-
-        y_pred = model(X_train)
-
-
-        if y_pred_all is None:
-            y_pred_all = y_pred.detach().numpy()
-            y_test_all = y_train.detach().numpy()
-
-        y_pred_all = np.concatenate([y_pred_all, y_pred.detach().numpy()])
-        y_test_all = np.concatenate([y_test_all, y_train.detach().numpy()])
-
-    model.train()
-
-    return y_pred_all, y_test_all
-
-
-def extract_features(data_loader, model):
-    """
-       NOTE: the feature index for the noise is based on the keeped indexes!!
-    """
-    model.eval()
-
-    y_pred_all = None
-    y_test_all = None
-
-    for X_train, y_train in data_loader(training_data, batch_size, random=False):
-
-        y_pred = model.return_last_layer(X_train)
-
-
-        if y_pred_all is None:
-            y_pred_all = y_pred.detach().numpy()
-            y_test_all = y_train.detach().numpy()
-
-        y_pred_all = np.concatenate([y_pred_all, y_pred.detach().numpy()])
-        y_test_all = np.concatenate([y_test_all, y_train.detach().numpy()])
-
-    model.train()
-
-    return y_pred_all, y_test_all
-
-
-
-y_pred, y_true = make_predictions(data_loader, model)
-features, y_true = extract_features(data_loader, model)
+y_pred, y_true = make_predictions(data_loader, model, training_data, batch_size)
+features, y_true = extract_features(data_loader, model, training_data, batch_size)
 
 print(np.corrcoef(features.T))
 if SHOW_FIGURES:
@@ -215,15 +125,7 @@ if SHOW_FIGURES:
     plt.plot(hist)
     plt.show()
 
-import os
-from functools import partial
-import numpy as np
-import pandas as pd
-import seaborn as sns
-import torch
-import torch.nn as nn
 
-import matplotlib.pyplot as plt
 
 
 
@@ -252,9 +154,18 @@ print(X.shape, y_.shape, X_tr.shape, X_te.shape)
 #((442, 10), (442,), (331, 10), (111, 10))
 
 #Preprocess data for Modeling
-shA_X = shared(X)
+#shA_X = shared(X)
 
+from models.LSTM_MCMC.gaussian_model_mcmc import GaussianLinearModel_MCMC
+
+model_linear_mcmc = GaussianLinearModel_MCMC(X, y_)
+model_linear_mcmc.sample()
+model_linear_mcmc.show_trace()
+predictions = model_linear_mcmc.make_predictions()
+
+predictions.show_predictions_with_confidence_interval(confidence_interval=0.95)
 #Generate Model
+"""
 linear_model = pm.Model()
 
 with linear_model:
@@ -296,3 +207,4 @@ plt.plot(predicted_yi_list, label="Preds")
 plt.plot(actual_yi_list, label="Data")
 plt.legend()
 plt.show()
+"""
