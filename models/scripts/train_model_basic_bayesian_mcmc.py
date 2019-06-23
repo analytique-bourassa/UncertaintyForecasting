@@ -1,9 +1,9 @@
 import torch
 import matplotlib.pyplot as plt
-from models.LSTM_MCMC.LSTM import LSTM
+from models.LSTM_BayesRegressor.LSTM import LSTM
 from models.model_data_feeder import *
 import numpy as np
-from models.LSTM_MCMC.gaussian_model_mcmc import GaussianLinearModel_MCMC
+from models.LSTM_BayesRegressor.gaussian_model_mcmc import GaussianLinearModel_MCMC
 from models.calibration.analysis import show_analysis
 #####################
 # Set parameters

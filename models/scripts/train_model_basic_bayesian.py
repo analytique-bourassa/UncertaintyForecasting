@@ -1,6 +1,6 @@
 import torch
 import matplotlib.pyplot as plt
-from models.LSTM_MCMC.LSTM import LSTM
+from models.LSTM_BayesRegressor.LSTM import LSTM
 from math import floor
 import numpy as np
 from data_generation.data_generator import return_arma_data, return_sinus_data

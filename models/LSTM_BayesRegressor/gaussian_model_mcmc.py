@@ -4,8 +4,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from probabilitic_predictions.probabilistic_predictions import ProbabilisticPredictions
+from models.LSTM_BayesRegressor.GaussianLinearModel_abstract import GaussianLinearModel_abstract
 
-class GaussianLinearModel_MCMC():
+class GaussianLinearModel_MCMC(GaussianLinearModel_abstract):
 
     def __init__(self, X_train, y_train, priors_beta=None):
 
