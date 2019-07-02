@@ -1,46 +1,54 @@
-import torch
 import matplotlib.pyplot as plt
 from models.LSTM_BayesRegressor.LSTM import LSTM
 from models.model_data_feeder import *
 import numpy as np
 from models.LSTM_BayesRegressor.gaussian_model_mcmc import GaussianLinearModel_MCMC
+from models.LSTM_BayesRegressor.gaussian_model_mcmc_pyro import GaussianLinearModel_MCMC_pyro
+from models.lstm_params import LSTM_parameters
+from models.disk_reader_and_writer import save_checkpoint, load_checkpoint
+
 from models.calibration.analysis import show_analysis
 
+from data_generation.data_generator import return_arma_data
 
 #####################
 # Set parameters
 #####################
-SHOW_FIGURES = False
+PATH = "/home/louis/Documents/ConsultationSimpliphAI/" \
+           "AnalytiqueBourassaGit/UncertaintyForecasting/models/LSTM_BayesRegressor/.models/"
+
+VERSION = "v0.0.4"
+SHOW_FIGURES = True
 SMOKE_TEST = False
+TRAIN_LSTM = True
+SAVE_LSTM = False
+TYPE_OF_DATA = "sin" # options are sin or ar5
+NAME = "feature_extractor"
+
+assert TYPE_OF_DATA in ["sin", "ar5"]
 
 # Network params
-input_size = 20
-
-per_element = True
-if per_element:
-    lstm_input_size = 1
-else:
-    lstm_input_size = input_size
-# size of hidden layers
-
-h1 = 5
-output_dim = 1
-num_layers = 1
+lstm_params = LSTM_parameters()
 learning_rate = 3e-3
 num_epochs = 250 if not SMOKE_TEST else 1
-dropout = 0.4
 
 n_data = 3000
 dtype = torch.float
 length_of_sequences = 10 + 1
 
 
+if TYPE_OF_DATA == "ar5":
+    y = return_arma_data(n_data)
+elif TYPE_OF_DATA == "sin":
+    y = np.sin(0.2 * np.linspace(0, n_data, n_data))
+else:
+    raise ValueError("invalid type of data")
 
-#####################
-# Generate data_handling
-#####################
+
 sigma = 0.1
-data = np.sin(0.2*np.linspace(0, n_data, n_data)) + np.random.normal(0, sigma, n_data)
+data = y + np.random.normal(0, sigma, n_data)
+data /= data.max()
+
 if SHOW_FIGURES:
 
     x = range(n_data)
@@ -80,52 +88,41 @@ if SHOW_FIGURES:
     plt.show()
 
 print("mean difference: ", np.mean(np.abs(all_data[length_of_sequences-2, :, 0] - training_data_labels)))
-#####################
-# Build model
-#####################
-batch_size = 20
 
-model = LSTM(1,
-             h1,
-             batch_size=batch_size,
-             output_dim=output_dim,
-             num_layers=num_layers,
-             dropout=dropout)
+
+model = LSTM(lstm_params)
+
 
 loss_fn = torch.nn.MSELoss(size_average=False)
-optimiser = torch.optim.Adam(model.parameters(), lr=learning_rate)
-
-#####################
-# Train model
-#####################
-
-hist = np.zeros(num_epochs)
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 
-for t in range(num_epochs):
-    # Initialise hidden state
-    # Don't do this if you want your LSTM to be stateful
-    model.hidden = model.init_hidden()
+if TRAIN_LSTM:
+    hist = np.zeros(num_epochs)
+    for t in range(num_epochs):
 
-    # Forward pass
+        model.hidden = model.init_hidden()
 
-    losses, N_data = make_forward_pass(data_loader, model, loss_fn, data_train, batch_size)
-    if t % 10 == 0:
-        print("Epoch ", t, "MSE: ", losses.item())
+        losses, N_data = make_forward_pass(data_loader, model, loss_fn, data_train, lstm_params.batch_size)
+        if t % 10 == 0:
+            print("Epoch ", t, "MSE: ", losses.item())
 
-    hist[t] = losses.item()
+        hist[t] = losses.item()
 
-    optimiser.zero_grad()
-    losses.backward()
-    optimiser.step()
+        optimizer.zero_grad()
+        losses.backward()
+        optimizer.step()
+else:
 
-#####################
-# Plot preds and performance
-#####################
+    load_checkpoint(model, optimizer, PATH, NAME + "_" + VERSION)
 
 
-y_pred, _ = make_predictions(data_loader, model, all_data, batch_size)
-features, y_true = extract_features(data_loader, model, all_data, batch_size)
+if SAVE_LSTM:
+    save_checkpoint(model, optimizer, PATH, NAME + "_" + VERSION)
+    lstm_params.save(VERSION, PATH)
+
+y_pred, _ = make_predictions(data_loader, model, all_data, lstm_params.batch_size)
+features, y_true = extract_features(data_loader, model, all_data, lstm_params.batch_size)
 
 print(np.corrcoef(features.T))
 print("mean difference: ", np.mean(np.abs(y_pred[number_of_train_data:] - y_true[number_of_train_data:])))
@@ -136,8 +133,9 @@ if SHOW_FIGURES:
     plt.legend()
     plt.show()
 
-    plt.plot(hist)
-    plt.show()
+    if TRAIN_LSTM:
+        plt.plot(hist)
+        plt.show()
 
 
 np.random.seed(9)
@@ -148,7 +146,7 @@ X_train, X_test, y_train, y_test = features[:number_of_train_data], features[num
 
 priors_beta, _ = model.last_layers_weights
 
-model_linear_mcmc = GaussianLinearModel_MCMC(X_train, y_train, priors_beta)
+model_linear_mcmc = GaussianLinearModel_MCMC_pyro(X_train, y_train, priors_beta)
 model_linear_mcmc.sample()
 model_linear_mcmc.show_trace()
 predictions = model_linear_mcmc.make_predictions(X_test, y_test)

@@ -3,9 +3,12 @@ from pyro.distributions import Normal, Uniform, Delta
 from pyro.optim import Adam
 from pyro.infer import EmpiricalMarginal, SVI, Trace_ELBO, TracePredictive
 from pyro.contrib.autoguide import AutoDiagonalNormal
-
+from pyro.infer.mcmc import MCMC, NUTS
+from warnings import warn
 import torch
 import torch.nn as nn
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 from probabilitic_predictions.probabilistic_predictions import ProbabilisticPredictions
 from models.LSTM_BayesRegressor.GaussianLinearModel_abstract import GaussianLinearModel_abstract
@@ -24,7 +27,7 @@ class RegressionModel(nn.Module):
         return self.linear(x) + (self.factor * x[:, 0] * x[:, 1]).unsqueeze(1)
 
 
-class GaussianLinearModel_SVI(GaussianLinearModel_abstract):
+class GaussianLinearModel_MCMC_pyro(GaussianLinearModel_abstract):
 
     def __init__(self, X_train, y_train, priors_beta=None):
 
@@ -34,34 +37,37 @@ class GaussianLinearModel_SVI(GaussianLinearModel_abstract):
         self.X_train = torch.tensor(X_train, dtype=torch.float)
         self.y_train = torch.tensor(y_train, dtype=torch.float)
 
-        guide = AutoDiagonalNormal(self.model)
-        optim = Adam({"lr": 0.03})
-
-        self.svi = SVI(self.model, guide, optim, loss=Trace_ELBO(), num_samples=1000)
-
     def sample(self):
-        num_iterations = 1000
-        pyro.clear_param_store()
-        for j in range(num_iterations):
-            # calculate the loss and take a gradient step
-            loss = self.svi.step(self.X_train, self.y_train)
-            if j % 100 == 0:
-                print("[iteration %04d] loss: %.4f" % (j + 1, loss / len(self.X_train)))
 
-        self.posterior = self.svi.run(self.X_train, self.y_train)
+        nuts_kernel = NUTS(self.model, adapt_step_size=False, step_size=0.1)
+        self.posterior = MCMC(nuts_kernel, num_samples=1000, warmup_steps=200) \
+            .run(self.X_train, self.y_train)
+
+
+        #    ax.set_title(sites[i])
+       # handles, labels = ax.get_legend_handles_labels()
+       # fig.legend(handles, labels, loc='upper right')
 
         self.trace_pred = TracePredictive(self.wrapped_model,
                                           self.posterior,
                                      num_samples=1000)
 
     def show_trace(self):
-        raise NotImplementedError
+        sites = ["sigma"]
+        hmc_empirical = EmpiricalMarginal(self.posterior, sites=sites)._get_samples_and_weights()[0].numpy()
+        # fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(12, 10))
+        # fig.suptitle("Marginal Posterior density - Regression Coefficients", fontsize=16)
+        # for i, ax in enumerate(axs.reshape(-1)):
+        # sns.distplot(svi_diagnorm_empirical[:, i], ax=ax, label="SVI (DiagNormal)")
+        sns.distplot(hmc_empirical[:, 0])
+        plt.show()
 
     def make_predictions(self, X_test, y_test):
 
         number_of_samples = 1000
 
         X_test = torch.tensor(X_test, dtype=torch.float)
+
         post_pred = self.trace_pred.run(X_test, None)
         mu, y = self.get_results(post_pred, sites=['prediction', 'obs'])
 
@@ -87,24 +93,24 @@ class GaussianLinearModel_SVI(GaussianLinearModel_abstract):
 
     def model(self, x_data, y_data):
 
-
         w_prior = Normal(torch.zeros(1, self.number_of_features),
                          torch.ones(1, self.number_of_features)).to_event(1)
 
-        b_prior = Normal(torch.tensor([[8.]]), torch.tensor([[1000.]])).to_event(1)
+        b_prior = Normal(torch.tensor([[0.]]),
+                         torch.tensor([[1.]])).to_event(1)
+
         f_prior = Normal(0., 1.)
+
         priors = {'linear.weight': w_prior,
                   'linear.bias': b_prior,
                   'factor': f_prior}
 
         scale = pyro.sample("sigma", Uniform(0., 10.))
-
         lifted_module = pyro.random_module("module", self.regression_model, priors)
         lifted_reg_model = lifted_module()
 
         with pyro.plate("map", len(x_data)):
             prediction_mean = lifted_reg_model(x_data).squeeze(-1)
-            # condition on the observed data
             pyro.sample("obs",
                         Normal(prediction_mean, scale),
                         obs=y_data)

@@ -47,7 +47,6 @@ class GaussianLinearModel_MCMC(GaussianLinearModel_abstract):
 
     def show_trace(self):
 
-        #Traceplot
         pm.traceplot(self.trace)
         plt.show()
 

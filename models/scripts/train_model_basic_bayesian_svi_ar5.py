@@ -1,34 +1,30 @@
-import torch
 import matplotlib.pyplot as plt
 from models.LSTM_BayesRegressor.LSTM import LSTM
 from models.model_data_feeder import *
 import numpy as np
-from models.LSTM_BayesRegressor.gaussian_model_mcmc import GaussianLinearModel_MCMC
 from models.calibration.analysis import show_analysis
+from models.disk_reader_and_writer import save_checkpoint
+from models.lstm_params import LSTM_parameters
+from models.LSTM_BayesRegressor.gaussian_model_svi import GaussianLinearModel_SVI
 
+from data_generation.data_generator import return_arma_data
 
 #####################
 # Set parameters
 #####################
-SHOW_FIGURES = False
+PATH = "/home/louis/Documents/ConsultationSimpliphAI/" \
+           "AnalytiqueBourassaGit/UncertaintyForecasting/models/LSTM_BayesRegressor/.models/"
+
+VERSION = "v0.1.0"
+SHOW_FIGURES = True
 SMOKE_TEST = False
+TRAIN_LSTM = True
+SAVE_LSTM = True
 
 # Network params
-input_size = 20
-
-per_element = True
-if per_element:
-    lstm_input_size = 1
-else:
-    lstm_input_size = input_size
-# size of hidden layers
-
-h1 = 5
-output_dim = 1
-num_layers = 1
+lstm_params = LSTM_parameters()
 learning_rate = 3e-3
 num_epochs = 250 if not SMOKE_TEST else 1
-dropout = 0.4
 
 n_data = 3000
 dtype = torch.float
@@ -39,8 +35,15 @@ length_of_sequences = 10 + 1
 #####################
 # Generate data_handling
 #####################
+
+y = return_arma_data(n_data)
+plt.plot(y)
+plt.show()
+
 sigma = 0.1
-data = np.sin(0.2*np.linspace(0, n_data, n_data)) + np.random.normal(0, sigma, n_data)
+data = y + np.random.normal(0, sigma, n_data)
+data /= data.max()
+
 if SHOW_FIGURES:
 
     x = range(n_data)
@@ -85,12 +88,7 @@ print("mean difference: ", np.mean(np.abs(all_data[length_of_sequences-2, :, 0] 
 #####################
 batch_size = 20
 
-model = LSTM(1,
-             h1,
-             batch_size=batch_size,
-             output_dim=output_dim,
-             num_layers=num_layers,
-             dropout=dropout)
+model = LSTM(lstm_params)
 
 loss_fn = torch.nn.MSELoss(size_average=False)
 optimiser = torch.optim.Adam(model.parameters(), lr=learning_rate)
@@ -103,11 +101,8 @@ hist = np.zeros(num_epochs)
 
 
 for t in range(num_epochs):
-    # Initialise hidden state
-    # Don't do this if you want your LSTM to be stateful
-    model.hidden = model.init_hidden()
 
-    # Forward pass
+    model.hidden = model.init_hidden()
 
     losses, N_data = make_forward_pass(data_loader, model, loss_fn, data_train, batch_size)
     if t % 10 == 0:
@@ -123,6 +118,9 @@ for t in range(num_epochs):
 # Plot preds and performance
 #####################
 
+if SAVE_LSTM:
+    save_checkpoint(model, optimiser, PATH, "feature_extractor_" + VERSION)
+    lstm_params.save(VERSION, PATH)
 
 y_pred, _ = make_predictions(data_loader, model, all_data, batch_size)
 features, y_true = extract_features(data_loader, model, all_data, batch_size)
@@ -146,14 +144,12 @@ X_train, X_test, y_train, y_test = features[:number_of_train_data], features[num
                                    y_true[:number_of_train_data], y_true[number_of_train_data:]
 
 
-priors_beta, _ = model.last_layers_weights
-
-model_linear_mcmc = GaussianLinearModel_MCMC(X_train, y_train, priors_beta)
-model_linear_mcmc.sample()
-model_linear_mcmc.show_trace()
-predictions = model_linear_mcmc.make_predictions(X_test, y_test)
+model_linear_svi = GaussianLinearModel_SVI(X_train, y_train)
+model_linear_svi.sample()
+predictions = model_linear_svi.make_predictions(X_test, y_test)
 
 predictions.show_predictions_with_confidence_interval(confidence_interval=0.95)
+show_analysis(predictions.values, predictions.true_values, name="LSTM + SVI")
 
-show_analysis(predictions.values, predictions.true_values, name="LSTM + MCMC")
+
 
