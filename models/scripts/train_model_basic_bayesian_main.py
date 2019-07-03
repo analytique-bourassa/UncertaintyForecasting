@@ -11,24 +11,25 @@ from models.calibration.analysis import show_analysis
 
 from data_generation.data_generator import return_arma_data
 
-#####################
-# Set parameters
-#####################
+
 PATH = "/home/louis/Documents/ConsultationSimpliphAI/" \
            "AnalytiqueBourassaGit/UncertaintyForecasting/models/LSTM_BayesRegressor/.models/"
 
-VERSION = "v0.0.4"
-SHOW_FIGURES = True
+VERSION = "v0.0.1"
+SHOW_FIGURES = False
 SMOKE_TEST = False
-TRAIN_LSTM = True
+TRAIN_LSTM = False
 SAVE_LSTM = False
 TYPE_OF_DATA = "sin" # options are sin or ar5
-NAME = "feature_extractor"
+NAME = "feature_extractor_sin"
 
 assert TYPE_OF_DATA in ["sin", "ar5"]
 
 # Network params
 lstm_params = LSTM_parameters()
+if TRAIN_LSTM is False:
+    lstm_params.load("lstm_params_" + NAME + "_" + VERSION, PATH)
+
 learning_rate = 3e-3
 num_epochs = 250 if not SMOKE_TEST else 1
 
@@ -137,21 +138,19 @@ if SHOW_FIGURES:
         plt.plot(hist)
         plt.show()
 
-
-np.random.seed(9)
-
 X_train, X_test, y_train, y_test = features[:number_of_train_data], features[number_of_train_data:], \
                                    y_true[:number_of_train_data], y_true[number_of_train_data:]
 
 
 priors_beta, _ = model.last_layers_weights
 
-model_linear_mcmc = GaussianLinearModel_MCMC_pyro(X_train, y_train, priors_beta)
+model_linear_mcmc = GaussianLinearModel_MCMC(X_train, y_train, priors_beta)
+model_linear_mcmc.option = "hybrid"
 model_linear_mcmc.sample()
 model_linear_mcmc.show_trace()
 predictions = model_linear_mcmc.make_predictions(X_test, y_test)
 
 predictions.show_predictions_with_confidence_interval(confidence_interval=0.95)
 
-show_analysis(predictions.values, predictions.true_values, name="LSTM + MCMC")
+show_analysis(predictions.values, predictions.true_values, name="LSTM + " + model_linear_mcmc.option)
 

@@ -43,7 +43,7 @@ class LSTM_parameters():
         assert isinstance(filename, str)
         assert isinstance(path, str)
 
-        full_filename = path + filename
+        full_filename = path + filename + ".json"
 
         with open(full_filename, "r") as file:
             dictionary_read = json.loads(file.read())
@@ -55,3 +55,4 @@ class LSTM_parameters():
         self.bidirectional = dictionary_read["bidirectional"]
         self.dropout = dictionary_read["dropout"]
         self.output_dim = dictionary_read["output_dim"]
+

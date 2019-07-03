@@ -53,8 +53,11 @@ class GaussianLinearModel_MCMC_pyro(GaussianLinearModel_abstract):
                                      num_samples=1000)
 
     def show_trace(self):
-        sites = ["sigma"]
-        hmc_empirical = EmpiricalMarginal(self.posterior, sites=sites)._get_samples_and_weights()[0].numpy()
+
+        return 0
+        sites = ["sigma", "betas", "alpha"]
+        hmc_empirical = EmpiricalMarginal(self.posterior, sites=sites)
+        #._get_samples_and_weights()[0].numpy()
         # fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(12, 10))
         # fig.suptitle("Marginal Posterior density - Regression Coefficients", fontsize=16)
         # for i, ax in enumerate(axs.reshape(-1)):
@@ -93,26 +96,15 @@ class GaussianLinearModel_MCMC_pyro(GaussianLinearModel_abstract):
 
     def model(self, x_data, y_data):
 
-        w_prior = Normal(torch.zeros(1, self.number_of_features),
-                         torch.ones(1, self.number_of_features)).to_event(1)
-
-        b_prior = Normal(torch.tensor([[0.]]),
-                         torch.tensor([[1.]])).to_event(1)
-
-        f_prior = Normal(0., 1.)
-
-        priors = {'linear.weight': w_prior,
-                  'linear.bias': b_prior,
-                  'factor': f_prior}
-
+        alpha = pyro.sample("alpha", Normal(0, 1))
+        betas = pyro.sample("betas", Normal(torch.zeros(self.number_of_features),
+                         torch.ones(self.number_of_features)).to_event(1))
         scale = pyro.sample("sigma", Uniform(0., 10.))
-        lifted_module = pyro.random_module("module", self.regression_model, priors)
-        lifted_reg_model = lifted_module()
 
-        with pyro.plate("map", len(x_data)):
-            prediction_mean = lifted_reg_model(x_data).squeeze(-1)
+        for i in pyro.plate("observations", len(x_data)):
+            prediction_mean = alpha + torch.dot(betas, x_data[i])
             pyro.sample("obs",
                         Normal(prediction_mean, scale),
-                        obs=y_data)
+                        obs=y_data[i])
 
             return prediction_mean

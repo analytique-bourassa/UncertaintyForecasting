@@ -87,12 +87,12 @@ class GaussianLinearModel_SVI(GaussianLinearModel_abstract):
 
     def model(self, x_data, y_data):
 
-
         w_prior = Normal(torch.zeros(1, self.number_of_features),
                          torch.ones(1, self.number_of_features)).to_event(1)
 
         b_prior = Normal(torch.tensor([[8.]]), torch.tensor([[1000.]])).to_event(1)
         f_prior = Normal(0., 1.)
+
         priors = {'linear.weight': w_prior,
                   'linear.bias': b_prior,
                   'factor': f_prior}
