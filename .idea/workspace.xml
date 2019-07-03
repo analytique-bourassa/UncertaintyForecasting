@@ -2,26 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8f142cc-a965-4a6e-b1a8-ece3b04b37ff" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/models/script_parameters/parameters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/model_feature_extractor_v0.0.1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/model_feature_extractor_v0.0.2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/model_feature_extractor_v0.0.3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/model_feature_extractor_v0.0.4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/model_feature_extractor_v0.1.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/optimizer_feature_extractor_v0.0.1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/optimizer_feature_extractor_v0.0.2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/optimizer_feature_extractor_v0.0.3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/optimizer_feature_extractor_v0.0.4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/optimizer_feature_extractor_v0.1.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/v0.0.3_lstm_params.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/v0.0.4_lstm_params.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/v0.1.0_lstm_params.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_mcmc.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_mcmc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_mcmc_pyro.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_mcmc_pyro.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_svi.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_svi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/lstm_params.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/lstm_params.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/train_model_basic_bayesian_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/train_model_basic_bayesian_main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,7 +17,7 @@
         <entry file="file://$PROJECT_DIR$/models/scripts/train_model_basic_bayesian_main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1006">
-              <caret line="156" lean-forward="true" selection-start-line="156" selection-end-line="156" />
+              <caret line="156" selection-start-line="156" selection-end-line="156" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -44,20 +25,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parameters.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/script_parameters/parameters.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="11" column="19" lean-forward="true" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="gaussian_model_mcmc.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_mcmc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-396">
-              <caret line="42" column="34" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
+            <state relative-caret-position="176">
+              <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -166,12 +138,6 @@
               <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
               <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
-              <item name="script_parameters" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -186,16 +152,16 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/models" />
+      <recent name="$PROJECT_DIR$/data_generation" />
+      <recent name="$PROJECT_DIR$/models/LSTM_VAR" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/models/LSTM_BayesRegressor" />
       <recent name="$PROJECT_DIR$/models/scripts" />
       <recent name="$PROJECT_DIR$/models/LSTM_MCMC" />
       <recent name="$PROJECT_DIR$/models/basic_lstm" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/models" />
-      <recent name="$PROJECT_DIR$/data_generation" />
-      <recent name="$PROJECT_DIR$/models/LSTM_VAR" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -329,7 +295,7 @@
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29326147" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.43237704" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.5942623" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32991803" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -337,12 +303,22 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.5092213" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32991803" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29326147" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.43237704" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.5092213" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32991803" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -640,16 +616,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/scripts/train_model_basic_bayesian_main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1006">
-          <caret line="156" lean-forward="true" selection-start-line="156" selection-end-line="156" />
+          <caret line="156" selection-start-line="156" selection-end-line="156" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -658,8 +631,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_mcmc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-396">
-          <caret line="42" column="34" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
+        <state relative-caret-position="176">
+          <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>

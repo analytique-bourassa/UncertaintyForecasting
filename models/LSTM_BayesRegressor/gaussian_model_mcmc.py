@@ -6,6 +6,21 @@ import numpy as np
 from probabilitic_predictions.probabilistic_predictions import ProbabilisticPredictions
 from models.LSTM_BayesRegressor.GaussianLinearModel_abstract import GaussianLinearModel_abstract
 
+from scipy import stats
+from pymc3.distributions import Interpolated
+
+def from_posterior(param, samples):
+    smin, smax = np.min(samples), np.max(samples)
+    width = smax - smin
+    x = np.linspace(smin, smax, 100)
+    y = stats.gaussian_kde(samples)(x)
+
+    # what was never sampled should have a small probability but not 0,
+    # so we'll extend the domain and use linear approximation of density on it
+    x = np.concatenate([[x[0] - 3 * width], x, [x[-1] + 3 * width]])
+    y = np.concatenate([[0], y, [0]])
+    return Interpolated(param, x, y)
+
 class GaussianLinearModel_MCMC(GaussianLinearModel_abstract):
 
     def __init__(self, X_train, y_train, priors_beta=None):
@@ -89,8 +104,9 @@ class GaussianLinearModel_MCMC(GaussianLinearModel_abstract):
                                   shape=self.n_features)
 
                 print(trace_sigma.std())
-                sigma = pm.HalfNormal("sigma_2",
-                                  sd=trace_sigma.std())  # you could also try with a HalfCauchy that has longer/fatter tails
+                #sigma = pm.HalfNormal("sigma_2",
+                #                  sd=10.)  # you could also try with a HalfCauchy that has longer/fatter tails
+                sigma = from_posterior("sigma_2", trace_sigma)
 
                 mu = alpha + pm.math.dot(betas, self.shared_X.T)
                 self.likelihood = pm.Normal("likelihood_2", mu=mu, sd=sigma, observed=self.shared_y)
