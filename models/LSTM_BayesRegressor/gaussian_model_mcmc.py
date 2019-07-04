@@ -23,9 +23,14 @@ def from_posterior(param, samples):
 
 class GaussianLinearModel_MCMC(GaussianLinearModel_abstract):
 
+    POSSIBLE_OPTION_FOR_POSTERIOR_CALCULATION = ["NUTS",
+                                                 "ADVI-Mean-Field",
+                                                 "ADVI-full-rank",
+                                                 "Hybrid"]
+
     def __init__(self, X_train, y_train, priors_beta=None):
 
-        self.option = "advi"
+        self.option = "ADVI-Mean-Field"
 
         self.X_data = X_train
         self.y_data = y_train
@@ -57,25 +62,33 @@ class GaussianLinearModel_MCMC(GaussianLinearModel_abstract):
         number_of_samples = 2000 if not SMOKE_TEST else 1
         number_of_tuning_step = 1000 if not SMOKE_TEST else 1
 
-        if self.option == "nuts":
+        if self.option == "NUTS":
 
             with self.linear_model:
 
                 step = pm.NUTS()
                 self.trace = pm.sample(number_of_samples, step, tune=number_of_tuning_step)
 
-        elif self.option == "advi":
+        elif self.option == "ADVI-Mean-Field":
 
             with self.linear_model:
 
                 self.advi_fit = pm.fit(method=pm.ADVI(), n=30000)
                 self.trace = self.advi_fit.sample(number_of_samples)
 
-        elif self.option == "hybrid":
+        elif self.option == "ADVI-full-rank":
+
+            with self.linear_model:
+
+                self.advi_fit = pm.fit(method='fullrank_advi', n=30000)
+                self.trace = self.advi_fit.sample(number_of_samples)
+
+        elif self.option == "Hybrid":
 
             with self.linear_model:
 
                 self.advi_fit = pm.fit(method=pm.ADVI(), n=30000)
+                #self.advi_fit = pm.fit(method='fullrank_advi', n=30000)
                 self.trace = self.advi_fit.sample(number_of_samples)
 
                 trace_alpha = self.trace.get_values('alpha')

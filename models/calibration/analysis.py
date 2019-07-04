@@ -25,6 +25,6 @@ def show_analysis(forecasting_values, y_true, name="ideal forecaster"):
     deviation_score_exceedance_calibration = show_empirical_cdf(forecasting_values, y_true)
     deviation_score_marginal_calibration = show_marginal_calibration(forecasting_values, y_true)
 
-    print(" deviation_score_probabilistic_calibration: %.2f " % deviation_score_probabilistic_calibration)
-    print(" deviation_score_exceedance_calibration: %.2f " % deviation_score_exceedance_calibration)
-    print(" deviation_score_marginal_calibration: %.2f " % deviation_score_marginal_calibration)
+    print(" deviation_score_probabilistic_calibration: %.5f " % deviation_score_probabilistic_calibration)
+    print(" deviation_score_exceedance_calibration: %.5f " % deviation_score_exceedance_calibration)
+    print(" deviation_score_marginal_calibration: %.5f " % deviation_score_marginal_calibration)

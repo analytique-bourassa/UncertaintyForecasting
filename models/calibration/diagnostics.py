@@ -3,6 +3,9 @@ from math import sqrt
 import numpy as np
 import matplotlib.pyplot as plt
 
+N_INTERVALS = 101
+n_possible_values = 100
+
 def in_interval(y_mean, y_true, sigma):
 
     if y_true >= y_mean - sigma and y_true <= y_mean + sigma:
@@ -24,11 +27,10 @@ def calculate_lower_upper_confidence_interval(random_samples, alpha):
 
 def show_in_intervals(y_pred, y_true):
 
-    n_intervals = 21
-    intervals = np.linspace(0., 1, n_intervals)
+    intervals = np.linspace(0., 1, N_INTERVALS)
     n_time_steps = y_pred.shape[0]
 
-    counts = np.zeros(n_intervals)
+    counts = np.zeros(N_INTERVALS)
 
     for index_interval, interval in enumerate(intervals):
 
@@ -63,10 +65,9 @@ def show_in_intervals_guassian_forecast(y_pred, y_true):
     y_mean = np.mean(y_pred, axis=1)
     error = np.std(y_pred, axis=1)
 
-    n_intervals = 21
-    intervals = np.linspace(0., 1, n_intervals)
+    intervals = np.linspace(0., 1, N_INTERVALS)
 
-    counts = np.zeros(n_intervals)
+    counts = np.zeros(N_INTERVALS)
 
     for index_interval, interval in enumerate(intervals):
 
@@ -95,7 +96,7 @@ def show_empirical_cdf(y_pred, y_true):
     y_mean = np.mean(y_pred, axis=1)
     error = np.std(y_pred, axis=1)
 
-    n_values = 21
+    n_values = N_INTERVALS
     p_values = np.linspace(0., 1, n_values)
 
     def calculate_empirical_cdf(y_mean, y_true, error, p_values):
@@ -143,7 +144,6 @@ def show_marginal_calibration(y_pred, y_true):
 
     y_mean = np.mean(y_pred, axis=1)
 
-    n_possible_values = 100
     y_values = np.linspace(min_y, max_y, n_possible_values)
 
     n_predictions = y_mean.shape[0]
