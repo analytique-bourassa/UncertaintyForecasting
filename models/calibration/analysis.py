@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from models.calibration.diagnostics import show_empirical_cdf, show_in_intervals, show_marginal_calibration
+from models.calibration.diagnostics import calculate_one_sided_cumulative_calibration, calculate_confidence_interval_calibration, calculate_marginal_calibration
 
 KEY_N_TIMESTEPS = 0
 
@@ -21,9 +21,9 @@ def show_analysis(forecasting_values, y_true, name="ideal forecaster"):
     plt.legend()
     plt.show()
 
-    deviation_score_probabilistic_calibration = show_in_intervals(forecasting_values, y_true)
-    deviation_score_exceedance_calibration = show_empirical_cdf(forecasting_values, y_true)
-    deviation_score_marginal_calibration = show_marginal_calibration(forecasting_values, y_true)
+    deviation_score_probabilistic_calibration = calculate_confidence_interval_calibration(forecasting_values, y_true, show=True)
+    deviation_score_exceedance_calibration = calculate_one_sided_cumulative_calibration(forecasting_values, y_true, show=True)
+    deviation_score_marginal_calibration = calculate_marginal_calibration(forecasting_values, y_true, show=True)
 
     print(" deviation_score_probabilistic_calibration: %.5f " % deviation_score_probabilistic_calibration)
     print(" deviation_score_exceedance_calibration: %.5f " % deviation_score_exceedance_calibration)

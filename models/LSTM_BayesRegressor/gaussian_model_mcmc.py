@@ -88,7 +88,6 @@ class GaussianLinearModel_MCMC(GaussianLinearModel_abstract):
             with self.linear_model:
 
                 self.advi_fit = pm.fit(method=pm.ADVI(), n=30000)
-                #self.advi_fit = pm.fit(method='fullrank_advi', n=30000)
                 self.trace = self.advi_fit.sample(number_of_samples)
 
                 trace_alpha = self.trace.get_values('alpha')
@@ -106,19 +105,11 @@ class GaussianLinearModel_MCMC(GaussianLinearModel_abstract):
                                   mu=alpha_mu_prior,
                                   sd=alpha_sd_prior)
 
-                print(alpha_mu_prior)
-                print(alpha_sd_prior)
-                print(trace_betas.mean(axis=0))
-                print(trace_betas.std(axis=0))
-
                 betas = pm.Normal("betas_2",
                                   mu=trace_betas.mean(axis=0),
                                   sd=trace_betas.std(axis=0),
                                   shape=self.n_features)
 
-                print(trace_sigma.std())
-                #sigma = pm.HalfNormal("sigma_2",
-                #                  sd=10.)  # you could also try with a HalfCauchy that has longer/fatter tails
                 sigma = from_posterior("sigma_2", trace_sigma)
 
                 mu = alpha + pm.math.dot(betas, self.shared_X.T)
@@ -153,7 +144,7 @@ class GaussianLinearModel_MCMC(GaussianLinearModel_abstract):
         zeros = np.zeros(X_test.shape[0], dtype=np.float32)
         self.shared_y.set_value(zeros)
 
-        if self.option == "hybrid":
+        if self.option == "Hybrid":
             ppc = pm.sample_ppc(self.trace,
                                 model=self.linear_model_2,
                                 samples=number_of_samples)

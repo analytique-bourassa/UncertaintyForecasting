@@ -2,8 +2,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.distributions.normal import Normal
-from torch.autograd import Variable
-import numpy as np
 
 class LSTM(nn.Module):
 
@@ -17,12 +15,6 @@ class LSTM(nn.Module):
         self.num_layers = num_layers
         self.bidirectional = bidirectional
         self.number_of_directions = 1 + 1*self.bidirectional
-
-        Sigma_numpy = np.random.random_integers(0.05, 0.1, size=(self.hidden_dim, self.hidden_dim))
-        Sigma_symmetric_numpy = (Sigma_numpy + Sigma_numpy.T) / 2
-
-        self.sigma_matrix_not_activated = Variable(torch.from_numpy(Sigma_symmetric_numpy).double(),
-                                     requires_grad=False)
 
         # Define the LSTM layer
         self.lstm = nn.LSTM(self.input_dim,
@@ -48,47 +40,29 @@ class LSTM(nn.Module):
         return hidden
 
     def forward(self, input):
-
-        self.sigma_matrix = F.relu(self.sigma_matrix_not_activated)
-
-        #self.sigma_matrix = self.sigma_matrix_not_activated
+        # Forward pass through LSTM layer
+        # shape of lstm_out: [input_size, batch_size, hidden_dim]
+        # shape of self.hidden: (a, b), where a and b both
+        # have shape (num_layers, batch_size, hidden_dim).
         lstm_out, self.hidden = self.lstm(input.view(len(input), self.batch_size, -1))
 
         # Only take the output from the final timetep
         # Can pass on the entirety of lstm_out to the next layer if it is a seq2seq prediction
         if self.training:
+            y_pred = self.linear(lstm_out[-1].view(self.batch_size, -1)).view(-1)
+        else:
+            epsilon = 0.14
+            number_of_samples = 100
+            y_pred = torch.ones((self.batch_size, number_of_samples))
 
             weights = self.linear.weight
             bias = self.linear.bias
 
-            noise_generator = Normal(loc=0, scale=1)
-            random_vector = noise_generator.rsample((self.hidden_dim,)).double()
-
-            eigenvalues, eigenvectors = torch.symeig(self.sigma_matrix, eigenvectors=True)
-            deviation = torch.mm(torch.mul(torch.sqrt(eigenvalues), random_vector).unsqueeze(0), eigenvectors)
-            new_weights = weights.float() + deviation.float()
-
-
-            y_pred = F.linear(lstm_out[-1].view(self.batch_size, -1), new_weights, bias).view(-1)
-
-        else:
-
-            number_of_samples = 100
-            y_pred = torch.ones((self.batch_size, number_of_samples))
-
-            #weights = self.linear.weight
-            #bias = self.linear.bias
-
             for sample_index in range(number_of_samples):
-                weights = self.linear.weight
-                bias = self.linear.bias
 
-                noise_generator = Normal(loc=0, scale=1)
-                random_vector = noise_generator.rsample((self.hidden_dim,)).double()
-
-                eigenvalues, eigenvectors = torch.symeig(self.sigma_matrix, eigenvectors=True)
-                deviation = torch.mm(torch.mul(torch.sqrt(eigenvalues), random_vector).unsqueeze(0), eigenvectors)
-                new_weights = weights.float() + deviation.float()
+                shape_for_noise = weights.size()
+                noise_generator = Normal(loc=0, scale=epsilon)
+                new_weights = weights + noise_generator.rsample(shape_for_noise)
 
                 output_value = F.linear(lstm_out[-1].view(self.batch_size, -1), new_weights, bias)
 

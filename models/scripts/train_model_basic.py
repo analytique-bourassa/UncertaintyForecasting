@@ -1,8 +1,16 @@
 import torch
-from data_generation.generate_data import *
 import matplotlib.pyplot as plt
 from models.LSTM_Bayesian.LSTM import LSTM
 from math import floor
+
+from data_generation.data_generators_switcher import DatageneratorsSwitcher
+from data_handling.data_reshaping import reshape_data_for_LSTM, reshape_into_sequences
+from probabilitic_predictions.probabilistic_predictions import ProbabilisticPredictions
+from models.calibration.analysis import show_analysis
+
+from models.script_parameters.parameters import ExperimentParameters
+
+experiment_params = ExperimentParameters()
 
 SMOKE_TEST = False
 #####################
@@ -20,17 +28,6 @@ num_train = int((1 - test_size) * num_datapoints)
 input_size = 20
 
 import numpy as np
-import statsmodels.api as sm
-
-np.random.seed(12345)
-arparams = np.array([.3, -.2, 0.2, 0.1])
-maparams = np.array([.65, .35])
-ar = np.r_[1, -arparams] # add zero-lag and negate
-ma = np.r_[1, maparams] # add zero-lag
-y = sm.tsa.arma_generate_sample(ar, ma, n_data)
-
-plt.plot(y)
-plt.show()
 
 
 per_element = True
@@ -54,7 +51,8 @@ length_of_sequences = 10
 # Generate data_handling
 #####################
 
-data = np.sin(0.2*np.linspace(0, 200, n_data))#y#
+sigma = 0.1
+data = np.sin(0.2*np.linspace(0, 200, n_data)) + np.random.normal(0, sigma, n_data)
 data /= (np.abs(data)).max()
 number_of_sequences = n_data - length_of_sequences+ 1
 
@@ -184,21 +182,20 @@ def make_predictions(data_loader, model):
     return y_pred_all, y_test_all
 
 
+
+
 y_pred, y_true = make_predictions(data_loader, model)
 
-y_mean = np.mean(y_pred, axis=1)
-error = np.std(y_pred, axis=1)
 
-x = range(y_pred.shape[0])
-plt.plot(x, y_mean, label="Preds")
-plt.plot(x, y_true, label="Data")
-plt.fill_between(x, y_mean - error, y_mean + error, alpha=0.5)
-plt.legend()
-plt.show()
+predictions = ProbabilisticPredictions()
+predictions.number_of_predictions = y_pred.shape[0]
+predictions.number_of_samples = y_pred.shape[1]
+predictions.initialize_to_zeros()
+predictions.values = y_pred
+predictions.true_values = y_true
+
+print(model.sigma_matrix)
+
+show_analysis(predictions.values, predictions.true_values, name="LSTM + correlated dropout")
 
 
-from models.calibration.diagnostics import show_empirical_cdf, show_in_intervals,show_marginal_calibration
-
-deviation_score_probabilistic_calibration = show_in_intervals(y_pred, y_true)
-show_empirical_cdf(y_pred, y_true)
-show_marginal_calibration(y_pred, y_true)
