@@ -8,6 +8,7 @@ class Timer:
     def __enter__(self):
 
         self.t0 = time.time()
+        return self
 
     def __exit__(self, *args):
         print('Method: %s | Elapsed time: %0.2fs' % (self.name, time.time() - self.t0))

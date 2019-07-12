@@ -31,7 +31,7 @@ experiment_params.show_figures = False
 experiment_params.smoke_test = False
 experiment_params.train_lstm = True
 experiment_params.save_lstm = False
-experiment_params.type_of_data = "sinus" # options are sin or ar5
+experiment_params.type_of_data =  "autoregressive-5" # options are sin or ar5
 experiment_params.name = "feature_extractor_" + experiment_params.type_of_data
 
 
@@ -82,42 +82,48 @@ from models.LSTM_BayesRegressor.experiment_results import ExperimentsResults
 results = ExperimentsResults()
 
 from Timer import Timer
+import random
 
-for option in GaussianLinearModel_MCMC.POSSIBLE_OPTION_FOR_POSTERIOR_CALCULATION:
-    for i in range(number_of_experiment_per_type):
+for i in range(number_of_experiment_per_type):
+
+    dropout = random.choice([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ])
+    lstm_params.dropout = dropout
+
+    model = LSTM(lstm_params)
+    loss_fn = torch.nn.MSELoss(size_average=False)
+    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+    if experiment_params.train_lstm:
+        hist = np.zeros(num_epochs)
+        for t in range(num_epochs):
+            model.hidden = model.init_hidden()
+
+            losses, N_data = make_forward_pass(data_loader, model, loss_fn, data_train, lstm_params.batch_size)
+            # if t % 10 == 0:
+            # print("Epoch ", t, "MSE: ", losses.item())
+
+            hist[t] = losses.item()
+
+            optimizer.zero_grad()
+            losses.backward()
+            optimizer.step()
+    else:
+
+        load_checkpoint(model, optimizer, experiment_params.path,
+                        experiment_params.name + "_" + experiment_params.version)
+
+    if experiment_params.save_lstm:
+        save_checkpoint(model, optimizer, experiment_params.path,
+                        experiment_params.name + "_" + experiment_params.version)
+        lstm_params.save(experiment_params.version, experiment_params.path)
+
+    y_pred, _ = make_predictions(data_loader, model, all_data, lstm_params.batch_size)
+    features, y_true = extract_features(data_loader, model, all_data, lstm_params.batch_size)
+
+    for option in GaussianLinearModel_MCMC.POSSIBLE_OPTION_FOR_POSTERIOR_CALCULATION:
 
         with Timer("%s number %d " % (option, i)) as timer:
 
-            model = LSTM(lstm_params)
-            loss_fn = torch.nn.MSELoss(size_average=False)
-            optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-
-            if experiment_params.train_lstm:
-                hist = np.zeros(num_epochs)
-                for t in range(num_epochs):
-
-                    model.hidden = model.init_hidden()
-
-                    losses, N_data = make_forward_pass(data_loader, model, loss_fn, data_train, lstm_params.batch_size)
-                    #if t % 10 == 0:
-                        #print("Epoch ", t, "MSE: ", losses.item())
-
-                    hist[t] = losses.item()
-
-                    optimizer.zero_grad()
-                    losses.backward()
-                    optimizer.step()
-            else:
-
-                load_checkpoint(model, optimizer, experiment_params.path, experiment_params.name + "_" + experiment_params.version)
-
-
-            if experiment_params.save_lstm:
-                save_checkpoint(model, optimizer, experiment_params.path, experiment_params.name + "_" + experiment_params.version)
-                lstm_params.save(experiment_params.version, experiment_params.path)
-
-            y_pred, _ = make_predictions(data_loader, model, all_data, lstm_params.batch_size)
-            features, y_true = extract_features(data_loader, model, all_data, lstm_params.batch_size)
 
             ########################################################
             # Create and optimize model for probabilistic predictions
@@ -158,9 +164,9 @@ for option in GaussianLinearModel_MCMC.POSSIBLE_OPTION_FOR_POSTERIOR_CALCULATION
 
             results.correlation_score.append(calculate_correlation_score(features))
             results.methods.append(option)
-            results.elapsed_times.append(timer.elapsed_time)
+            results.elapsed_times.append(timer.elapsed_time())
 
         #predictions.show_predictions_with_confidence_interval(confidence_interval=0.95)
         #show_analysis(predictions.values, predictions.true_values, name="LSTM + " + model_linear_mcmc.option)
 
-results.save_as_csv(path_results, "results_n_100")
+results.save_as_csv(path_results, "results_n_100_ar5")
