@@ -3,7 +3,7 @@ import pyro.distributions as dist
 import torch.nn as nn
 import pyro
 import torch
-from pyro.contrib.autoguide import AutoDiagonalNormal
+
 
 class LSTM_VI(nn.Module):
 
@@ -26,14 +26,15 @@ class LSTM_VI(nn.Module):
 
         w = pyro.sample("weights", w_prior)
         encoding = self.encoder(x)
-        mu = torch.mm(encoding, w)
+
+        mu = torch.mm(encoding, torch.t(w))
 
         sigma = pyro.sample("sigma", sigma_prior)
-
         pyro.sample("obs", dist.Normal(mu, sigma).to_event(1), obs=y)
 
+    def wrapped_model(self, x_data, y_data):
+        pyro.sample("prediction", dist.Delta(self.model(x_data, y_data)))
 
-    def guide(self):
 
-        return AutoDiagonalNormal(self.model)
+
 

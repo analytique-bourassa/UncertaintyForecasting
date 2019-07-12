@@ -40,4 +40,4 @@ class Encoder(nn.Module):
         # have shape (num_layers, batch_size, hidden_dim).
         lstm_out, self.hidden = self.lstm(input.view(len(input), self.params.batch_size, -1))
 
-        return self.hidden
+        return lstm_out[-1].view(self.params.batch_size, -1)
