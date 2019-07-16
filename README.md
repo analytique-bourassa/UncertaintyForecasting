@@ -13,7 +13,7 @@ $F_t $: forecaster cumulative distribution
 t: time
 
 NOTE: At the moment, the deviation score for the probabilistic and exceendance calibration might not correspond.
- 
+
 ### 1.1.1 definition
 
 A predictor is said to be probabilistically calibrated if 

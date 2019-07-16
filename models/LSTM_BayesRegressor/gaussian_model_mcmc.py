@@ -59,7 +59,7 @@ class GaussianLinearModel_MCMC(GaussianLinearModel_abstract):
 
         SMOKE_TEST = False
 
-        number_of_samples = 2000 if not SMOKE_TEST else 1
+        number_of_samples = 10000 if not SMOKE_TEST else 1
         number_of_tuning_step = 1000 if not SMOKE_TEST else 1
 
         if self.option == "NUTS":
@@ -80,14 +80,14 @@ class GaussianLinearModel_MCMC(GaussianLinearModel_abstract):
 
             with self.linear_model:
 
-                self.advi_fit = pm.fit(method='fullrank_advi', n=30000)
+                self.advi_fit = pm.fit(method='fullrank_advi', n=500000)
                 self.trace = self.advi_fit.sample(number_of_samples)
 
         elif self.option == "Hybrid":
 
             with self.linear_model:
 
-                self.advi_fit = pm.fit(method=pm.ADVI(), n=30000)
+                self.advi_fit = pm.fit(method=pm.ADVI(), n=500000)
                 self.trace = self.advi_fit.sample(number_of_samples)
 
                 trace_alpha = self.trace.get_values('alpha')
@@ -113,6 +113,8 @@ class GaussianLinearModel_MCMC(GaussianLinearModel_abstract):
                 sigma = from_posterior("sigma_2", trace_sigma)
 
                 mu = alpha + pm.math.dot(betas, self.shared_X.T)
+                #self.likelihood = pm.Cauchy("likelihood_2", alpha=mu, beta=sigma, observed=self.shared_y)
+
                 self.likelihood = pm.Normal("likelihood_2", mu=mu, sd=sigma, observed=self.shared_y)
 
                 step = pm.NUTS()

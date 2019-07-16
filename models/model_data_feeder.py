@@ -31,6 +31,9 @@ def make_forward_pass(data_loader, model, loss_fn, training_data, batch_size):
 
     for X_train, y_train in data_loader(training_data, batch_size):
 
+        if next(model.parameters()).is_cuda:
+            X_train, y_train = X_train.cuda(), y_train.cuda()
+
         N_data += batch_size
         y_pred = model(X_train)
 
@@ -53,8 +56,14 @@ def make_predictions(data_loader, model, training_data, batch_size):
 
     for X_train, y_train in data_loader(training_data, batch_size, random=False):
 
+        is_on_gpu = next(model.parameters()).is_cuda
+        if is_on_gpu:
+            X_train, y_train = X_train.cuda(), y_train.cuda()
+
         y_pred = model(X_train)
 
+        if is_on_gpu:
+            y_pred, y_train = y_pred.cpu(), y_train.cpu()
 
         if y_pred_all is None:
             y_pred_all = y_pred.detach().numpy()
@@ -80,8 +89,14 @@ def extract_features(data_loader, model, training_data, batch_size):
 
     for X_train, y_train in data_loader(training_data, batch_size, random=False):
 
+        is_on_gpu = next(model.parameters()).is_cuda
+        if is_on_gpu:
+            X_train, y_train = X_train.cuda(), y_train.cuda()
+
         y_pred = model.return_last_layer(X_train)
 
+        if is_on_gpu:
+            y_pred, y_train = y_pred.cpu(), y_train.cpu()
 
         if y_pred_all is None:
             y_pred_all = y_pred.detach().numpy()

@@ -7,6 +7,7 @@ class ProbabilisticPredictions():
     KEY_INT_FOR_SAMPLES_PREDICTIONS = 1
     KEY_INT_FOR_PREDICTIONS_PREDICTIONS = 0
     KEY_INT_TRUE_VALUES = 0
+    KEY_FOR_NUMBER_OF_TRAINING_DATA = 0
 
     def __init__(self):
 
@@ -14,6 +15,9 @@ class ProbabilisticPredictions():
         self._number_of_predictions = None
         self._values = None
         self._true_values = None
+
+        self._train_data = None
+
 
     def initialize_to_zeros(self):
 
@@ -78,6 +82,16 @@ class ProbabilisticPredictions():
     def predictions(self):
         return np.mean(self.values, axis=1)
 
+    @property
+    def train_data(self):
+        return self._train_data
+
+    @train_data.setter
+    def train_data(self, value):
+        assert isinstance(value, np.ndarray)
+
+        self._train_data = value
+
     def calculate_confidence_interval(self, interval):
 
             p = ((1.0 - interval) / 2.0) * 100
@@ -96,11 +110,40 @@ class ProbabilisticPredictions():
 
         x = range(self.number_of_predictions)
 
-        plt.plot(x, self.predictions, label="Preds")
-        plt.plot(x, self.true_values, label="Data")
-        plt.xlabel("time")
-        plt.ylabel("y (value to forecast)")
-        plt.title("Prediction with %f confidence interval" % confidence_interval)
+        plt.plot(x, self.predictions, label="predictions", linewidth=3.0)
+        plt.plot(x, self.true_values, label="true data", linewidth=3.0)
+
+        plt.xlabel("Time", size=22)
+        plt.ylabel("y (value to forecast)", size=22)
+        plt.title("Prediction with %2.0f %% confidence interval" % 100*confidence_interval, size=26)
+
         plt.fill_between(x, lower, upper, alpha=0.5)
+        plt.legend()
+        plt.show()
+
+    def show_predictions_with_training_data(self, confidence_interval):
+
+        assert 0 <= confidence_interval <= 1.0, "must be between zero and one (including boundary)"
+        assert self.train_data is not None, "must have train data"
+
+        lower, upper = self.calculate_confidence_interval(confidence_interval)
+
+        n_training_data = self._train_data.shape[self.KEY_FOR_NUMBER_OF_TRAINING_DATA]
+        n_total = n_training_data + self.number_of_predictions
+
+        x_for_test = range(n_training_data, n_training_data + self.number_of_predictions)
+        x_total = range(n_total)
+
+        data = np.zeros(n_total)
+        data[:n_training_data] = self.train_data.flatten()
+        data[n_training_data:] = self.true_values.flatten()
+
+        plt.plot(x_for_test, self.predictions, label="predictions", linewidth=3.0)
+        plt.plot(x_total, data, label="true value", linewidth=3.0 )
+
+        plt.xlabel("Time", size=22)
+        plt.ylabel("y (value to forecast)", size=22)
+        plt.title("Prediction with %2.0f %% confidence interval" % (100*confidence_interval), size=26)
+        plt.fill_between(x_for_test, lower, upper, alpha=0.5)
         plt.legend()
         plt.show()

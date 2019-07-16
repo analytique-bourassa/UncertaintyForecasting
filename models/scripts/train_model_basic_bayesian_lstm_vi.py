@@ -3,13 +3,9 @@ from models.LSTM_BayesRegressor.LSTM import LSTM
 from models.model_data_feeder import *
 import numpy as np
 
-from models.LSTM_BayesRegressor.gaussian_model_mcmc import GaussianLinearModel_MCMC
-from models.LSTM_BayesRegressor.gaussian_model_mcmc_pyro import GaussianLinearModel_MCMC_pyro
 from data_generation.data_generators_switcher import DatageneratorsSwitcher
 
 from models.lstm_params import LSTM_parameters
-from models.disk_reader_and_writer import save_checkpoint, load_checkpoint
-from models.calibration.analysis import show_analysis
 from models.script_parameters.parameters import ExperimentParameters
 from models.calibration.diagnostics import calculate_one_sided_cumulative_calibration, calculate_confidence_interval_calibration, calculate_marginal_calibration
 from models.LSTM_VI.LSTM_VI_model import LSTM_VI
