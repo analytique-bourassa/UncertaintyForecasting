@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+DEFAULT_LEGEND_SIZE = 19
 
 class ProbabilisticPredictions():
 
@@ -111,14 +112,14 @@ class ProbabilisticPredictions():
         x = range(self.number_of_predictions)
 
         plt.plot(x, self.predictions, label="predictions", linewidth=3.0)
-        plt.plot(x, self.true_values, label="true data", linewidth=3.0)
+        plt.plot(x, self.true_values, label="true values", linewidth=3.0)
 
         plt.xlabel("Time", size=22)
         plt.ylabel("y (value to forecast)", size=22)
         plt.title("Prediction with %2.0f %% confidence interval" % 100*confidence_interval, size=26)
 
         plt.fill_between(x, lower, upper, alpha=0.5)
-        plt.legend()
+        plt.legend(fontsize=DEFAULT_LEGEND_SIZE)
         plt.show()
 
     def show_predictions_with_training_data(self, confidence_interval):
@@ -139,11 +140,13 @@ class ProbabilisticPredictions():
         data[n_training_data:] = self.true_values.flatten()
 
         plt.plot(x_for_test, self.predictions, label="predictions", linewidth=3.0)
-        plt.plot(x_total, data, label="true value", linewidth=3.0 )
+        plt.plot(x_total, data, label="true values", linewidth=3.0)
 
         plt.xlabel("Time", size=22)
-        plt.ylabel("y (value to forecast)", size=22)
-        plt.title("Prediction with %2.0f %% confidence interval" % (100*confidence_interval), size=26)
+        plt.ylabel("y", size=22, rotation=0)
+
+        plt.title("Predictions with %2.0f %% confidence interval" % (100*confidence_interval), size=26)
         plt.fill_between(x_for_test, lower, upper, alpha=0.5)
-        plt.legend()
+
+        plt.legend(fontsize=DEFAULT_LEGEND_SIZE)
         plt.show()

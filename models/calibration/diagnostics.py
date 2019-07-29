@@ -134,7 +134,7 @@ def calculate_one_sided_cumulative_calibration(y_pred, y_true, show=False):
         plt.title("Calibration of the cumulative distribution function")
         plt.show()
 
-    deviation_score_exceedance_calibration = np.abs(cdf_empirical - p_values).sum()
+    deviation_score_exceedance_calibration = (p_values[1] - p_values[0])*np.abs(cdf_empirical - p_values).sum()
     return deviation_score_exceedance_calibration
 
 

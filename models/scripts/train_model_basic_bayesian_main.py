@@ -3,7 +3,7 @@ from models.LSTM_BayesRegressor.LSTM import LSTM
 from models.model_data_feeder import *
 import numpy as np
 
-from models.LSTM_BayesRegressor.gaussian_model_mcmc import GaussianLinearModel_MCMC
+from models.LSTM_BayesRegressor.bayesian_linear_regression import BayesianLinearModel
 from models.LSTM_BayesRegressor.gaussian_model_mcmc_pyro import GaussianLinearModel_MCMC_pyro
 from data_generation.data_generators_switcher import DatageneratorsSwitcher
 
@@ -120,7 +120,7 @@ for i in range(number_of_experiment_per_type):
     y_pred, _ = make_predictions(data_loader, model, all_data, lstm_params.batch_size)
     features, y_true = extract_features(data_loader, model, all_data, lstm_params.batch_size)
 
-    for option in GaussianLinearModel_MCMC.POSSIBLE_OPTION_FOR_POSTERIOR_CALCULATION:
+    for option in BayesianLinearModel.POSSIBLE_OPTION_FOR_POSTERIOR_CALCULATION:
 
         with Timer("%s number %d " % (option, i)) as timer:
 
@@ -147,7 +147,7 @@ for i in range(number_of_experiment_per_type):
 
             priors_beta, _ = model.last_layers_weights
 
-            model_linear_mcmc = GaussianLinearModel_MCMC(X_train, y_train, priors_beta)
+            model_linear_mcmc = BayesianLinearModel(X_train, y_train, priors_beta)
             model_linear_mcmc.option = option
             model_linear_mcmc.sample()
             #model_linear_mcmc.show_trace()

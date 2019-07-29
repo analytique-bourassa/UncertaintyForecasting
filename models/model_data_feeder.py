@@ -46,9 +46,7 @@ def make_forward_pass(data_loader, model, loss_fn, training_data, batch_size):
 
 
 def make_predictions(data_loader, model, training_data, batch_size):
-    """
-       NOTE: the feature index for the noise is based on the keeped indexes!!
-    """
+
     model.eval()
 
     y_pred_all = None
@@ -78,10 +76,7 @@ def make_predictions(data_loader, model, training_data, batch_size):
 
 
 def extract_features(data_loader, model, training_data, batch_size):
-    """
-    return_last_layer must be implemented
-       NOTE: the feature index for the noise is based on the keeped indexes!!
-    """
+
     model.eval()
 
     y_pred_all = None

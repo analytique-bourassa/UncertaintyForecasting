@@ -9,7 +9,8 @@ dependencies:
   - numpy
   - matplotlib
   - cudatoolkit=9.0
-  - pymc3
+  - pygpu==0.7.6
+  - pymc3==3.6
   - scikit-learn
   - pip:
     - pyro-ppl

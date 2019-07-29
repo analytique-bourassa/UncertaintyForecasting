@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from models.LSTM_BayesRegressor.LSTM import LSTM
 from models.model_data_feeder import *
 import numpy as np
-from models.LSTM_BayesRegressor.gaussian_model_mcmc import GaussianLinearModel_MCMC
+from models.LSTM_BayesRegressor.bayesian_linear_regression import BayesianLinearModel
 from models.calibration.analysis import show_analysis
 
 
@@ -148,7 +148,7 @@ X_train, X_test, y_train, y_test = features[:number_of_train_data], features[num
 
 priors_beta, _ = model.last_layers_weights
 
-model_linear_mcmc = GaussianLinearModel_MCMC(X_train, y_train, priors_beta)
+model_linear_mcmc = BayesianLinearModel(X_train, y_train, priors_beta)
 model_linear_mcmc.sample()
 model_linear_mcmc.show_trace()
 predictions = model_linear_mcmc.make_predictions(X_test, y_test)
