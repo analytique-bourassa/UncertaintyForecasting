@@ -12,6 +12,8 @@ dependencies:
   - pygpu==0.7.6
   - pymc3==3.6
   - scikit-learn
+  - pytest
+  - pytest-cov
   - pip:
     - pyro-ppl
     - prettytable
