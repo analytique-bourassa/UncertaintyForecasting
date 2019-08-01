@@ -1,8 +1,18 @@
 import json
 
+from utils.validator import Validator
+
 class LSTM_parameters():
 
     def __init__(self):
+
+        self._input_dim = None
+        self._hidden_dim = None
+        self._batch_size = None
+        self._num_layers = None
+        self._bidirectional = None
+        self._dropout = None
+        self._output_dim = None
 
         self.input_dim = 1
         self.hidden_dim = 5
@@ -26,6 +36,82 @@ class LSTM_parameters():
 
         return dict_params
 
+    @property
+    def input_dim(self):
+        return self._input_dim
+
+    @input_dim.setter
+    def input_dim(self, value):
+
+        Validator.check_type(value, int)
+        Validator.check_value_strictly_positive(value)
+
+        self._input_dim = value
+
+    @property
+    def hidden_dim(self):
+        return self._hidden_dim
+
+    @hidden_dim.setter
+    def hidden_dim(self, value):
+        Validator.check_type(value, int)
+        Validator.check_value_strictly_positive(value)
+
+        self._hidden_dim = value
+
+    @property
+    def batch_size(self):
+        return self._batch_size
+
+    @batch_size.setter
+    def batch_size(self, value):
+        Validator.check_type(value, int)
+        Validator.check_value_strictly_positive(value)
+
+        self._batch_size = value
+
+    @property
+    def num_layers(self):
+        return self._num_layers
+
+    @num_layers.setter
+    def num_layers(self, value):
+        Validator.check_type(value, int)
+        Validator.check_value_strictly_positive(value)
+
+        self._num_layers = value
+
+    @property
+    def bidirectional(self):
+        return self._bidirectional
+
+    @bidirectional.setter
+    def bidirectional(self, value):
+        Validator.check_type(value, bool)
+
+        self._bidirectional = value
+
+    @property
+    def dropout(self):
+        return self._dropout
+
+    @dropout.setter
+    def dropout(self, value):
+        Validator.check_value_is_a_number(value)
+        Validator.check_value_is_between_zero_and_one_inclusive(value)
+
+        self._dropout = value
+
+    @property
+    def output_dim(self):
+        return self._output_dim
+
+    @output_dim.setter
+    def output_dim(self, value):
+        Validator.check_type(value, int)
+        Validator.check_value_strictly_positive(value)
+
+        self._output_dim = value
 
     def save(self, filename, path="./"):
 

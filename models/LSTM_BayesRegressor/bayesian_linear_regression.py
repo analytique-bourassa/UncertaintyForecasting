@@ -9,6 +9,7 @@ from theano import shared
 from probabilitic_predictions.probabilistic_predictions import ProbabilisticPredictions
 from models.LSTM_BayesRegressor.GaussianLinearModel_abstract import GaussianLinearModel_abstract
 from models.LSTM_BayesRegressor.bayesian_linear_regression_parameters import BayesianLinearRegressionParameters
+from models.LSTM_BayesRegressor.bayesian_linear_regression_priors import BayesianLinearRegressionPriors
 
 def from_posterior(param, samples):
 
@@ -24,6 +25,11 @@ def from_posterior(param, samples):
     return Interpolated(param, x, y)
 
 class BayesianLinearModel(GaussianLinearModel_abstract):
+    """
+
+    y ~ Normal(mu,sigma)
+    mu = sum_i=1 theta_i*z_i + theta_0
+    """
 
     POSSIBLE_OPTION_FOR_POSTERIOR_CALCULATION = ["NUTS",
                                                  "ADVI-Mean-Field",
@@ -32,31 +38,43 @@ class BayesianLinearModel(GaussianLinearModel_abstract):
 
     KEY_INDEX_FOR_NUMBER_OF_DATA = 0
 
-    def __init__(self, X_train, y_train, priors_beta=None, SMOKE_TEST=False):
+    def __init__(self, X_train, y_train, priors_thetas=None, SMOKE_TEST=False):
 
         self.option = "ADVI-Mean-Field"
 
+        ################################
         self.X_data = X_train
         self.y_data = y_train
 
-        self.mu_prior = y_train.mean()
         self.n_features = X_train.shape[1]
 
         self.shared_X = shared(X_train)
         self.shared_y = shared(y_train)
+        ################################
 
         self.params = BayesianLinearRegressionParameters(SMOKE_TEST)
+        self.priors = BayesianLinearRegressionPriors(priors_thetas)
 
-        if priors_beta is None:
-            priors_beta = 1.
 
         self.linear_model = pm.Model()
 
         with self.linear_model:
-            alpha = pm.Normal("alpha", mu=self.mu_prior, sd=2)
-            betas = pm.Normal("betas", mu=priors_beta, sd=2, shape=self.n_features)
-            sigma = pm.HalfNormal("sigma", sd=10)
-            mu = alpha + pm.math.dot(betas, self.shared_X.T)
+
+            theta_0 = pm.Normal("theta_0",
+                                mu=self.priors.mean_theta_0,
+                                sd=self.priors.standard_deviation_theta_0
+                                )
+
+            thetas = pm.Normal("thetas",
+                               mu=self.priors.mean_thetas,
+                               sd=self.priors.standard_deviation_thetas,
+                               shape=self.n_features)
+
+            sigma = pm.HalfNormal("sigma",
+                                  sd=self.priors.standard_deviation_sigma)
+
+            mu = theta_0 + pm.math.dot(thetas, self.shared_X.T)
+
             self.likelihood = pm.Normal("likelihood", mu=mu, sd=sigma, observed=self.shared_y)
 
     def sample(self):

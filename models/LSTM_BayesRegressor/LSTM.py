@@ -14,14 +14,12 @@ class LSTM(nn.Module):
         self.params = lstm_params
         self.number_of_directions = 1 + 1*lstm_params.bidirectional
 
-        # Define the LSTM layer
         self.lstm = nn.LSTM(lstm_params.input_dim,
                             lstm_params.hidden_dim,
                             lstm_params.num_layers,
                             dropout=lstm_params.dropout,
                             bidirectional=lstm_params.bidirectional)
 
-        # Define the output layer
         self.linear = nn.Linear(lstm_params.hidden_dim*self.number_of_directions, lstm_params.output_dim)
 
     def __del__(self):
@@ -29,7 +27,6 @@ class LSTM(nn.Module):
         torch.cuda.empty_cache()
 
     def init_hidden(self):
-        # This is what we'll initialise our hidden state as
         zeros_1 = torch.zeros(self.params.num_layers*self.number_of_directions,
                               self.params.batch_size,
                               self.params.hidden_dim)
@@ -43,10 +40,6 @@ class LSTM(nn.Module):
         return hidden
 
     def forward(self, input):
-        # Forward pass through LSTM layer
-        # shape of lstm_out: [input_size, batch_size, hidden_dim]
-        # shape of self.hidden: (a, b), where a and b both
-        # have shape (num_layers, batch_size, hidden_dim).
         lstm_out, self.hidden = self.lstm(input.view(len(input), self.params.batch_size, -1))
         y_pred = self.linear(lstm_out[-1].view(self.params.batch_size, -1))
 
