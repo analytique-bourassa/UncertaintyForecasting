@@ -3,13 +3,11 @@ from models.LSTM_BayesRegressor.LSTM import LSTM
 from models.model_data_feeder import *
 import numpy as np
 
-from models.LSTM_BayesRegressor.bayesian_linear_regression import BayesianLinearModel
-from models.LSTM_BayesRegressor.gaussian_model_mcmc_pyro import GaussianLinearModel_MCMC_pyro
+from models.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression import BayesianLinearModel
 from data_generation.data_generators_switcher import DatageneratorsSwitcher
 
 from models.lstm_params import LSTM_parameters
 from models.disk_reader_and_writer import save_checkpoint, load_checkpoint
-from models.calibration.analysis import show_analysis
 from models.script_parameters.parameters import ExperimentParameters
 from models.calibration.diagnostics import calculate_one_sided_cumulative_calibration, calculate_confidence_interval_calibration, calculate_marginal_calibration
 
@@ -81,7 +79,7 @@ number_of_experiment_per_type = 100
 from models.LSTM_BayesRegressor.experiment_results import ExperimentsResults
 results = ExperimentsResults()
 
-from Timer import Timer
+from utils.Timer import Timer
 import random
 
 for i in range(number_of_experiment_per_type):

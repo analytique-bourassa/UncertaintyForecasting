@@ -2,6 +2,9 @@
 
 This project is about time series forecating with uncertainty diagnostics. Long short term memory neural network has been proven to be effective at timeseries forecasting. Recent adavances in bayesian neural network have allowed to be able to quantify the uncertainty in the predictions provided. Unfortunately, the uncertainty provided is not always well calibrated (i.e. the distribution of the forecast does not correspond to the empiral distribution). We will define some diagnostic measures to verify the calibration of the forecast, test those measures on toy forecasters and then compare those measures for different types of bayesian LSTM implementations.  
 
+```
+python -m pytest --cov-report html:cov_html --cov=. tests/
+```
 
 # 1 - Diagnostics tools
 

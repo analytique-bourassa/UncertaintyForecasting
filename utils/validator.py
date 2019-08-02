@@ -1,4 +1,4 @@
-import Numbers
+NumberTypes = (int, float, complex)
 
 class Validator():
 
@@ -17,7 +17,7 @@ class Validator():
     @staticmethod
     def check_value_is_a_number(value):
 
-        if not isinstance(value, Numbers.number):
+        if not isinstance(value, NumberTypes):
             raise TypeError("The value {} must be a number".format(value))
 
     @staticmethod

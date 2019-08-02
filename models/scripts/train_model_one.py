@@ -6,7 +6,7 @@ from data_generation.data_generators_switcher import DatageneratorsSwitcher
 from data_handling.data_reshaping import reshape_data_for_LSTM, reshape_into_sequences
 from models.LSTM_BayesRegressor.LSTM import LSTM
 from models.model_data_feeder import *
-from models.LSTM_BayesRegressor.bayesian_linear_regression import BayesianLinearModel
+from models.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression import BayesianLinearModel
 from models.lstm_params import LSTM_parameters
 from models.disk_reader_and_writer import save_checkpoint, load_checkpoint
 from models.calibration.analysis import show_analysis

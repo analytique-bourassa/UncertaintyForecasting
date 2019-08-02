@@ -1,9 +1,8 @@
-import torch
 import matplotlib.pyplot as plt
 from models.LSTM_BayesRegressor.LSTM import LSTM
 from models.model_data_feeder import *
 import numpy as np
-from models.LSTM_BayesRegressor.bayesian_linear_regression import BayesianLinearModel
+from models.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression import BayesianLinearModel
 from models.calibration.analysis import show_analysis
 
 

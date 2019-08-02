@@ -19,13 +19,14 @@ class Encoder(nn.Module):
                             dropout=lstm_params.dropout,
                             bidirectional=lstm_params.bidirectional)
 
+        self.linear = nn.Linear(lstm_params.hidden_dim * self.number_of_directions, lstm_params.output_dim)
 
     def __del__(self):
 
         torch.cuda.empty_cache()
 
     def init_hidden(self):
-        # This is what we'll initialise our hidden state as
+
         zeros_1 = torch.zeros(self.num_layers*self.number_of_directions, self.batch_size, self.hidden_dim)
         zeros_2 = torch.zeros(self.num_layers*self.number_of_directions, self.batch_size, self.hidden_dim)
         hidden = (zeros_1,
@@ -34,10 +35,14 @@ class Encoder(nn.Module):
         return hidden
 
     def forward(self, input):
-        # Forward pass through LSTM layer
-        # shape of lstm_out: [input_size, batch_size, hidden_dim]
-        # shape of self.hidden: (a, b), where a and b both
-        # have shape (num_layers, batch_size, hidden_dim).
         lstm_out, self.hidden = self.lstm(input.view(len(input), self.params.batch_size, -1))
 
-        return lstm_out[-1].view(self.params.batch_size, -1)
+        if self.pretraining:
+
+            y_pred = self.linear(lstm_out[-1].view(self.params.batch_size, -1))
+            return y_pred.view(-1)
+
+        else:
+
+            last_hidden_states = lstm_out[-1].view(self.params.batch_size, -1)
+            return last_hidden_states
