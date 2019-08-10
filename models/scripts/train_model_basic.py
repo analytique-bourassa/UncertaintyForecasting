@@ -5,7 +5,7 @@ from math import floor
 
 from data_generation.data_generators_switcher import DatageneratorsSwitcher
 from data_handling.data_reshaping import reshape_data_for_LSTM, reshape_into_sequences
-from probabilitic_predictions.probabilistic_predictions import ProbabilisticPredictions
+from probabilitic_predictions.probabilistic_predictions_regression import ProbabilisticPredictionsRegression
 from models.calibration.analysis import show_analysis
 
 from models.script_parameters.parameters import ExperimentParameters
@@ -187,7 +187,7 @@ def make_predictions(data_loader, model):
 y_pred, y_true = make_predictions(data_loader, model)
 
 
-predictions = ProbabilisticPredictions()
+predictions = ProbabilisticPredictionsRegression()
 predictions.number_of_predictions = y_pred.shape[0]
 predictions.number_of_samples = y_pred.shape[1]
 predictions.initialize_to_zeros()

@@ -121,9 +121,9 @@ def get_results( traces, sites):
 post_pred = trace_pred.run(X_train, None)
 y = get_results(post_pred, sites=['obs'])
 
-from probabilitic_predictions.probabilistic_predictions import ProbabilisticPredictions
+from probabilitic_predictions.probabilistic_predictions_regression import ProbabilisticPredictionsRegression
 
-predictions = ProbabilisticPredictions()
+predictions = ProbabilisticPredictionsRegression()
 predictions.number_of_predictions = lstm_params.batch_size
 predictions.number_of_samples = number_of_samples
 predictions.initialize_to_zeros()

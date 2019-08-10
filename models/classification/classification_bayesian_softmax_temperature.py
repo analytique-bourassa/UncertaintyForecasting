@@ -7,7 +7,7 @@ from theano import shared
 from models.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression_parameters import BayesianLinearRegressionParameters
 from probabilitic_predictions.probabilistic_predictions_classification import ProbabilisticPredictionsClassification
 
-class BayesianSoftmaxClassification():
+class BayesianSoftmaxClassificationWithTemperatures():
 
     KEY_INDEX_FOR_NUMBER_OF_DATA = 0
 
@@ -32,8 +32,15 @@ class BayesianSoftmaxClassification():
             thetas = pm.Normal('thetas', mu=0, sd=1.0, shape=(self.number_of_features,
                                                              self.number_of_classes))
 
+            temperatures = pm.HalfNormal('temperatures',
+                                         sd=10.0,
+                                         shape=self.number_of_classes)
+
             mu = theta_0 + pm.math.dot(self.shared_X, thetas)
-            probability_of_class = pm.math.exp(mu) / pm.math.sum(pm.math.exp(mu), axis=0)
+            mu_with_temperatures = mu*temperatures
+
+            probability_of_class = pm.math.exp(mu_with_temperatures) / \
+                                   pm.math.sum(pm.math.exp(mu_with_temperatures), axis=0)
 
             self.likelihood = pm.Categorical('category',
                                              p=probability_of_class,
@@ -54,6 +61,7 @@ class BayesianSoftmaxClassification():
 
             trace_theta_0 = self.trace.get_values('theta_0')
             trace_thetas = self.trace.get_values('thetas')
+            trace_temperatures = self.trace.get_values('temperatures')
 
         self.classification_model_2 = pm.Model()
 
@@ -72,7 +80,16 @@ class BayesianSoftmaxClassification():
                                      self.number_of_classes))
 
             mu = alpha + pm.math.dot(self.shared_X, betas)
-            probability_of_class = pm.math.exp(mu) / pm.math.sum(pm.math.exp(mu), axis=0)
+
+            temperatures = pm.HalfNormal('temperatures',
+                                     sd=trace_temperatures.std(),
+                                     shape=self.number_of_classes)
+
+            mu_with_temperatures = mu*temperatures
+
+            probability_of_class = pm.math.exp(mu_with_temperatures) / \
+                                   pm.math.sum(pm.math.exp(mu_with_temperatures), axis=0)
+
 
             self.likelihood = pm.Categorical('category',
                                              p=probability_of_class,

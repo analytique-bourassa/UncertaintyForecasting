@@ -5,6 +5,11 @@ from torch.distributions.normal import Normal
 from torch.autograd import Variable
 import numpy as np
 
+
+def loss_correlated_dropout():
+    raise NotImplementedError
+    return 0
+
 class LSTM(nn.Module):
 
     def __init__(self, input_dim, hidden_dim, batch_size, output_dim=1,

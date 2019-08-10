@@ -7,7 +7,7 @@ from pyro.contrib.autoguide import AutoDiagonalNormal
 import torch
 import torch.nn as nn
 
-from probabilitic_predictions.probabilistic_predictions import ProbabilisticPredictions
+from probabilitic_predictions.probabilistic_predictions_regression import ProbabilisticPredictionsRegression
 from models.LSTM_BayesRegressor.GaussianLinearModel_abstract import GaussianLinearModel_abstract
 
 get_marginal = lambda traces, sites: EmpiricalMarginal(traces, sites)._get_samples_and_weights()[
@@ -65,7 +65,7 @@ class GaussianLinearModel_SVI(GaussianLinearModel_abstract):
         post_pred = self.trace_pred.run(X_test, None)
         mu, y = self.get_results(post_pred, sites=['prediction', 'obs'])
 
-        predictions = ProbabilisticPredictions()
+        predictions = ProbabilisticPredictionsRegression()
         predictions.number_of_predictions = X_test.shape[0]
         predictions.number_of_samples = number_of_samples
         predictions.initialize_to_zeros()
@@ -74,7 +74,6 @@ class GaussianLinearModel_SVI(GaussianLinearModel_abstract):
         predictions.true_values = y_test
 
         return predictions
-
 
     def get_results(self, traces, sites):
 

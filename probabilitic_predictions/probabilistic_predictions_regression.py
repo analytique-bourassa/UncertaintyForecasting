@@ -1,9 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from models.visualisations import Visualisator
+
 DEFAULT_LEGEND_SIZE = 19
 
-class ProbabilisticPredictions():
+class ProbabilisticPredictionsRegression():
 
     KEY_INT_FOR_SAMPLES_PREDICTIONS = 1
     KEY_INT_FOR_PREDICTIONS_PREDICTIONS = 0
@@ -109,18 +111,11 @@ class ProbabilisticPredictions():
 
         lower, upper = self.calculate_confidence_interval(confidence_interval)
 
-        x = range(self.number_of_predictions)
-
-        plt.plot(x, self.predictions, label="predictions", linewidth=3.0)
-        plt.plot(x, self.true_values, label="true values", linewidth=3.0)
-
-        plt.xlabel("Time", size=22)
-        plt.ylabel("y (value to forecast)", size=22)
-        plt.title("Prediction with %2.0f %% confidence interval" % 100*confidence_interval, size=26)
-
-        plt.fill_between(x, lower, upper, alpha=0.5)
-        plt.legend(fontsize=DEFAULT_LEGEND_SIZE)
-        plt.show()
+        Visualisator.show_predictions_with_confidence_interval(self.predictions,
+                                                               self.true_values,
+                                                               lower,
+                                                               upper,
+                                                               confidence_interval)
 
     def show_predictions_with_training_data(self, confidence_interval):
 

@@ -77,6 +77,7 @@ def make_predictions(data_loader, model, training_data, batch_size):
 
 def extract_features(data_loader, model, training_data, batch_size):
 
+    assert hasattr(model, "return_last_layer"), "The model must have the method return_last_layer implemented"
     model.eval()
 
     y_pred_all = None

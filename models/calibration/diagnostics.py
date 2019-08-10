@@ -1,5 +1,5 @@
 from scipy.special import erfinv
-from math import sqrt
+from math import sqrt, floor
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -170,4 +170,52 @@ def calculate_marginal_calibration(y_pred, y_true, show=False):
 
     deviation_score_marginal_calibration = ((cdf_true[1:] - cdf_true[:-1]) * np.abs(cdf_true[1:] - cdf_forecast[1:])).sum()
     return deviation_score_marginal_calibration
+
+
+def calculate_static_calibration_error(y_pred, y_true, confidences, number_of_classes):
+
+    n_bins = 8
+    p_values = np.linspace(0., 1, n_bins + 1)
+
+    index_second_value = 1
+    index_first_value = 0
+    interval = p_values[index_second_value] - p_values[index_first_value]
+
+    index_correct_value = 0
+    index_total_values_in_bin =1
+
+    bins = np.zeros((n_bins, number_of_classes, 2)) # first in true, second is total put in class
+    for index_instance in range(y_pred.shape[0]):
+        for index_class in range(number_of_classes):
+
+            confidence_instance_specific_class = confidences[index_instance, index_class]
+
+            bin_index = int(floor(confidence_instance_specific_class/interval))
+            bin_index = min(n_bins - 1, bin_index)
+            bin_index = max(0, bin_index)
+
+            true_label = y_true[index_instance]
+
+            bins[bin_index, index_class, index_total_values_in_bin] += 1
+            bins[bin_index, index_class, index_correct_value] += 1*(index_class == true_label)
+
+    bins_normalized = np.zeros((n_bins, number_of_classes))
+    curve = np.zeros(n_bins)
+    for bin_index in range(n_bins):
+        for class_index in range(number_of_classes):
+
+             curve[bin_index] = bins[bin_index, :, index_correct_value].sum() / max(bins[bin_index, :, index_total_values_in_bin].sum(), 1)
+             bins_normalized[bin_index, class_index] = bins[bin_index, class_index, index_correct_value] / max(bins[bin_index, class_index, index_total_values_in_bin], 1)
+
+    means_per_bin = 0.5*(p_values[1:] + p_values[:-1])
+
+    deviations = np.zeros((n_bins, number_of_classes))
+    for class_index in range(number_of_classes):
+        deviations[:, class_index] = np.abs(bins_normalized[:, class_index] - means_per_bin)
+
+    deviations_average_accross_classes = deviations.mean(axis=1)
+
+    return curve, means_per_bin
+
+
 

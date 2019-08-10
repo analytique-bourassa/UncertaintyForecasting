@@ -4,7 +4,7 @@ import numpy as np
 
 from theano import shared
 
-from probabilitic_predictions.probabilistic_predictions import ProbabilisticPredictions
+from probabilitic_predictions.probabilistic_predictions_regression import ProbabilisticPredictionsRegression
 from models.LSTM_BayesRegressor.GaussianLinearModel_abstract import GaussianLinearModel_abstract
 from models.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression_parameters import BayesianLinearRegressionParameters
 from models.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression_priors import BayesianLinearRegressionPriors
@@ -137,7 +137,7 @@ class BayesianLinearModel(GaussianLinearModel_abstract):
 
     def make_predictions(self, X_test, y_test):
 
-        predictions = ProbabilisticPredictions()
+        predictions = ProbabilisticPredictionsRegression()
         predictions.number_of_predictions = X_test.shape[0]
         predictions.number_of_samples = self.params.number_of_samples_for_predictions
         predictions.initialize_to_zeros()

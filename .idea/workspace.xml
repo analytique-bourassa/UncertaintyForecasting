@@ -2,13 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8f142cc-a965-4a6e-b1a8-ece3b04b37ff" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/models/classification/classification_bayesian_softmax.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/scripts/classification_iris.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/tools_pymc.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/classification/classification_bayesian_softmax_temperature.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/probabilitic_predictions/probabilistic_predictions_classification.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_models/test_model_data_feeder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_probabilistic_predictions/test_probabilistic_predictions_classification.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tet_calibration/test_diagnostic.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProbabilisticForecaste.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/ProbabilisticForecaste.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor_bayesian_linear_regression_bayesian_linear_regression_parameters_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor_bayesian_linear_regression_bayesian_linear_regression_parameters_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor_bayesian_linear_regression_bayesian_linear_regression_priors_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor_bayesian_linear_regression_bayesian_linear_regression_priors_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor_bayesian_linear_regression_bayesian_linear_regression_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor_bayesian_linear_regression_bayesian_linear_regression_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor_gaussian_model_mcmc_pyro_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor_gaussian_model_mcmc_pyro_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor_gaussian_model_svi_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor_gaussian_model_svi_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_LSTM_CorrelatedDropout_LSTM_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_LSTM_CorrelatedDropout_LSTM_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_lstm_params_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_lstm_params_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_model_data_feeder_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_model_data_feeder_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_visualisations_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_visualisations_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/status.json" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/status.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/tests_test_models_test_LSTM_BayesRegressor_bayesian_linear_regression_test_bayesian_linear_regression_parameters_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests_test_models_test_LSTM_BayesRegressor_bayesian_linear_regression_test_bayesian_linear_regression_parameters_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/tests_test_models_test_LSTM_BayesRegressor_bayesian_linear_regression_test_bayesian_linear_regression_priors_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests_test_models_test_LSTM_BayesRegressor_bayesian_linear_regression_test_bayesian_linear_regression_priors_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/tests_test_models_test_lstm_params_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests_test_models_test_lstm_params_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/utils_validator_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/utils_validator_py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression/bayesian_linear_regression.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression/bayesian_linear_regression.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_models/test_LSTM_BayesRegressor/bayesian_linear_regression/test_bayesian_linear_regression_priors.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models/test_LSTM_BayesRegressor/bayesian_linear_regression/test_bayesian_linear_regression_priors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_mcmc_pyro.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_mcmc_pyro.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_svi.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_svi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/calibration/diagnostics.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/calibration/diagnostics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/classification/classification_bayesian_softmax.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/classification/classification_bayesian_softmax.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/model_data_feeder.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/model_data_feeder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/scripts/classification_iris.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/classification_iris.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/scripts/train_model_basic.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/train_model_basic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/scripts/train_model_basic_bayesian_lstm_vi.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/train_model_basic_bayesian_lstm_vi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/tools_pymc.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/tools_pymc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/visualisations.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/visualisations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/probabilitic_predictions/probabilistic_predictions.py" beforeDir="false" afterPath="$PROJECT_DIR$/probabilitic_predictions/probabilistic_predictions_regression.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,11 +46,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="classification_bayesian_softmax.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="classification_bayesian_softmax.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/classification/classification_bayesian_softmax.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+            <state relative-caret-position="330">
+              <caret line="104" column="41" selection-start-line="101" selection-start-column="6" selection-end-line="104" selection-end-column="41" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -34,8 +61,8 @@
       <file leaf-file-name="classification_iris.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/scripts/classification_iris.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+            <state relative-caret-position="264">
+              <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -43,20 +70,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="requirements.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/requirements.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-            </state>
-          </provider>
+      <file leaf-file-name="Timer.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/Timer.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file leaf-file-name="train_model_basic.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/scripts/train_model_basic.py">
+      <file leaf-file-name="model_data_feeder.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/model_data_feeder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2495">
-              <caret line="53" column="11" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="11" />
+            <state relative-caret-position="814">
+              <caret line="79" column="109" selection-start-line="79" selection-start-column="109" selection-end-line="79" selection-end-column="109" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -64,11 +87,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tools_pymc.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/tools_pymc.py">
+      <file leaf-file-name="test_lstm_params.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_models/test_lstm_params.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="528">
+              <caret line="39" column="61" selection-start-line="6" selection-end-line="39" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LSTM.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/LSTM.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="381">
+              <caret line="47" column="8" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="probabilistic_predictions_classification.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/probabilitic_predictions/probabilistic_predictions_classification.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="544">
+              <caret line="129" column="31" selection-start-line="129" selection-start-column="31" selection-end-line="129" selection-end-column="31" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -76,11 +117,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bayesian_linear_regression.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression/bayesian_linear_regression.py">
+      <file leaf-file-name="test_probabilistic_predictions_classification.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_probabilistic_predictions/test_probabilistic_predictions_classification.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="125" column="68" selection-start-line="125" selection-start-column="68" selection-end-line="125" selection-end-column="68" />
+            <state relative-caret-position="260">
+              <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -88,11 +129,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bayesian_linear_regression_priors.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression/bayesian_linear_regression_priors.py">
+      <file leaf-file-name="test_diagnostic.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/tet_calibration/test_diagnostic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="695">
-              <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
+            <state relative-caret-position="22">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_model_data_feeder.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_models/test_model_data_feeder.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -125,15 +175,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/data_generation/data_generators_wrapper.py" />
-        <option value="$PROJECT_DIR$/models/script_parameters/parameters.py" />
-        <option value="$PROJECT_DIR$/data_handling/data_reshaping.py" />
-        <option value="$PROJECT_DIR$/antichambre/LSTM_Bayesian/LSTM.py" />
-        <option value="$PROJECT_DIR$/models/calibration/analysis.py" />
-        <option value="$PROJECT_DIR$/models/scripts/train_model_basic.py" />
-        <option value="$PROJECT_DIR$/models/LSTM_Bayesian/LSTM.py" />
-        <option value="$PROJECT_DIR$/models/LSTM_BayesRegressor/results_smoke_test.csv" />
-        <option value="$PROJECT_DIR$/models/LSTM_BayesRegressor/experiment_results.py" />
         <option value="$PROJECT_DIR$/Timer.py" />
         <option value="$PROJECT_DIR$/models/scripts/train_model_basic_bayesian_main.py" />
         <option value="$PROJECT_DIR$/models/scripts/classification.py" />
@@ -148,11 +189,7 @@
         <option value="$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_model_parameters.py" />
         <option value="$PROJECT_DIR$/data_generation/data_generators_switcher.py" />
         <option value="$PROJECT_DIR$/data_generation/data_generator.py" />
-        <option value="$PROJECT_DIR$/models/model_data_feeder.py" />
         <option value="$PROJECT_DIR$/models/training_tools/early_stopping.py" />
-        <option value="$PROJECT_DIR$/models/visualisations.py" />
-        <option value="$PROJECT_DIR$/probabilitic_predictions/probabilistic_predictions.py" />
-        <option value="$PROJECT_DIR$/models/calibration/diagnostics.py" />
         <option value="$PROJECT_DIR$/models/scripts/train_model_one.py" />
         <option value="$PROJECT_DIR$/tests/test_params.py" />
         <option value="$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression_parameters.py" />
@@ -171,18 +208,31 @@
         <option value="$PROJECT_DIR$/tests/test_models/test_lstm_params.py" />
         <option value="$PROJECT_DIR$/tests/test_models/test_LSTM_BayesRegressor/bayesian_linear_regression/test_bayesian_linear_regression_parameters.py" />
         <option value="$PROJECT_DIR$/tests/test_models/test_LSTM_BayesRegressor/bayesian_linear_regression/test_bayesian_linear_regression_priors.py" />
-        <option value="$PROJECT_DIR$/models/tools_pymc.py" />
         <option value="$PROJECT_DIR$/requirements.yml" />
         <option value="$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression/bayesian_linear_regression.py" />
-        <option value="$PROJECT_DIR$/models/scripts/classification_iris.py" />
+        <option value="$PROJECT_DIR$/probabilitic_predictions/probabilistic_predictions.py" />
+        <option value="$PROJECT_DIR$/probabilitic_predictions/probabilistic_predictions_regression.py" />
+        <option value="$PROJECT_DIR$/models/visualisations.py" />
+        <option value="$PROJECT_DIR$/models/classification/classification_bayesian_softmax_temperature.py" />
         <option value="$PROJECT_DIR$/models/classification/classification_bayesian_softmax.py" />
+        <option value="$PROJECT_DIR$/models/tools_pymc.py" />
+        <option value="$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_svi.py" />
+        <option value="$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_mcmc_pyro.py" />
+        <option value="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM.py" />
+        <option value="$PROJECT_DIR$/models/calibration/diagnostics.py" />
+        <option value="$PROJECT_DIR$/models/scripts/classification_iris.py" />
+        <option value="$PROJECT_DIR$/models/model_data_feeder.py" />
+        <option value="$PROJECT_DIR$/tests/test_models/test_model_data_feeder.py" />
+        <option value="$PROJECT_DIR$/probabilitic_predictions/probabilistic_predictions_classification.py" />
+        <option value="$PROJECT_DIR$/tests/test_probabilistic_predictions/test_probabilistic_predictions_classification.py" />
+        <option value="$PROJECT_DIR$/tests/tet_calibration/test_diagnostic.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="482" />
-    <option name="y" value="27" />
-    <option name="width" value="910" />
+    <option name="x" value="586" />
+    <option name="y" value="329" />
+    <option name="width" value="890" />
     <option name="height" value="1040" />
   </component>
   <component name="ProjectView">
@@ -190,6 +240,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -205,40 +256,19 @@
             <path>
               <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
               <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-              <item name="classification" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
               <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="test_models" type="462c0819:PsiDirectoryNode" />
+              <item name="test_probabilistic_predictions" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
               <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="test_models" type="462c0819:PsiDirectoryNode" />
-              <item name="test_LSTM_BayesRegressor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="test_models" type="462c0819:PsiDirectoryNode" />
-              <item name="test_LSTM_BayesRegressor" type="462c0819:PsiDirectoryNode" />
-              <item name="bayesian_linear_regression" type="462c0819:PsiDirectoryNode" />
+              <item name="tet_calibration" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
@@ -249,7 +279,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -257,19 +286,19 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/models/classification" />
+      <recent name="$PROJECT_DIR$/models/scripts" />
+      <recent name="$PROJECT_DIR$/models" />
+      <recent name="$PROJECT_DIR$/antichambre" />
+      <recent name="$PROJECT_DIR$/models/LSTM_BayesRegressor" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/tests/test_models" />
       <recent name="$PROJECT_DIR$/utils" />
       <recent name="$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression" />
       <recent name="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models" />
       <recent name="$PROJECT_DIR$/models" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/models/scripts" />
-      <recent name="$PROJECT_DIR$/models" />
-      <recent name="$PROJECT_DIR$/antichambre" />
-      <recent name="$PROJECT_DIR$/models/LSTM_BayesRegressor" />
-      <recent name="$PROJECT_DIR$/models/LSTM_MCMC" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -445,18 +474,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26065838" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26011872" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.45185184" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32991803" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.42751324" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.65185183" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.53544974" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -475,6 +503,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/probabilitic_predictions/probabilistic_predictions_classification.py</url>
+          <line>129</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -482,69 +517,10 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="41" />
+      <option name="time" value="56" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/models/scripts/classification.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/antichambre/train_model_basic_bayesian_svi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-550">
-          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="105" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/env_HMM/lib/python3.6/site-packages/torch/__init__.pyi">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25938">
-          <caret line="1180" column="4" selection-start-line="1180" selection-start-column="4" selection-end-line="1180" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/scripts/test_gpu.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/scripts/train_model_basic_bayesian_main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3048">
-          <caret line="168" column="19" lean-forward="true" selection-start-line="168" selection-start-column="19" selection-end-line="168" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_svi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1132">
-          <caret line="41" column="21" lean-forward="true" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/env_HMM/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-46">
-          <caret line="2279" column="8" selection-start-line="2279" selection-start-column="8" selection-end-line="2279" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/lynx.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/script_parameters/parameters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1804">
-          <caret line="82" column="8" selection-start-line="82" selection-start-column="8" selection-end-line="82" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/pymc3/distributions/distribution.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="616">
@@ -594,20 +570,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/model_data_feeder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/visualisations.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1672">
-          <caret line="80" column="57" selection-start-line="80" selection-start-column="57" selection-end-line="80" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/training_tools/early_stopping.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
@@ -622,13 +584,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/calibration/diagnostics.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="849">
-          <caret line="138" selection-start-line="138" selection-end-line="138" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/calibration/analysis.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -636,36 +591,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="82" column="44" selection-start-line="82" selection-start-column="44" selection-end-line="82" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/LSTM_VI/LSTM_VI_model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="302">
           <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/LSTM.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/probabilitic_predictions/probabilistic_predictions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="849">
-          <caret line="124" column="71" selection-start-line="124" selection-start-column="71" selection-end-line="124" selection-end-column="71" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#3059#3739#0" />
-            <element signature="e#3822#4958#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -721,24 +650,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_models/test_lstm_params.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="151" column="16" lean-forward="true" selection-start-line="151" selection-start-column="16" selection-end-line="151" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression/bayesian_linear_regression_parameters.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
           <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/GaussianLinearModel_abstract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="16" selection-start-line="6" selection-end-line="13" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -753,53 +668,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1115">
           <caret line="148" selection-start-line="148" selection-end-line="148" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/tools_pymc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression/bayesian_linear_regression_priors.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="695">
-          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/scripts/train_model_basic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2495">
-          <caret line="53" column="11" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression/bayesian_linear_regression.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="125" column="68" selection-start-line="125" selection-start-column="68" selection-end-line="125" selection-end-column="68" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -814,29 +682,205 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="880">
           <caret line="166" column="26" lean-forward="true" selection-start-line="166" selection-start-column="26" selection-end-line="166" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/scripts/train_model_basic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="53" column="11" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression/bayesian_linear_regression_priors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="695">
+          <caret line="64" selection-start-line="64" selection-end-line="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression/bayesian_linear_regression.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3322">
+          <caret line="161" column="64" selection-start-line="161" selection-start-column="7" selection-end-line="161" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/envs/env_HMM/lib/python3.6/site-packages/matplotlib/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24156">
+          <caret line="1098" selection-start-line="1098" selection-end-line="1098" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/visualisations.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2398">
+          <caret line="115" column="80" selection-start-line="115" selection-start-column="80" selection-end-line="115" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1122">
+          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/classification/classification_bayesian_softmax_temperature.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="638">
+          <caret line="36" column="55" selection-start-line="36" selection-start-column="55" selection-end-line="36" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/probabilitic_predictions/probabilistic_predictions_regression.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="849">
+          <caret line="137" column="67" selection-start-line="126" selection-start-column="8" selection-end-line="137" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_svi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#638#938#0" />
+            <element signature="e#1072#1486#0" />
+            <element signature="e#1518#2092#0" />
+            <element signature="e#2128#2153#0" />
+            <element signature="e#2212#2742#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/GaussianLinearModel_abstract.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_mcmc_pyro.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="12" column="108" selection-start-line="12" selection-start-column="74" selection-end-line="12" selection-end-column="108" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/tools_pymc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="682">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/calibration/diagnostics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="203" column="35" selection-start-line="203" selection-start-column="35" selection-end-line="203" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/Timer.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/LSTM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="47" column="8" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_models/test_lstm_params.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="39" column="61" selection-start-line="6" selection-end-line="39" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/classification/classification_bayesian_softmax.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="104" column="41" selection-start-line="101" selection-start-column="6" selection-end-line="104" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/model_data_feeder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="814">
+          <caret line="79" column="109" selection-start-line="79" selection-start-column="109" selection-end-line="79" selection-end-column="109" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/scripts/classification_iris.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+        <state relative-caret-position="264">
+          <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/classification/classification_bayesian_softmax.py">
+    <entry file="file://$PROJECT_DIR$/tests/test_models/test_model_data_feeder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+        <state relative-caret-position="264">
+          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/probabilitic_predictions/probabilistic_predictions_classification.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="129" column="31" selection-start-line="129" selection-start-column="31" selection-end-line="129" selection-end-column="31" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_probabilistic_predictions/test_probabilistic_predictions_classification.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/tet_calibration/test_diagnostic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
