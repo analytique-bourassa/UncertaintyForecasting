@@ -1,22 +1,67 @@
+import numpy as np
+
+import torch.nn as nn
+
+from models.model_data_feeder import data_loader_sequences
+from models.model_data_feeder import make_forward_pass
 
 class TestModelDataFeeder(object):
 
-    def test_if_input_dim_not_positive_should_raise_value_error(self):
+    def test_data_loader_sequences(self):
+
+        # Prepare
+        number_of_data = 1000
+        batch_size = 100
+        expected_number_of_batches = 10
+        number_of_time_steps = 8
+        number_of_features = 1
+
+        data_generated = np.random.normal(0, 1, (number_of_time_steps, number_of_data, number_of_features))
+
+        data_generated_by_data_loader = list()
+
+        # Action
+        for features, labels in data_loader_sequences(data_generated, batch_size, random=True):
+            data_generated_by_data_loader.append(features)
+
+        # Assert
+        assert len(data_generated_by_data_loader) == expected_number_of_batches
+        assert all([data.shape[1] == batch_size for data in data_generated_by_data_loader])
+        assert all([data.shape[0] == number_of_time_steps - 1 for data in data_generated_by_data_loader])
+
+    def test_if_make_forward_pass_return_data(self):
+
 
         # Prepare
 
+        number_of_data = 1000
+        batch_size = 100
+        expected_number_of_batches = 10
+        number_of_time_steps = 8
+        number_of_features = 1
 
-        # Action
-
-
-        # Assert
-        assert False
-
-    def test_if_input_dim_positive_integer_should_set_the_value(self):
-        # Prepare
+        data_generated = np.random.normal(0, 1, (number_of_time_steps, number_of_data, number_of_features))
 
 
         # Action
+        class EmptyModel(nn.Module):
+
+            def __init__(self):
+                super(EmptyModel, self).__init__()
+                input_size, hidden_size = 5, 10
+                self.lstm = nn.LSTM(input_size, hidden_size)
+
+            def forward(self, x):
+                return np.random.normal(0,1,7)
+
+
+        model = EmptyModel()
+
+        def faked_loss(x, y): return 1
+        # Action
+        losses, N_data = make_forward_pass(data_loader_sequences,  model, faked_loss, data_generated, batch_size )
+
 
         # Assert
-        assert False
+        assert N_data == number_of_data
+        assert losses == expected_number_of_batches

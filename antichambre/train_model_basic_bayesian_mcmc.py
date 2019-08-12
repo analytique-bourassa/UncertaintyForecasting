@@ -108,7 +108,7 @@ for t in range(num_epochs):
 
     # Forward pass
 
-    losses, N_data = make_forward_pass(data_loader, model, loss_fn, data_train, batch_size)
+    losses, N_data = make_forward_pass(data_loader_sequences, model, loss_fn, data_train, batch_size)
     if t % 10 == 0:
         print("Epoch ", t, "MSE: ", losses.item())
 
@@ -123,8 +123,8 @@ for t in range(num_epochs):
 #####################
 
 
-y_pred, _ = make_predictions(data_loader, model, all_data, batch_size)
-features, y_true = extract_features(data_loader, model, all_data, batch_size)
+y_pred, _ = make_predictions(data_loader_sequences, model, all_data, batch_size)
+features, y_true = extract_features(data_loader_sequences, model, all_data, batch_size)
 
 print(np.corrcoef(features.T))
 print("mean difference: ", np.mean(np.abs(y_pred[number_of_train_data:] - y_true[number_of_train_data:])))

@@ -96,7 +96,7 @@ for i in range(number_of_experiment_per_type):
         for t in range(num_epochs):
             model.hidden = model.init_hidden()
 
-            losses, N_data = make_forward_pass(data_loader, model, loss_fn, data_train, lstm_params.batch_size)
+            losses, N_data = make_forward_pass(data_loader_sequences, model, loss_fn, data_train, lstm_params.batch_size)
             # if t % 10 == 0:
             # print("Epoch ", t, "MSE: ", losses.item())
 
@@ -115,8 +115,8 @@ for i in range(number_of_experiment_per_type):
                         experiment_params.name + "_" + experiment_params.version)
         lstm_params.save(experiment_params.version, experiment_params.path)
 
-    y_pred, _ = make_predictions(data_loader, model, all_data, lstm_params.batch_size)
-    features, y_true = extract_features(data_loader, model, all_data, lstm_params.batch_size)
+    y_pred, _ = make_predictions(data_loader_sequences, model, all_data, lstm_params.batch_size)
+    features, y_true = extract_features(data_loader_sequences, model, all_data, lstm_params.batch_size)
 
     for option in BayesianLinearModel.POSSIBLE_OPTION_FOR_POSTERIOR_CALCULATION:
 

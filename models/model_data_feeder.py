@@ -1,10 +1,23 @@
 import torch
 from math import floor
 import numpy as np
+import torch.nn as nn
 
-def data_loader(data, batch_size, random=True):
+from utils.validator import Validator
 
-    number_of_batches = int(floor(data.shape[1] / batch_size))
+def data_loader_sequences(data, batch_size, random=True):
+    """
+
+    The expected shape is [number_of_times_steps, number_of_data, number_of_features]
+    :param data:
+    :param batch_size:
+    :param random:
+    :return:
+    """
+
+    Validator.check_type(data, np.ndarray)
+    index_for_number_of_data = 1
+    number_of_batches = int(floor(data.shape[index_for_number_of_data] / batch_size))
     if random:
         indexes_of_batch = np.random.choice(range(number_of_batches),
                                             number_of_batches, replace=False)
@@ -26,6 +39,8 @@ def data_loader(data, batch_size, random=True):
 
 def make_forward_pass(data_loader, model, loss_fn, training_data, batch_size):
 
+    assert isinstance(model, nn.Module)
+
     losses = None
     N_data = 0
 
@@ -46,6 +61,8 @@ def make_forward_pass(data_loader, model, loss_fn, training_data, batch_size):
 
 
 def make_predictions(data_loader, model, training_data, batch_size):
+
+    assert isinstance(model, nn.Module)
 
     model.eval()
 
@@ -78,6 +95,7 @@ def make_predictions(data_loader, model, training_data, batch_size):
 def extract_features(data_loader, model, training_data, batch_size):
 
     assert hasattr(model, "return_last_layer"), "The model must have the method return_last_layer implemented"
+
     model.eval()
 
     y_pred_all = None

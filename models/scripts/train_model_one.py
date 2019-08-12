@@ -94,10 +94,10 @@ if experiment_params.train_lstm:
     for epoch in tqdm(range(num_epochs)):
         model.hidden = model.init_hidden()
 
-        losses, N_data = make_forward_pass(data_loader, model, loss_fn, data_train, lstm_params.batch_size)
+        losses, N_data = make_forward_pass(data_loader_sequences, model, loss_fn, data_train, lstm_params.batch_size)
 
         if epoch % 100 == 0:
-            y_pred, y_true = make_predictions(data_loader, model, data_validation, lstm_params.batch_size)
+            y_pred, y_true = make_predictions(data_loader_sequences, model, data_validation, lstm_params.batch_size)
             val_loss = mean_squared_error(y_pred, y_true)
             print("Epoch ", epoch, "MSE: ", val_loss)
             early_stopper(epoch, val_loss, model)
@@ -120,8 +120,8 @@ if experiment_params.save_lstm:
                     experiment_params.name + "_" + experiment_params.version)
     lstm_params.save(experiment_params.version, experiment_params.path)
 
-y_pred, _ = make_predictions(data_loader, model, all_data, lstm_params.batch_size)
-features, y_true = extract_features(data_loader, model, all_data, lstm_params.batch_size)
+y_pred, _ = make_predictions(data_loader_sequences, model, all_data, lstm_params.batch_size)
+features, y_true = extract_features(data_loader_sequences, model, all_data, lstm_params.batch_size)
 
 
 print("r2 score: %.4f" % r2_score(y_true.flatten(), y_pred.flatten()))
