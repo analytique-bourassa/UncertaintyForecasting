@@ -2,8 +2,10 @@ import time
 
 class Timer:
 
-    def __init__(self,name):
+    def __init__(self,name,show_time_when_exit=True):
+
         self.name = name
+        self.show_time_when_exit =show_time_when_exit
 
     def __enter__(self):
 
@@ -11,7 +13,8 @@ class Timer:
         return self
 
     def __exit__(self, *args):
-        print('Method: %s | Elapsed time: %0.2fs' % (self.name, time.time() - self.t0))
+        if self.show_time_when_exit:
+            print('Method: %s | Elapsed time: %0.2fs' % (self.name, time.time() - self.t0))
 
     def elapsed_time(self):
         return time.time() - self.t0

@@ -117,3 +117,7 @@ class BayesianSoftmaxClassification():
 
         return predictions
 
+    def calculate_widely_applicable_information_criterion(self):
+        widely_applicable_information_criterion_class = pm.waic(self.trace, self.classification_model_2)
+        return widely_applicable_information_criterion_class.WAIC
+

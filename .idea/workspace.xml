@@ -2,17 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8f142cc-a965-4a6e-b1a8-ece3b04b37ff" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/data_handling/train_test_split.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/information_metrics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/calibration/diagnostics.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/calibration/diagnostics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/classification/classification_bayesian_softmax.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/classification/classification_bayesian_softmax.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/classification/classification_bayesian_softmax_temperature.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/classification/classification_bayesian_softmax_temperature.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/scripts/classification_iris.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/classification_iris.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/visualisations.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/visualisations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.yml" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_models/test_model_data_feeder.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models/test_model_data_feeder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tet_calibration/test_diagnostic.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_calibration/test_diagnostic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/validator.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/validator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results_analysis.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/results_analysis.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/Timer.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/Timer.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,8 +23,8 @@
       <file leaf-file-name="classification_bayesian_softmax.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/classification/classification_bayesian_softmax.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2266">
-              <caret line="103" column="23" selection-start-line="103" selection-start-column="23" selection-end-line="103" selection-end-column="23" />
+            <state relative-caret-position="637">
+              <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -38,8 +35,8 @@
       <file leaf-file-name="classification_iris.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/models/scripts/classification_iris.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="124" column="36" lean-forward="true" selection-start-line="124" selection-start-column="36" selection-end-line="124" selection-end-column="36" />
+            <state relative-caret-position="681">
+              <caret line="137" column="28" lean-forward="true" selection-start-line="137" selection-start-column="28" selection-end-line="137" selection-end-column="28" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -50,8 +47,8 @@
       <file leaf-file-name="train_test_split.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data_handling/train_test_split.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="17" column="49" lean-forward="true" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
+            <state relative-caret-position="330">
+              <caret line="17" column="49" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -62,8 +59,8 @@
       <file leaf-file-name="visualisations.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/visualisations.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="154" column="64" selection-start-line="154" selection-start-column="64" selection-end-line="154" selection-end-column="64" />
+            <state relative-caret-position="-911">
+              <caret line="97" column="40" selection-start-line="97" selection-start-column="40" selection-end-line="97" selection-end-column="40" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -74,8 +71,8 @@
       <file leaf-file-name="diagnostics.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/calibration/diagnostics.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="213" column="25" lean-forward="true" selection-start-line="213" selection-start-column="25" selection-end-line="213" selection-end-column="25" />
+            <state relative-caret-position="483">
+              <caret line="213" column="25" selection-start-line="213" selection-start-column="25" selection-end-line="213" selection-end-column="25" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -83,14 +80,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="information_metrics.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/information_metrics.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
       <file leaf-file-name="classification_bayesian_softmax_temperature.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/classification/classification_bayesian_softmax_temperature.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="44">
+              <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -98,8 +97,8 @@
       <file leaf-file-name="validator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/validator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="41" column="33" lean-forward="true" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
+            <state relative-caret-position="902">
+              <caret line="41" column="33" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -108,7 +107,7 @@
         <entry file="file://$PROJECT_DIR$/requirements.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="66">
-              <caret line="3" column="9" lean-forward="true" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
+              <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -141,7 +140,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/models/scripts/train_model_basic_bayesian_main.py" />
         <option value="$PROJECT_DIR$/models/scripts/classification.py" />
         <option value="$PROJECT_DIR$/models/scripts/mnist_classification.py" />
         <option value="$PROJECT_DIR$/models/LSTM_VI/LSTM_VI_model.py" />
@@ -186,11 +184,12 @@
         <option value="$PROJECT_DIR$/tests/test_models/test_model_data_feeder.py" />
         <option value="$PROJECT_DIR$/requirements.yml" />
         <option value="$PROJECT_DIR$/utils/validator.py" />
-        <option value="$PROJECT_DIR$/models/classification/classification_bayesian_softmax.py" />
-        <option value="$PROJECT_DIR$/models/classification/classification_bayesian_softmax_temperature.py" />
-        <option value="$PROJECT_DIR$/models/visualisations.py" />
         <option value="$PROJECT_DIR$/models/calibration/diagnostics.py" />
         <option value="$PROJECT_DIR$/data_handling/train_test_split.py" />
+        <option value="$PROJECT_DIR$/models/visualisations.py" />
+        <option value="$PROJECT_DIR$/models/information_metrics.py" />
+        <option value="$PROJECT_DIR$/models/classification/classification_bayesian_softmax.py" />
+        <option value="$PROJECT_DIR$/models/classification/classification_bayesian_softmax_temperature.py" />
         <option value="$PROJECT_DIR$/models/scripts/classification_iris.py" />
       </list>
     </option>
@@ -216,11 +215,6 @@
             <path>
               <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
               <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
-              <item name="data_handling" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -234,25 +228,6 @@
               <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
               <item name="classification" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-              <item name="LSTM_BayesRegressor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-              <item name="LSTM_BayesRegressor" type="462c0819:PsiDirectoryNode" />
-              <item name="bayesian_linear_regression" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
@@ -466,13 +441,12 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21208851" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21208851" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32910052" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32991803" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25291005" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.36507937" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -483,6 +457,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32910052" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -512,13 +487,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/anaconda3/envs/env_HMM/lib/python3.6/site-packages/pymc3/variational/inference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="706" column="28" selection-start-line="706" selection-start-column="18" selection-end-line="706" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data_generation/data_generators_switcher.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
@@ -721,9 +689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="14" column="64" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -738,9 +703,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="59" column="11" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -755,9 +717,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="16" column="27" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -765,23 +724,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1254">
           <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/requirements.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
-          <caret line="3" column="9" lean-forward="true" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
+          <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/validator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="41" column="33" lean-forward="true" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
+        <state relative-caret-position="902">
+          <caret line="41" column="33" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -796,59 +752,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/classification/classification_bayesian_softmax_temperature.py">
+    <entry file="file://$PROJECT_DIR$/models/scripts/data_accuracy_and_deviation_score" />
+    <entry file="file://$PROJECT_DIR$/data_handling/train_test_split.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
+        <state relative-caret-position="330">
+          <caret line="17" column="49" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/classification/classification_bayesian_softmax.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2266">
-          <caret line="103" column="23" selection-start-line="103" selection-start-column="23" selection-end-line="103" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/scripts/data_accuracy_and_deviation_score">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/calibration/diagnostics.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="213" column="25" lean-forward="true" selection-start-line="213" selection-start-column="25" selection-end-line="213" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/visualisations.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="154" column="64" selection-start-line="154" selection-start-column="64" selection-end-line="154" selection-end-column="64" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data_handling/train_test_split.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="49" lean-forward="true" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
+        <state relative-caret-position="-911">
+          <caret line="97" column="40" selection-start-line="97" selection-start-column="40" selection-end-line="97" selection-end-column="40" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -857,13 +778,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/scripts/cumulator.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1749" />
+        <state relative-caret-position="44">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/calibration/diagnostics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="213" column="25" selection-start-line="213" selection-start-column="25" selection-end-line="213" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/information_metrics.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/classification/classification_bayesian_softmax.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="637">
+          <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/classification/classification_bayesian_softmax_temperature.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/scripts/classification_iris.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="124" column="36" lean-forward="true" selection-start-line="124" selection-start-column="36" selection-end-line="124" selection-end-column="36" />
+        <state relative-caret-position="681">
+          <caret line="137" column="28" lean-forward="true" selection-start-line="137" selection-start-column="28" selection-end-line="137" selection-end-column="28" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>

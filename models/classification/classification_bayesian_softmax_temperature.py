@@ -12,6 +12,7 @@ import logging
 logger = logging.getLogger('pymc3')
 logger.setLevel(logging.ERROR)
 
+
 class BayesianSoftmaxClassificationWithTemperatures():
 
     KEY_INDEX_FOR_NUMBER_OF_DATA = 0
@@ -135,4 +136,9 @@ class BayesianSoftmaxClassificationWithTemperatures():
         predictions.true_values = y_test
 
         return predictions
+
+    def calculate_widely_applicable_information_criterion(self):
+
+        widely_applicable_information_criterion_class = pm.waic(self.trace, self.classification_model_2)
+        return widely_applicable_information_criterion_class.WAIC
 

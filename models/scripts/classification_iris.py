@@ -9,6 +9,7 @@ from tqdm import tqdm
 from models.calibration.diagnostics import calculate_static_calibration_error
 import matplotlib.pyplot as plt
 
+from utils.Timer import Timer
 from models.classification.classification_bayesian_softmax_temperature import \
     BayesianSoftmaxClassificationWithTemperatures
 from models.classification.classification_bayesian_softmax import BayesianSoftmaxClassification
@@ -35,6 +36,12 @@ accuracy_with_temperatures = np.zeros(number_of_different_seeds)
 deviation_without_temperatures = np.zeros(number_of_different_seeds)
 deviation_with_temperatures = np.zeros(number_of_different_seeds)
 
+calculation_time_without_temperatures = np.zeros(number_of_different_seeds)
+calculation_time_with_temperatures = np.zeros(number_of_different_seeds)
+
+waic_without_temperatures = np.zeros(number_of_different_seeds)
+waic_with_temperatures = np.zeros(number_of_different_seeds)
+
 cumulator_has_been_used_in_train_set = np.zeros(number_of_data)
 
 for i in tqdm(range(number_of_different_seeds)):
@@ -45,54 +52,60 @@ for i in tqdm(range(number_of_different_seeds)):
     X_train, X_test, y_train, y_test = X[train_indexes], X[test_indexes], \
                                        y.values[train_indexes], y.values[test_indexes]
 
-    model_without = BayesianSoftmaxClassification(number_of_classes=3,
-                                                  number_of_features=4,
-                                                  X_train=X_train,
-                                                  y_train=y_train)
+    with Timer(name="without_temperature") as timer:
 
-    model_without.params.number_of_tuning_steps = 5000
-    model_without.params.number_of_samples_for_posterior = int(1e5)
-    model_without.params.number_of_iterations = int(1e6)
+        model_without = BayesianSoftmaxClassification(number_of_classes=3,
+                                                      number_of_features=4,
+                                                      X_train=X_train,
+                                                      y_train=y_train)
 
-    model_without.sample()
-    # model.show_trace()
+        model_without.params.number_of_tuning_steps = 5000
+        model_without.params.number_of_samples_for_posterior = int(1e5)
+        model_without.params.number_of_iterations = int(1e6)
 
-    predictions = model_without.make_predictions(X_test, y_test)
+        model_without.sample()
+        # model.show_trace()
 
-    y_test_predictions, confidences = predictions.predictions_with_confidence
+        predictions = model_without.make_predictions(X_test, y_test)
 
-    accuracy_without = 100.0 * accuracy_score(y_test, predictions.predictions)
+        y_test_predictions, confidences = predictions.predictions_with_confidence
 
-    curves_without, means_per_bin_without, deviation_score = calculate_static_calibration_error(y_test_predictions,
-                                                                                                y_test,
-                                                                                                confidences,
-                                                                                                predictions.number_of_classes)
+        accuracy_without = 100.0 * accuracy_score(y_test, predictions.predictions)
 
-    accuracy_without_temperatures[i] = accuracy_without
-    deviation_without_temperatures[i] = deviation_score
+        curves_without, means_per_bin_without, deviation_score = calculate_static_calibration_error(y_test_predictions,
+                                                                                                    y_test,
+                                                                                                    confidences,
+                                                                                                    predictions.number_of_classes)
 
-    model_with = BayesianSoftmaxClassificationWithTemperatures(number_of_classes=3,
-                                                               number_of_features=4,
-                                                               X_train=X_train,
-                                                               y_train=y_train)
+        accuracy_without_temperatures[i] = accuracy_without
+        deviation_without_temperatures[i] = deviation_score
+        calculation_time_without_temperatures[i] = timer.elapsed_time()
+        waic_without_temperatures[i] = model_without.calculate_widely_applicable_information_criterion()
 
-    model_with.params.number_of_tuning_steps = 5000
-    model_with.params.number_of_samples_for_posterior = int(1e5)
-    model_with.params.number_of_iterations = int(1e6)
+    with Timer(name="with_temperature") as timer:
 
-    model_with.sample()
-    # model_with.show_trace()
+        model_with = BayesianSoftmaxClassificationWithTemperatures(number_of_classes=3,
+                                                                   number_of_features=4,
+                                                                   X_train=X_train,
+                                                                   y_train=y_train)
 
-    predictions = model_with.make_predictions(X_test, y_test)
+        model_with.params.number_of_tuning_steps = 5000
+        model_with.params.number_of_samples_for_posterior = int(1e5)
+        model_with.params.number_of_iterations = int(1e6)
 
-    y_test_predictions, confidences = predictions.predictions_with_confidence
+        model_with.sample()
+        # model_with.show_trace()
 
-    accuracy_with = 100.0 * accuracy_score(y_test, predictions.predictions)
+        predictions = model_with.make_predictions(X_test, y_test)
 
-    curves_with, means_per_bin_with, deviation_score = calculate_static_calibration_error(y_test_predictions,
-                                                                                          y_test,
-                                                                                          confidences,
-                                                                                          predictions.number_of_classes)
+        y_test_predictions, confidences = predictions.predictions_with_confidence
+
+        accuracy_with = 100.0 * accuracy_score(y_test, predictions.predictions)
+
+        curves_with, means_per_bin_with, deviation_score = calculate_static_calibration_error(y_test_predictions,
+                                                                                              y_test,
+                                                                                              confidences,
+                                                                                              predictions.number_of_classes)
 
     # plt.plot(means_per_bin_with, curves_with, ".-")
     # plt.plot(means_per_bin_with, means_per_bin_with)
@@ -100,20 +113,31 @@ for i in tqdm(range(number_of_different_seeds)):
 
     # deviation = np.abs(curves_with - means_per_bin_with).sum()
 
-    accuracy_with_temperatures[i] = accuracy_with
-    deviation_with_temperatures[i] = deviation_score
+        accuracy_with_temperatures[i] = accuracy_with
+        deviation_with_temperatures[i] = deviation_score
+        calculation_time_with_temperatures[i] = timer.elapsed_time()
+        waic_with_temperatures[i] = model_with.calculate_widely_applicable_information_criterion()
 
 print("Mean acc without: {}".format(accuracy_without_temperatures.mean()))
 print("Mean acc with: {}".format(accuracy_with_temperatures.mean()))
 print("Mean dev without: {}".format(deviation_without_temperatures.mean()))
 print("Mean dev with: {}".format(deviation_with_temperatures.mean()))
+print("Mean time calculation without: {}".format(calculation_time_without_temperatures.mean()))
+print("Mean time calculation with: {}".format(calculation_time_with_temperatures.mean()))
+print("Mean WAIC without: {}".format(waic_without_temperatures.mean()))
+print("Mean WAIC with: {}".format(waic_with_temperatures.mean()))
 
 dataframe = pd.DataFrame({"accuracy_without_temperatures": accuracy_without_temperatures,
                           "accuracy_with_temperatures": accuracy_with_temperatures,
                           "deviation_without_temperatures": deviation_without_temperatures,
-                          "deviation_with_temperatures": deviation_with_temperatures})
+                          "deviation_with_temperatures": deviation_with_temperatures,
+                          "calculation_time_without_temperatures": calculation_time_without_temperatures,
+                          "calculation_time_with_temperatures": calculation_time_with_temperatures,
+                          "WAIC_without_temperatures": waic_without_temperatures,
+                          "WAIC_time_with_temperatures": waic_with_temperatures
+                          })
 
-dataframe.to_csv("data_accuracy_and_deviation_score.csv")
+dataframe.to_csv("data_accuracy_and_deviation_score_with_time.csv")
 
 Visualisator.show_multiple_distribution(np.array([accuracy_without_temperatures,
                                                   accuracy_with_temperatures]),
@@ -122,4 +146,4 @@ Visualisator.show_multiple_distribution(np.array([accuracy_without_temperatures,
                                         variable_name="accuracy")
 
 df_cumulator = pd.DataFrame({"number_of_times_used_for_training": cumulator_has_been_used_in_train_set})
-df_cumulator.to_csv("cumulator.csv")
+df_cumulator.to_csv("cumulator_with_time.csv")

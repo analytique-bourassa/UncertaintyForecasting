@@ -100,6 +100,9 @@ class Visualisator():
         plt.plot(x, predictions, label="predictions", linewidth=DEFAULT_LINEWIDTH)
         plt.plot(x, true_values, label="true values", linewidth=DEFAULT_LINEWIDTH)
 
+        plt.xticks(fontsize=DEFAULT_TICKS_SIZE)
+        plt.yticks(fontsize=DEFAULT_TICKS_SIZE)
+
         plt.xlabel("Time", size=DEFAULT_LABEL_SIZE)
         plt.ylabel("y (value to forecast)", size=DEFAULT_LABEL_SIZE)
         plt.title("Prediction with %2.0f %% confidence interval" % 100*confidence_interval,
@@ -129,6 +132,9 @@ class Visualisator():
         data = np.zeros(n_total)
         data[:n_training_data] = train_data.flatten()
         data[n_training_data:] = true_values.flatten()
+
+        plt.xticks(fontsize=DEFAULT_TICKS_SIZE)
+        plt.yticks(fontsize=DEFAULT_TICKS_SIZE)
 
         plt.plot(x_for_test, predictions, label="predictions", linewidth=DEFAULT_LINEWIDTH)
         plt.plot(x_total, data, label="true values", linewidth=DEFAULT_LINEWIDTH)
@@ -160,11 +166,14 @@ class Visualisator():
             values = values_per_distribution[index_label]
             sns.distplot(values, hist=False, rug=False, label=label)
 
+        plt.xticks(fontsize=DEFAULT_TICKS_SIZE)
+        plt.yticks(fontsize=DEFAULT_TICKS_SIZE)
+
         plt.xlabel(variable_name, size=DEFAULT_LABEL_SIZE)
         plt.ylabel("Density", size=DEFAULT_LABEL_SIZE)
         plt.title("Distributions",
                   size=DEFAULT_TITLE_SIZE)
 
-        plt.legend()
+        plt.legend(fontsize=DEFAULT_LEGEND_SIZE)
         plt.show()
 
