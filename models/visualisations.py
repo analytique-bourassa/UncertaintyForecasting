@@ -142,3 +142,29 @@ class Visualisator():
         plt.legend(fontsize=DEFAULT_LEGEND_SIZE)
         plt.show()
 
+
+    @staticmethod
+    def show_multiple_distribution(values_per_distribution, labels, title, variable_name):
+
+        Validator.check_type(values_per_distribution, np.ndarray)
+        Validator.check_all_elements_type(labels, str)
+        Validator.check_type(title, str)
+        Validator.check_type(variable_name, str)
+
+        number_of_labels = len(labels)
+        number_of_distribution = values_per_distribution.shape[0]
+        Validator.check_matching_dimensions(number_of_distribution, number_of_labels)
+
+        for index_label, label in enumerate(labels):
+
+            values = values_per_distribution[index_label]
+            sns.distplot(values, hist=False, rug=False, label=label)
+
+        plt.xlabel(variable_name, size=DEFAULT_LABEL_SIZE)
+        plt.ylabel("Density", size=DEFAULT_LABEL_SIZE)
+        plt.title("Distributions",
+                  size=DEFAULT_TITLE_SIZE)
+
+        plt.legend()
+        plt.show()
+

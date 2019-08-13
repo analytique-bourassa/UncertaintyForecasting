@@ -7,6 +7,11 @@ from theano import shared
 from models.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression_parameters import BayesianLinearRegressionParameters
 from probabilitic_predictions.probabilistic_predictions_classification import ProbabilisticPredictionsClassification
 
+
+import logging
+logger = logging.getLogger('pymc3')
+logger.setLevel(logging.ERROR)
+
 class BayesianSoftmaxClassificationWithTemperatures():
 
     KEY_INDEX_FOR_NUMBER_OF_DATA = 0
@@ -24,6 +29,7 @@ class BayesianSoftmaxClassificationWithTemperatures():
         self.params = BayesianLinearRegressionParameters()
         self.number_of_classes = number_of_classes
         self.number_of_features = number_of_features
+
 
         with pm.Model() as classification_model:
 
@@ -55,7 +61,8 @@ class BayesianSoftmaxClassificationWithTemperatures():
         with self.classification_model:
 
             self.advi_fit = pm.fit(method=pm.ADVI(),
-                                   n=self.params.number_of_iterations)
+                                   n=self.params.number_of_iterations,
+                                   progressbar=False)
 
             self.trace = self.advi_fit.sample(self.params.number_of_samples_for_posterior)
 
@@ -96,7 +103,8 @@ class BayesianSoftmaxClassificationWithTemperatures():
                                              observed=self.shared_y)
 
             self.trace = pm.sample(self.params.number_of_samples_for_posterior,
-                                   tune=self.params.number_of_tuning_steps)
+                                   tune=self.params.number_of_tuning_steps,
+                                   progressbar=False)
 
 
 
@@ -114,13 +122,13 @@ class BayesianSoftmaxClassificationWithTemperatures():
 
         ppc = pm.sample_ppc(self.trace,
                             model=self.classification_model_2,
-                            samples=self.params.number_of_samples_for_predictions)
+                            samples=self.params.number_of_samples_for_predictions,
+                            progressbar=False)
 
         predictions = ProbabilisticPredictionsClassification(number_of_classes=self.number_of_classes)
         predictions.number_of_predictions = X_test.shape[0]
         predictions.number_of_samples = self.params.number_of_samples_for_predictions
         predictions.initialize_to_zeros()
-
 
         samples = list(ppc.items())[0][1].T
         predictions.values = samples

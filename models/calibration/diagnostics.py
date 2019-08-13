@@ -199,23 +199,27 @@ def calculate_static_calibration_error(y_pred, y_true, confidences, number_of_cl
             bins[bin_index, index_class, index_total_values_in_bin] += 1
             bins[bin_index, index_class, index_correct_value] += 1*(index_class == true_label)
 
-    bins_normalized = np.zeros((n_bins, number_of_classes))
+    accuracy_per_bin = np.zeros((n_bins, number_of_classes))
     curve = np.zeros(n_bins)
     for bin_index in range(n_bins):
-        for class_index in range(number_of_classes):
 
-             curve[bin_index] = bins[bin_index, :, index_correct_value].sum() / max(bins[bin_index, :, index_total_values_in_bin].sum(), 1)
-             bins_normalized[bin_index, class_index] = bins[bin_index, class_index, index_correct_value] / max(bins[bin_index, class_index, index_total_values_in_bin], 1)
+        curve[bin_index] = bins[bin_index, :, index_correct_value].sum() / max(
+            bins[bin_index, :, index_total_values_in_bin].sum(), 1)
+
+        for class_index in range(number_of_classes):
+            accuracy_per_bin[bin_index, class_index] = bins[bin_index, class_index, index_correct_value] / max(bins[bin_index, class_index, index_total_values_in_bin], 1)
 
     means_per_bin = 0.5*(p_values[1:] + p_values[:-1])
 
-    deviations = np.zeros((n_bins, number_of_classes))
+    deviation_score = 0.0
     for class_index in range(number_of_classes):
-        deviations[:, class_index] = np.abs(bins_normalized[:, class_index] - means_per_bin)
+        vector_deviations = np.abs(accuracy_per_bin[:, class_index] - means_per_bin)*bins[:, class_index, index_total_values_in_bin]
+        deviation_score += vector_deviations.sum()
 
-    deviations_average_accross_classes = deviations.mean(axis=1)
+    n_total_putted_in_bins = bins[:, :, index_total_values_in_bin].sum()
+    deviation_score /= number_of_classes*n_total_putted_in_bins
 
-    return curve, means_per_bin
+    return curve, means_per_bin, deviation_score
 
 
 

@@ -14,6 +14,8 @@ dependencies:
   - scikit-learn
   - pytest
   - pytest-cov
+  - pytest-mock
+  - unittest
   - Numbers
   - pip:
     - pyro-ppl

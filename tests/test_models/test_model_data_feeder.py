@@ -33,7 +33,6 @@ class TestModelDataFeeder(object):
 
 
         # Prepare
-
         number_of_data = 1000
         batch_size = 100
         expected_number_of_batches = 10
@@ -42,8 +41,6 @@ class TestModelDataFeeder(object):
 
         data_generated = np.random.normal(0, 1, (number_of_time_steps, number_of_data, number_of_features))
 
-
-        # Action
         class EmptyModel(nn.Module):
 
             def __init__(self):
@@ -58,9 +55,9 @@ class TestModelDataFeeder(object):
         model = EmptyModel()
 
         def faked_loss(x, y): return 1
+
         # Action
         losses, N_data = make_forward_pass(data_loader_sequences,  model, faked_loss, data_generated, batch_size )
-
 
         # Assert
         assert N_data == number_of_data
