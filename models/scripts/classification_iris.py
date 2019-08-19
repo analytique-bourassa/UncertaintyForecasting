@@ -52,12 +52,14 @@ for i in tqdm(range(number_of_different_seeds)):
     X_train, X_test, y_train, y_test = X[train_indexes], X[test_indexes], \
                                        y.values[train_indexes], y.values[test_indexes]
 
-    with Timer(name="without_temperature") as timer:
+    with Timer(name="without_temperature", show_time_when_exit=False) as timer:
 
         model_without = BayesianSoftmaxClassification(number_of_classes=3,
                                                       number_of_features=4,
                                                       X_train=X_train,
                                                       y_train=y_train)
+
+        model_without.turn_logging_off()
 
         model_without.params.number_of_tuning_steps = 5000
         model_without.params.number_of_samples_for_posterior = int(1e5)
@@ -82,12 +84,14 @@ for i in tqdm(range(number_of_different_seeds)):
         calculation_time_without_temperatures[i] = timer.elapsed_time()
         waic_without_temperatures[i] = model_without.calculate_widely_applicable_information_criterion()
 
-    with Timer(name="with_temperature") as timer:
+    with Timer(name="with_temperature", show_time_when_exit=False) as timer:
 
         model_with = BayesianSoftmaxClassificationWithTemperatures(number_of_classes=3,
                                                                    number_of_features=4,
                                                                    X_train=X_train,
                                                                    y_train=y_train)
+
+        model_with.turn_logging_off()
 
         model_with.params.number_of_tuning_steps = 5000
         model_with.params.number_of_samples_for_posterior = int(1e5)
@@ -134,10 +138,10 @@ dataframe = pd.DataFrame({"accuracy_without_temperatures": accuracy_without_temp
                           "calculation_time_without_temperatures": calculation_time_without_temperatures,
                           "calculation_time_with_temperatures": calculation_time_with_temperatures,
                           "WAIC_without_temperatures": waic_without_temperatures,
-                          "WAIC_time_with_temperatures": waic_with_temperatures
+                          "WAIC_with_temperatures": waic_with_temperatures
                           })
 
-dataframe.to_csv("data_accuracy_and_deviation_score_with_time.csv")
+dataframe.to_csv("data_accuracy_and_deviation_score_with_time_and_waic.csv")
 
 Visualisator.show_multiple_distribution(np.array([accuracy_without_temperatures,
                                                   accuracy_with_temperatures]),
@@ -146,4 +150,4 @@ Visualisator.show_multiple_distribution(np.array([accuracy_without_temperatures,
                                         variable_name="accuracy")
 
 df_cumulator = pd.DataFrame({"number_of_times_used_for_training": cumulator_has_been_used_in_train_set})
-df_cumulator.to_csv("cumulator_with_time.csv")
+df_cumulator.to_csv("cumulator_with_time_and_waic.csv")

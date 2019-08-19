@@ -177,3 +177,34 @@ class Visualisator():
         plt.legend(fontsize=DEFAULT_LEGEND_SIZE)
         plt.show()
 
+    @staticmethod
+    def show_calibration_curves(x_values, values_for_curves, labels, title_suffix):
+
+        Validator.check_type(values_for_curves, np.ndarray)
+        Validator.check_type(x_values, np.ndarray)
+        Validator.check_all_elements_type(labels, str)
+        Validator.check_type(title, str)
+
+        number_of_labels = len(labels)
+        number_of_curves = values_for_curves.shape[0]
+        Validator.check_matching_dimensions(number_of_curves, number_of_labels)
+
+        for index_label, label in enumerate(labels):
+            values = values_for_curves[index_label]
+            plt.plot(x_values, values, ".-", label=label)
+
+        plt.plot(x_values, x_values)
+
+        plt.xticks(fontsize=DEFAULT_TICKS_SIZE)
+        plt.yticks(fontsize=DEFAULT_TICKS_SIZE)
+
+        plt.xlabel("p (confidence of prediction)", size=DEFAULT_LABEL_SIZE)
+        plt.ylabel("accuracy", size=DEFAULT_LABEL_SIZE)
+
+        title = "Calibation curve" if number_of_curves == 1 else "Calibation curves"
+        plt.title(title + " " + title_suffix,
+                  size=DEFAULT_TITLE_SIZE)
+
+        plt.legend(fontsize=DEFAULT_LEGEND_SIZE)
+        plt.show()
+

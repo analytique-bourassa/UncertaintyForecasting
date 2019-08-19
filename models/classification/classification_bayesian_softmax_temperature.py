@@ -1,16 +1,13 @@
 import pymc3 as pm
 import matplotlib.pyplot as plt
 import numpy as np
+import logging
 
 from theano import shared
 
 from models.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression_parameters import BayesianLinearRegressionParameters
 from probabilitic_predictions.probabilistic_predictions_classification import ProbabilisticPredictionsClassification
-
-
-import logging
-logger = logging.getLogger('pymc3')
-logger.setLevel(logging.ERROR)
+from utils.validator import Validator
 
 
 class BayesianSoftmaxClassificationWithTemperatures():
@@ -31,6 +28,7 @@ class BayesianSoftmaxClassificationWithTemperatures():
         self.number_of_classes = number_of_classes
         self.number_of_features = number_of_features
 
+        self._show_progress = True
 
         with pm.Model() as classification_model:
 
@@ -55,6 +53,21 @@ class BayesianSoftmaxClassificationWithTemperatures():
 
             self.classification_model = classification_model
 
+    @property
+    def show_progress(self):
+        return self._show_progress
+
+    @show_progress.setter
+    def show_progress(self, value):
+        Validator.check_type(value, bool)
+
+        self._show_progress = value
+
+    def turn_logging_off(self):
+        logger = logging.getLogger('pymc3')
+        logger.setLevel(logging.ERROR)
+
+        self.show_progress = False
 
     def sample(self):
 
@@ -63,7 +76,7 @@ class BayesianSoftmaxClassificationWithTemperatures():
 
             self.advi_fit = pm.fit(method=pm.ADVI(),
                                    n=self.params.number_of_iterations,
-                                   progressbar=False)
+                                   progressbar=self.show_progress)
 
             self.trace = self.advi_fit.sample(self.params.number_of_samples_for_posterior)
 
@@ -105,7 +118,7 @@ class BayesianSoftmaxClassificationWithTemperatures():
 
             self.trace = pm.sample(self.params.number_of_samples_for_posterior,
                                    tune=self.params.number_of_tuning_steps,
-                                   progressbar=False)
+                                   progressbar=self.show_progress)
 
 
 
@@ -124,7 +137,7 @@ class BayesianSoftmaxClassificationWithTemperatures():
         ppc = pm.sample_ppc(self.trace,
                             model=self.classification_model_2,
                             samples=self.params.number_of_samples_for_predictions,
-                            progressbar=False)
+                            progressbar=self.show_progress)
 
         predictions = ProbabilisticPredictionsClassification(number_of_classes=self.number_of_classes)
         predictions.number_of_predictions = X_test.shape[0]
