@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from models.visualisations import Visualisator
+from utils.validator import Validator
 
 DEFAULT_LEGEND_SIZE = 19
 
@@ -97,17 +98,19 @@ class ProbabilisticPredictionsRegression():
 
     def calculate_confidence_interval(self, interval):
 
-            p = ((1.0 - interval) / 2.0) * 100
-            lower = np.percentile(self.values, p, axis=self.KEY_INT_FOR_SAMPLES_PREDICTIONS)
+        Validator.check_value_is_between_zero_and_one_inclusive(interval)
 
-            p = (interval + ((1.0 - interval) / 2.0)) * 100
-            upper = np.percentile(self.values, p, axis=self.KEY_INT_FOR_SAMPLES_PREDICTIONS)
+        p = ((1.0 - interval) / 2.0) * 100
+        lower = np.percentile(self.values, p, axis=self.KEY_INT_FOR_SAMPLES_PREDICTIONS)
 
-            return lower, upper
+        p = (interval + ((1.0 - interval) / 2.0)) * 100
+        upper = np.percentile(self.values, p, axis=self.KEY_INT_FOR_SAMPLES_PREDICTIONS)
+
+        return lower, upper
 
     def show_predictions_with_confidence_interval(self, confidence_interval):
 
-        assert 0 <= confidence_interval <= 1.0, "must be between zero and one (including boundary)"
+        Validator.check_value_is_between_zero_and_one_inclusive(confidence_interval)
 
         lower, upper = self.calculate_confidence_interval(confidence_interval)
 

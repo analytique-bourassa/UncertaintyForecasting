@@ -9,13 +9,19 @@ from tqdm import tqdm
 from models.calibration.diagnostics import calculate_static_calibration_error
 import matplotlib.pyplot as plt
 
-from utils.Timer import Timer
+from utils.timers import TimerContext
+from utils.time_profiler_logging import TimeProfilerLogger
+
+logger_time = TimeProfilerLogger()
+
 from models.classification.classification_bayesian_softmax_temperature import \
     BayesianSoftmaxClassificationWithTemperatures
 from models.classification.classification_bayesian_softmax import BayesianSoftmaxClassification
 from models.visualisations import Visualisator
 
 from data_handling.train_test_split import return_train_test_split_indexes
+
+SMOKE_TEST = True
 
 iris = sns.load_dataset("iris")
 
@@ -52,7 +58,9 @@ for i in tqdm(range(number_of_different_seeds)):
     X_train, X_test, y_train, y_test = X[train_indexes], X[test_indexes], \
                                        y.values[train_indexes], y.values[test_indexes]
 
-    with Timer(name="without_temperature", show_time_when_exit=False) as timer:
+    with TimerContext(name="without_temperature",
+                      show_time_when_exit=False,
+                      logger=logger_time) as timer:
 
         model_without = BayesianSoftmaxClassification(number_of_classes=3,
                                                       number_of_features=4,
@@ -61,9 +69,9 @@ for i in tqdm(range(number_of_different_seeds)):
 
         model_without.turn_logging_off()
 
-        model_without.params.number_of_tuning_steps = 5000
-        model_without.params.number_of_samples_for_posterior = int(1e5)
-        model_without.params.number_of_iterations = int(1e6)
+        model_without.params.number_of_tuning_steps = 5000 if not SMOKE_TEST else 1
+        model_without.params.number_of_samples_for_posterior = int(1e5) if not SMOKE_TEST else 1
+        model_without.params.number_of_iterations = int(1e6) if not SMOKE_TEST else 1
 
         model_without.sample()
         # model.show_trace()
@@ -84,7 +92,7 @@ for i in tqdm(range(number_of_different_seeds)):
         calculation_time_without_temperatures[i] = timer.elapsed_time()
         waic_without_temperatures[i] = model_without.calculate_widely_applicable_information_criterion()
 
-    with Timer(name="with_temperature", show_time_when_exit=False) as timer:
+    with TimerContext(name="with_temperature", show_time_when_exit=False) as timer:
 
         model_with = BayesianSoftmaxClassificationWithTemperatures(number_of_classes=3,
                                                                    number_of_features=4,

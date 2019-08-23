@@ -1,9 +1,12 @@
 import numpy as np
 
 import torch.nn as nn
+import torch
 
 from models.model_data_feeder import data_loader_sequences
 from models.model_data_feeder import make_forward_pass
+from models.model_data_feeder import make_predictions
+from models.model_data_feeder import extract_features
 
 class TestModelDataFeeder(object):
 
@@ -49,7 +52,7 @@ class TestModelDataFeeder(object):
                 self.lstm = nn.LSTM(input_size, hidden_size)
 
             def forward(self, x):
-                return np.random.normal(0,1,7)
+                return np.random.normal(0,1, batch_size)
 
 
         model = EmptyModel()
@@ -62,3 +65,75 @@ class TestModelDataFeeder(object):
         # Assert
         assert N_data == number_of_data
         assert losses == expected_number_of_batches
+
+
+    def test_if_make_predictions_return_data(self):
+
+
+        # Prepare
+        number_of_data = 1000
+        batch_size = 100
+        number_of_time_steps = 8
+        number_of_features = 1
+
+        data_generated = np.random.normal(0, 1, (number_of_time_steps, number_of_data, number_of_features))
+
+        class EmptyModel(nn.Module):
+
+            def __init__(self):
+                super(EmptyModel, self).__init__()
+                input_size, hidden_size = 5, 10
+                self.lstm = nn.LSTM(input_size, hidden_size)
+
+            def forward(self, x):
+                return torch.tensor(np.random.normal(0,1,batch_size))
+
+
+        model = EmptyModel()
+
+
+        # Action
+        y_pred_all, y_test_all = make_predictions(data_loader_sequences, model, data_generated, batch_size)
+
+        # Assert
+        assert len(y_test_all) == number_of_data
+        assert len(y_pred_all) == number_of_data
+
+
+    def test_if_extract_features(self):
+
+
+        # Prepare
+        number_of_data = 1000
+        batch_size = 100
+        expected_number_of_batches = 10
+        number_of_time_steps = 8
+        number_of_features = 1
+        number_of_hidden_states = 5
+
+        data_generated = np.random.normal(0, 1, (number_of_time_steps, number_of_data, number_of_features))
+
+        class EmptyModel(nn.Module):
+
+            def __init__(self):
+                super(EmptyModel, self).__init__()
+                input_size, hidden_size = 5, 10
+                self.lstm = nn.LSTM(input_size, hidden_size)
+
+            def forward(self, x):
+                return torch.tensor(np.random.normal(0,1,batch_size))
+
+            def return_last_layer(self, x):
+                return torch.tensor(np.random.normal(0,1,(batch_size,number_of_hidden_states)))
+
+
+        model = EmptyModel()
+
+
+        # Action
+        features_all, y_test_all = extract_features(data_loader_sequences, model, data_generated, batch_size)
+
+        # Assert
+        assert len(y_test_all) == number_of_data
+        assert len(features_all) == number_of_data
+        assert features_all.shape[1] == number_of_hidden_states

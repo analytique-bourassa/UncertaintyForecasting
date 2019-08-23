@@ -12,6 +12,7 @@ DEFAULT_LINEWIDTH = 3.0
 DEFAULT_TITLE_SIZE = 26
 DEFAULT_LEGEND_SIZE = 19
 DEFAULT_TRANSPARENCY = 0.5
+DEFAULT_MARKER_SIZE = 6.0
 
 from matplotlib import rcParams
 rcParams['axes.titlepad'] = 20
@@ -183,7 +184,7 @@ class Visualisator():
         Validator.check_type(values_for_curves, np.ndarray)
         Validator.check_type(x_values, np.ndarray)
         Validator.check_all_elements_type(labels, str)
-        Validator.check_type(title, str)
+        Validator.check_type(title_suffix, str)
 
         number_of_labels = len(labels)
         number_of_curves = values_for_curves.shape[0]
@@ -191,7 +192,7 @@ class Visualisator():
 
         for index_label, label in enumerate(labels):
             values = values_for_curves[index_label]
-            plt.plot(x_values, values, ".-", label=label)
+            plt.plot(x_values, values, ".-", label=label, markersize=DEFAULT_MARKER_SIZE)
 
         plt.plot(x_values, x_values)
 

@@ -16,8 +16,10 @@ def data_loader_sequences(data, batch_size, random=True):
     """
 
     Validator.check_type(data, np.ndarray)
+
     index_for_number_of_data = 1
     number_of_batches = int(floor(data.shape[index_for_number_of_data] / batch_size))
+
     if random:
         indexes_of_batch = np.random.choice(range(number_of_batches),
                                             number_of_batches, replace=False)
@@ -84,8 +86,9 @@ def make_predictions(data_loader, model, training_data, batch_size):
             y_pred_all = y_pred.detach().numpy()
             y_test_all = y_train.detach().numpy()
 
-        y_pred_all = np.concatenate([y_pred_all, y_pred.detach().numpy()])
-        y_test_all = np.concatenate([y_test_all, y_train.detach().numpy()])
+        else:
+            y_pred_all = np.concatenate([y_pred_all, y_pred.detach().numpy()])
+            y_test_all = np.concatenate([y_test_all, y_train.detach().numpy()])
 
     model.train()
 
@@ -98,7 +101,7 @@ def extract_features(data_loader, model, training_data, batch_size):
 
     model.eval()
 
-    y_pred_all = None
+    features_all = None
     y_test_all = None
 
     for X_train, y_train in data_loader(training_data, batch_size, random=False):
@@ -107,19 +110,20 @@ def extract_features(data_loader, model, training_data, batch_size):
         if is_on_gpu:
             X_train, y_train = X_train.cuda(), y_train.cuda()
 
-        y_pred = model.return_last_layer(X_train)
+        features = model.return_last_layer(X_train)
 
         if is_on_gpu:
-            y_pred, y_train = y_pred.cpu(), y_train.cpu()
+            y_pred, y_train = features.cpu(), y_train.cpu()
 
-        if y_pred_all is None:
-            y_pred_all = y_pred.detach().numpy()
+        if features_all is None:
+            features_all = features.detach().numpy()
             y_test_all = y_train.detach().numpy()
 
-        y_pred_all = np.concatenate([y_pred_all, y_pred.detach().numpy()])
-        y_test_all = np.concatenate([y_test_all, y_train.detach().numpy()])
+        else:
+            features_all = np.concatenate([features_all, features.detach().numpy()])
+            y_test_all = np.concatenate([y_test_all, y_train.detach().numpy()])
 
     model.train()
 
-    return y_pred_all, y_test_all
+    return features_all, y_test_all
 

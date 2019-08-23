@@ -6,6 +6,10 @@ import matplotlib.pyplot as plt
 N_INTERVALS = 101
 n_possible_values = 100
 
+# Last index for bins
+INDEX_CORRECT_VALUE = 0
+INDEX_TOTAL_VALUES_IN_BIN = 1
+
 def in_interval(y_mean, y_true, sigma):
 
     if y_true >= y_mean - sigma and y_true <= y_mean + sigma:
@@ -181,11 +185,18 @@ def calculate_static_calibration_error(y_pred, y_true, confidences, number_of_cl
     index_first_value = 0
     interval = p_values[index_second_value] - p_values[index_first_value]
 
-    index_correct_value = 0
-    index_total_values_in_bin =1
+    bins = seperate_probabilistic_classification_into_bins(confidences, y_true, n_bins, number_of_classes, interval)
+    accuracy_per_bin, curve = calculate_accuracy_per_bins(bins, n_bins, number_of_classes)
+    means_per_bin = 0.5*(p_values[1:] + p_values[:-1])
+    deviation_score = calculate_deviation_score(bins, accuracy_per_bin, means_per_bin, number_of_classes)
+
+    return curve, means_per_bin, deviation_score
+
+
+def seperate_probabilistic_classification_into_bins(confidences,y_true, n_bins, number_of_classes, interval):
 
     bins = np.zeros((n_bins, number_of_classes, 2)) # first in true, second is total put in class
-    for index_instance in range(y_pred.shape[0]):
+    for index_instance in range(y_true.shape[0]):
         for index_class in range(number_of_classes):
 
             confidence_instance_specific_class = confidences[index_instance, index_class]
@@ -196,30 +207,38 @@ def calculate_static_calibration_error(y_pred, y_true, confidences, number_of_cl
 
             true_label = y_true[index_instance]
 
-            bins[bin_index, index_class, index_total_values_in_bin] += 1
-            bins[bin_index, index_class, index_correct_value] += 1*(index_class == true_label)
+            bins[bin_index, index_class, INDEX_TOTAL_VALUES_IN_BIN] += 1
+            bins[bin_index, index_class, INDEX_CORRECT_VALUE] += 1*(index_class == true_label)
+
+    return bins
+
+def calculate_accuracy_per_bins(bins, n_bins, number_of_classes):
 
     accuracy_per_bin = np.zeros((n_bins, number_of_classes))
     curve = np.zeros(n_bins)
+
     for bin_index in range(n_bins):
 
-        curve[bin_index] = bins[bin_index, :, index_correct_value].sum() / max(
-            bins[bin_index, :, index_total_values_in_bin].sum(), 1)
+        curve[bin_index] = bins[bin_index, :, INDEX_CORRECT_VALUE].sum() / max(
+            bins[bin_index, :, INDEX_TOTAL_VALUES_IN_BIN].sum(), 1)
 
         for class_index in range(number_of_classes):
-            accuracy_per_bin[bin_index, class_index] = bins[bin_index, class_index, index_correct_value] / max(bins[bin_index, class_index, index_total_values_in_bin], 1)
+            accuracy_per_bin[bin_index, class_index] = bins[bin_index, class_index, INDEX_CORRECT_VALUE]
+            accuracy_per_bin[bin_index, class_index] /= max(bins[bin_index, class_index, INDEX_TOTAL_VALUES_IN_BIN], 1)
 
-    means_per_bin = 0.5*(p_values[1:] + p_values[:-1])
+    return accuracy_per_bin, curve
+
+
+def calculate_deviation_score(bins, accuracy_per_bin, means_per_bin, number_of_classes):
 
     deviation_score = 0.0
     for class_index in range(number_of_classes):
-        vector_deviations = np.abs(accuracy_per_bin[:, class_index] - means_per_bin)*bins[:, class_index, index_total_values_in_bin]
+        vector_deviations = np.abs(accuracy_per_bin[:, class_index] - means_per_bin) * bins[:, class_index,
+                                                                                       INDEX_TOTAL_VALUES_IN_BIN]
         deviation_score += vector_deviations.sum()
 
-    n_total_putted_in_bins = bins[:, :, index_total_values_in_bin].sum()
-    deviation_score /= number_of_classes*n_total_putted_in_bins
+    n_total_putted_in_bins = bins[:, :, INDEX_TOTAL_VALUES_IN_BIN].sum()
+    deviation_score /= number_of_classes * n_total_putted_in_bins
 
-    return curve, means_per_bin, deviation_score
-
-
+    return deviation_score
 

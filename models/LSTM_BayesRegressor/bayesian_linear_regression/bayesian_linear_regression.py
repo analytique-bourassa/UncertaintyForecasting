@@ -5,13 +5,13 @@ import numpy as np
 from theano import shared
 
 from probabilitic_predictions.probabilistic_predictions_regression import ProbabilisticPredictionsRegression
-from models.LSTM_BayesRegressor.GaussianLinearModel_abstract import GaussianLinearModel_abstract
+from models.ProbabilisticModelWrapperAbstract import ProbabilisticModelWrapperAbstract
 from models.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression_parameters import BayesianLinearRegressionParameters
 from models.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression_priors import BayesianLinearRegressionPriors
 from models.tools_pymc import from_posterior
 
 
-class BayesianLinearModel(GaussianLinearModel_abstract):
+class BayesianLinearModel(ProbabilisticModelWrapperAbstract):
     """
 
     y ~ Normal(mu,sigma)

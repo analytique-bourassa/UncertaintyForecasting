@@ -1,20 +1,24 @@
 import pymc3 as pm
 import matplotlib.pyplot as plt
 import numpy as np
-import logging
 
 from theano import shared
 
 from models.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression_parameters import BayesianLinearRegressionParameters
+from models.ProbabilisticModelWrapperAbstract import ProbabilisticModelWrapperAbstract
 from probabilitic_predictions.probabilistic_predictions_classification import ProbabilisticPredictionsClassification
-from utils.validator import Validator
+from utils.timers import TimerContext
+from utils.time_profiler_logging import TimeProfilerLogger
 
+logger_time = TimeProfilerLogger.getInstance()
 
-class BayesianSoftmaxClassificationWithTemperatures():
+class BayesianSoftmaxClassificationWithTemperatures(ProbabilisticModelWrapperAbstract):
 
     KEY_INDEX_FOR_NUMBER_OF_DATA = 0
 
     def __init__(self, number_of_features, number_of_classes, X_train, y_train):
+
+        super().__init__()
 
         self.X_data = X_train
         self.y_data = y_train
@@ -27,8 +31,6 @@ class BayesianSoftmaxClassificationWithTemperatures():
         self.params = BayesianLinearRegressionParameters()
         self.number_of_classes = number_of_classes
         self.number_of_features = number_of_features
-
-        self._show_progress = True
 
         with pm.Model() as classification_model:
 
@@ -53,74 +55,59 @@ class BayesianSoftmaxClassificationWithTemperatures():
 
             self.classification_model = classification_model
 
-    @property
-    def show_progress(self):
-        return self._show_progress
-
-    @show_progress.setter
-    def show_progress(self, value):
-        Validator.check_type(value, bool)
-
-        self._show_progress = value
-
-    def turn_logging_off(self):
-        logger = logging.getLogger('pymc3')
-        logger.setLevel(logging.ERROR)
-
-        self.show_progress = False
 
     def sample(self):
+        with TimerContext(name="sampling",
+                          show_time_when_exit=True,
+                          logger=logger_time):
+
+            with self.classification_model:
+
+                self.advi_fit = pm.fit(method=pm.ADVI(),
+                                       n=self.params.number_of_iterations,
+                                       progressbar=self.show_progress)
+
+                self.trace = self.advi_fit.sample(self.params.number_of_samples_for_posterior)
+
+                trace_theta_0 = self.trace.get_values('theta_0')
+                trace_thetas = self.trace.get_values('thetas')
+                trace_temperatures = self.trace.get_values('temperatures')
+
+            self.model = pm.Model()
+
+            with self.model:
 
 
-        with self.classification_model:
+                alpha = pm.Normal("theta_0",
+                                  mu=trace_theta_0.mean(),
+                                  sd=trace_thetas.std(),
+                                  shape=self.number_of_classes)
 
-            self.advi_fit = pm.fit(method=pm.ADVI(),
-                                   n=self.params.number_of_iterations,
-                                   progressbar=self.show_progress)
+                betas = pm.Normal("thetas",
+                                  mu=trace_thetas.mean(axis=0),
+                                  sd=trace_thetas.std(axis=0),
+                                  shape=(self.number_of_features,
+                                         self.number_of_classes))
 
-            self.trace = self.advi_fit.sample(self.params.number_of_samples_for_posterior)
+                mu = alpha + pm.math.dot(self.shared_X, betas)
 
-            trace_theta_0 = self.trace.get_values('theta_0')
-            trace_thetas = self.trace.get_values('thetas')
-            trace_temperatures = self.trace.get_values('temperatures')
+                temperatures = pm.HalfNormal('temperatures',
+                                         sd=trace_temperatures.std(),
+                                         shape=self.number_of_classes)
 
-        self.classification_model_2 = pm.Model()
+                mu_with_temperatures = mu*temperatures
 
-        with self.classification_model_2:
-
-
-            alpha = pm.Normal("theta_0",
-                              mu=trace_theta_0.mean(),
-                              sd=trace_thetas.std(),
-                              shape=self.number_of_classes)
-
-            betas = pm.Normal("thetas",
-                              mu=trace_thetas.mean(axis=0),
-                              sd=trace_thetas.std(axis=0),
-                              shape=(self.number_of_features,
-                                     self.number_of_classes))
-
-            mu = alpha + pm.math.dot(self.shared_X, betas)
-
-            temperatures = pm.HalfNormal('temperatures',
-                                     sd=trace_temperatures.std(),
-                                     shape=self.number_of_classes)
-
-            mu_with_temperatures = mu*temperatures
-
-            probability_of_class = pm.math.exp(mu_with_temperatures) / \
-                                   pm.math.sum(pm.math.exp(mu_with_temperatures), axis=0)
+                probability_of_class = pm.math.exp(mu_with_temperatures) / \
+                                       pm.math.sum(pm.math.exp(mu_with_temperatures), axis=0)
 
 
-            self.likelihood = pm.Categorical('category',
-                                             p=probability_of_class,
-                                             observed=self.shared_y)
+                self.likelihood = pm.Categorical('category',
+                                                 p=probability_of_class,
+                                                 observed=self.shared_y)
 
-            self.trace = pm.sample(self.params.number_of_samples_for_posterior,
-                                   tune=self.params.number_of_tuning_steps,
-                                   progressbar=self.show_progress)
-
-
+                self.trace = pm.sample(self.params.number_of_samples_for_posterior,
+                                       tune=self.params.number_of_tuning_steps,
+                                       progressbar=self.show_progress)
 
     def show_trace(self):
 
@@ -135,7 +122,7 @@ class BayesianSoftmaxClassificationWithTemperatures():
         self.shared_y.set_value(zeros)
 
         ppc = pm.sample_ppc(self.trace,
-                            model=self.classification_model_2,
+                            model=self.model,
                             samples=self.params.number_of_samples_for_predictions,
                             progressbar=self.show_progress)
 
@@ -144,14 +131,13 @@ class BayesianSoftmaxClassificationWithTemperatures():
         predictions.number_of_samples = self.params.number_of_samples_for_predictions
         predictions.initialize_to_zeros()
 
-        samples = list(ppc.items())[0][1].T
+        index_dummy_axis = 0
+        index_for_values = 1
+
+        samples = list(ppc.items())[index_dummy_axis][index_for_values].T
         predictions.values = samples
         predictions.true_values = y_test
 
         return predictions
 
-    def calculate_widely_applicable_information_criterion(self):
-
-        widely_applicable_information_criterion_class = pm.waic(self.trace, self.classification_model_2)
-        return widely_applicable_information_criterion_class.WAIC
 

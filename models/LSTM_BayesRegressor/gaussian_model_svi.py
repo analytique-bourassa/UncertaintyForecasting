@@ -8,7 +8,7 @@ import torch
 import torch.nn as nn
 
 from probabilitic_predictions.probabilistic_predictions_regression import ProbabilisticPredictionsRegression
-from models.LSTM_BayesRegressor.GaussianLinearModel_abstract import GaussianLinearModel_abstract
+from models.ProbabilisticModelWrapperAbstract import GaussianLinearModel_abstract
 
 get_marginal = lambda traces, sites: EmpiricalMarginal(traces, sites)._get_samples_and_weights()[
         0].detach().cpu().numpy()

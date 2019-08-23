@@ -1,21 +1,27 @@
 import seaborn as sns
 import numpy as np
 import pandas as pd
+import pymc3 as pm
 
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 from models.calibration.diagnostics import calculate_static_calibration_error
 
-from utils.Timer import Timer
+from utils.timers import TimerContext
 from models.classification.classification_bayesian_softmax_temperature import \
     BayesianSoftmaxClassificationWithTemperatures
 from models.classification.classification_bayesian_softmax import BayesianSoftmaxClassification
 from models.visualisations import Visualisator
 
 from data_handling.train_test_split import return_train_test_split_indexes
+from utils.time_profiler_logging import TimeProfilerLogger
 
-RANDOM_STATE = 3
+logger_time = TimeProfilerLogger.getInstance()
+SMOKE_TEST = True
+
+RANDOM_STATE_WITHOUT_TEMPERATURES = 32
+RANDOM_STATE_WITH_TEMPERATURES = 18
 
 iris = sns.load_dataset("iris")
 
@@ -29,26 +35,29 @@ y = iris['species'].apply(data_classes.index)
 
 number_of_data = len(y)
 
-train_indexes, test_indexes = return_train_test_split_indexes(number_of_data,
-                                                              test_size=0.3,
-                                                              random_state=RANDOM_STATE)
 
-X_train, X_test, y_train, y_test = X[train_indexes], X[test_indexes], \
-                               y.values[train_indexes], y.values[test_indexes]
+with TimerContext(name="without_temperature",
+                  show_time_when_exit=True,
+                  logger=logger_time) as timer:
 
-with Timer(name="without_temperature", show_time_when_exit=False) as timer:
+    train_indexes, test_indexes = return_train_test_split_indexes(number_of_data,
+                                                                  test_size=0.3,
+                                                                  random_state=RANDOM_STATE_WITHOUT_TEMPERATURES)
+
+    X_train, X_test, y_train, y_test = X[train_indexes], X[test_indexes], \
+                                       y.values[train_indexes], y.values[test_indexes]
 
     model_without = BayesianSoftmaxClassification(number_of_classes=3,
                                                   number_of_features=4,
                                                   X_train=X_train,
                                                   y_train=y_train)
 
-    model_without.params.number_of_tuning_steps = 5000
-    model_without.params.number_of_samples_for_posterior = int(1e5)
-    model_without.params.number_of_iterations = int(1e6)
+    model_without.params.number_of_tuning_steps = 5000 if not SMOKE_TEST else 10
+    model_without.params.number_of_samples_for_posterior = int(1e5) if not SMOKE_TEST else 10
+    model_without.params.number_of_iterations = int(1e6) if not SMOKE_TEST else 10
 
     model_without.sample()
-    # model.show_trace()
+    #model_without.show_trace()
 
     predictions = model_without.make_predictions(X_test, y_test)
 
@@ -62,19 +71,28 @@ with Timer(name="without_temperature", show_time_when_exit=False) as timer:
                                                                                                 predictions.number_of_classes)
 
 
-with Timer(name="with_temperature", show_time_when_exit=False) as timer:
+with TimerContext(name="with_temperature", show_time_when_exit=True) as timer:
+
+    train_indexes, test_indexes = return_train_test_split_indexes(number_of_data,
+                                                                  test_size=0.3,
+                                                                  random_state=RANDOM_STATE_WITH_TEMPERATURES)
+
+    X_train, X_test, y_train, y_test = X[train_indexes], X[test_indexes], \
+                                       y.values[train_indexes], y.values[test_indexes]
 
     model_with = BayesianSoftmaxClassificationWithTemperatures(number_of_classes=3,
                                                                number_of_features=4,
                                                                X_train=X_train,
                                                                y_train=y_train)
 
-    model_with.params.number_of_tuning_steps = 5000
-    model_with.params.number_of_samples_for_posterior = int(1e5)
-    model_with.params.number_of_iterations = int(1e6)
+    model_with.params.number_of_tuning_steps = 5000 if not SMOKE_TEST else 10
+    model_with.params.number_of_samples_for_posterior = int(1e5) if not SMOKE_TEST else 10
+    model_with.params.number_of_iterations = int(1e6) if not SMOKE_TEST else 10
 
     model_with.sample()
-    # model_with.show_trace()
+    #model_with.show_trace()
+
+    print(logger_time.times)
 
     predictions = model_with.make_predictions(X_test, y_test)
 
@@ -86,6 +104,14 @@ with Timer(name="with_temperature", show_time_when_exit=False) as timer:
                                                                                           y_test,
                                                                                           confidences,
                                                                                           predictions.number_of_classes)
+
+model_with.model.name = 'with temperatures'
+model_without.model.name = 'without temperatures'
+
+df_compare_WAIC = pm.compare({model_with.model: model_with.trace,
+                           model_without.model: model_without.trace})
+
+print(df_compare_WAIC)
 
 
 Visualisator.show_calibration_curves(means_per_bin_with_temperatures,

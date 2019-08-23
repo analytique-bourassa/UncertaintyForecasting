@@ -79,7 +79,7 @@ number_of_experiment_per_type = 100
 from models.LSTM_BayesRegressor.experiment_results import ExperimentsResults
 results = ExperimentsResults()
 
-from utils.Timer import Timer
+from utils.timers import TimerContext
 import random
 
 for i in range(number_of_experiment_per_type):
@@ -120,7 +120,7 @@ for i in range(number_of_experiment_per_type):
 
     for option in BayesianLinearModel.POSSIBLE_OPTION_FOR_POSTERIOR_CALCULATION:
 
-        with Timer("%s number %d " % (option, i)) as timer:
+        with TimerContext("%s number %d " % (option, i)) as timer:
 
 
             ########################################################

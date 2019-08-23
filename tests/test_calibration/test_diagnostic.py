@@ -20,12 +20,14 @@ class TestDiagnostics():
                                                                     ,number_of_samples_for_predictions))
         predictions.true_values = np.random.randint(0, number_of_classes, number_of_predictions)
         y_test_predictions, confidences = predictions.predictions_with_confidence
+
         # action
 
-        curves_with, means_per_bin_with = calculate_static_calibration_error(y_test_predictions,
+        curve, means_per_bin, deviation_score = calculate_static_calibration_error(y_test_predictions,
                                                                              predictions.true_values,
                                                                              confidences,
                                                                              predictions.number_of_classes)
         # assert
-        assert  isinstance(curves_with, np.ndarray)
-        assert isinstance(means_per_bin_with, np.ndarray)
+        assert  isinstance(curve, np.ndarray)
+        assert isinstance(means_per_bin, np.ndarray)
+        assert deviation_score >= 0
