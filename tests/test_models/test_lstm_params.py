@@ -158,7 +158,7 @@ class TestParams(object):
     def test_if_output_dim_positive_integer_should_set_the_value(self):
         # Prepare
         lstm_params = LSTM_parameters()
-        valid_output_dim = random.randint(1,INTEGER_GENERATION_UPPER_LIMIT)
+        valid_output_dim = random.randint(1, INTEGER_GENERATION_UPPER_LIMIT)
 
         # Action
         lstm_params.output_dim = valid_output_dim

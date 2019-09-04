@@ -61,6 +61,27 @@ def make_forward_pass(data_loader, model, loss_fn, training_data, batch_size):
 
     return losses, N_data
 
+def make_forward_pass_output_specific(data_loader, model, loss_fn, training_data, batch_size):
+
+    assert isinstance(model, nn.Module)
+
+    losses = None
+    N_data = 0
+
+    for X_train, y_train in data_loader(training_data, batch_size):
+
+        if next(model.parameters()).is_cuda:
+            X_train, y_train = X_train.cuda(), y_train.cuda()
+
+        N_data += batch_size
+        output = model(X_train)
+
+        if losses is None:
+            losses = loss_fn(*output, y_train)
+        else:
+            losses += loss_fn(*output, y_train)
+
+    return losses, N_data
 
 def make_predictions(data_loader, model, training_data, batch_size):
 

@@ -1,6 +1,6 @@
 import torch
 import matplotlib.pyplot as plt
-from models.LSTM_CorrelatedDropout.LSTM import LSTM
+from models.LSTM_CorrelatedDropout.LSTM_correlated_dropout import LSTM
 from math import floor
 
 from data_generation.data_generators_switcher import DatageneratorsSwitcher

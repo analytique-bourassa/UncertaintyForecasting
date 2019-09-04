@@ -8,7 +8,9 @@ class BayesianLSTM(nn.Module):
 
     def __init__(self, input_dim, hidden_dim, batch_size, output_dim=1,
                  num_layers=2, dropout=0, bidirectional=False):
-        super(LSTM_encoder, self).__init__()
+
+        super(BayesianLSTM, self).__init__()
+
         self.input_dim = input_dim
         self.hidden_dim = hidden_dim
         self.batch_size = batch_size
@@ -17,6 +19,7 @@ class BayesianLSTM(nn.Module):
         self.number_of_directions = 1 + 1 * self.bidirectional
 
         self.latent_dim = 10
+
         # Define the LSTM layer
         self.lstm = nn.LSTM(self.input_dim,
                             self.hidden_dim,
@@ -35,10 +38,11 @@ class BayesianLSTM(nn.Module):
         self.linear_predictor = nn.Linear(self.latent_dim, output_dim)
 
     def __del__(self):
+
         torch.cuda.empty_cache()
 
-
     def model(self, x_data, y_data):
+
         pyro.module("decoder", self.decoder)
 
         with pyro.plate("data", x_data.shape[0]):

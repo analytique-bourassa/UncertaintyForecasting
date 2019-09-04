@@ -191,7 +191,7 @@
 <p id="t8" class="stm mis"><span class="key">import</span> <span class="nam">torch</span><span class="op">.</span><span class="nam">nn</span> <span class="key">as</span> <span class="nam">nn</span><span class="strut">&nbsp;</span></p>
 <p id="t9" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t10" class="stm mis"><span class="key">from</span> <span class="nam">probabilitic_predictions</span><span class="op">.</span><span class="nam">probabilistic_predictions_regression</span> <span class="key">import</span> <span class="nam">ProbabilisticPredictionsRegression</span><span class="strut">&nbsp;</span></p>
-<p id="t11" class="stm mis"><span class="key">from</span> <span class="nam">models</span><span class="op">.</span><span class="nam">LSTM_BayesRegressor</span><span class="op">.</span><span class="nam">GaussianLinearModel_abstract</span> <span class="key">import</span> <span class="nam">GaussianLinearModel_abstract</span><span class="strut">&nbsp;</span></p>
+<p id="t11" class="stm mis"><span class="key">from</span> <span class="nam">models</span><span class="op">.</span><span class="nam">ProbabilisticModelWrapperAbstract</span> <span class="key">import</span> <span class="nam">GaussianLinearModel_abstract</span><span class="strut">&nbsp;</span></p>
 <p id="t12" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t13" class="stm mis"><span class="nam">get_marginal</span> <span class="op">=</span> <span class="key">lambda</span> <span class="nam">traces</span><span class="op">,</span> <span class="nam">sites</span><span class="op">:</span> <span class="nam">EmpiricalMarginal</span><span class="op">(</span><span class="nam">traces</span><span class="op">,</span> <span class="nam">sites</span><span class="op">)</span><span class="op">.</span><span class="nam">_get_samples_and_weights</span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="strut">&nbsp;</span></p>
 <p id="t14" class="pln">        <span class="num">0</span><span class="op">]</span><span class="op">.</span><span class="nam">detach</span><span class="op">(</span><span class="op">)</span><span class="op">.</span><span class="nam">cpu</span><span class="op">(</span><span class="op">)</span><span class="op">.</span><span class="nam">numpy</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
@@ -302,7 +302,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.5.3</a>,
-            created at 2019-08-10 10:53
+            created at 2019-09-04 09:16
         </p>
     </div>
 </div>
