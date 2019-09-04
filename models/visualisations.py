@@ -106,7 +106,7 @@ class Visualisator():
 
         plt.xlabel("Time", size=DEFAULT_LABEL_SIZE)
         plt.ylabel("y (value to forecast)", size=DEFAULT_LABEL_SIZE)
-        plt.title("Prediction with %2.0f %% confidence interval" % 100*confidence_interval,
+        plt.title("Prediction with %2.0f %% confidence interval" % (100.0*confidence_interval),
                   size=DEFAULT_TITLE_SIZE)
 
         plt.fill_between(x, lower_bound, upper_bound, alpha=DEFAULT_TRANSPARENCY)

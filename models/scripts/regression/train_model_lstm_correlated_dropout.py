@@ -1,6 +1,7 @@
 from tqdm import tqdm
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
+import itertools
 
 from data_generation.data_generators_switcher import DatageneratorsSwitcher
 from data_handling.data_reshaping import reshape_data_for_LSTM, reshape_into_sequences
@@ -19,6 +20,7 @@ from models.calibration.analysis import show_analysis
 from models.script_parameters.parameters import ExperimentParameters
 from models.calibration.diagnostics import calculate_one_sided_cumulative_calibration, calculate_confidence_interval_calibration, calculate_marginal_calibration
 
+from probabilitic_predictions.probabilistic_predictions_regression import ProbabilisticPredictionsRegression
 from models.visualisations import Visualisator
 from models.training_tools.early_stopping import EarlyStopping
 
@@ -34,10 +36,10 @@ path_results = "/home/louis/Documents/ConsultationSimpliphAI/" \
 
 
 experiment_params.version = "v0.1.0"
-experiment_params.show_figures = False
+experiment_params.show_figures = True
 experiment_params.smoke_test = False
 experiment_params.train_lstm = True
-experiment_params.save_lstm = True
+experiment_params.save_lstm = False
 experiment_params.type_of_data = "autoregressive-5" # options are sin or "autoregressive-5"
 experiment_params.name = "feature_extractor_" + experiment_params.type_of_data
 
@@ -45,14 +47,14 @@ experiment_params.name = "feature_extractor_" + experiment_params.type_of_data
 
 # Network params
 lstm_params = LSTM_parameters()
-lstm_params.batch_size = 1
+lstm_params.batch_size = 5
 lstm_params.hidden_dim = 5
 
 if experiment_params.train_lstm is False:
     lstm_params.load("lstm_params_" + experiment_params.name + "_" + experiment_params.version, experiment_params.path)
 
 learning_rate = 1e-3
-num_epochs = 2300 if not experiment_params.smoke_test else 1
+num_epochs = 100 if not experiment_params.smoke_test else 1
 
 n_data = 1000
 length_of_sequences = 7 + 1
@@ -85,17 +87,22 @@ if experiment_params.show_figures:
 # Create and optimize model for feature extraction
 ##################################################
 
-lstm_params.dropout = 0.4
+lstm_params.dropout = 0.0
 
 model = LSTM_correlated_dropout(lstm_params)
 model.cuda()
 
+model.show_summary()
+print("***************")
 loss_fn = LossRegressionGaussianWithCorrelations(0.1, lstm_params.hidden_dim)
 
-optimizer = torch.optim.Adam(model.parameters(),
+params = list(model.parameters()) + list(model.prediction_sigma)
+
+
+optimizer = torch.optim.Adam(itertools.chain(model.parameters(), [model.weights_mu,
+                                                                  model.prediction_sigma,
+                                                                  model.covariance_factor]),
                              lr=learning_rate)
-
-
 
 if experiment_params.train_lstm:
     hist = np.zeros(num_epochs)
@@ -109,6 +116,7 @@ if experiment_params.train_lstm:
         optimizer.zero_grad()
         losses.backward()
         optimizer.step()
+
 else:
 
     load_checkpoint(model, optimizer, experiment_params.path,
@@ -119,5 +127,24 @@ if experiment_params.save_lstm:
                     experiment_params.name + "_" + experiment_params.version)
     lstm_params.save(experiment_params.version, experiment_params.path)
 
-y_pred, _ = make_predictions(data_loader_sequences, model, all_data, lstm_params.batch_size)
-features, y_true = extract_features(data_loader_sequences, model, all_data, lstm_params.batch_size)
+y_pred, y_true = make_predictions(data_loader_sequences, model, all_data, lstm_params.batch_size)
+
+model.show_summary()
+
+if experiment_params.show_figures:
+
+    if experiment_params.train_lstm:
+        Visualisator.show_epoch_convergence(data=hist,
+                                            name="Loss",
+                                            title="Loss convergence curve for the LSTM training",
+                                            number_of_burned_step=0)
+
+predictions = ProbabilisticPredictionsRegression()
+predictions.number_of_predictions = y_pred.shape[0]
+predictions.number_of_samples = y_pred.shape[1]
+predictions.initialize_to_zeros()
+
+predictions.values = y_pred
+predictions.true_values = y_true
+predictions.show_predictions_with_confidence_interval(0.95)
+

@@ -23,7 +23,7 @@ class LSTM_not_correlated_dropout(nn.Module):
         self.output_dim = 1
 
         self.initialize_variance_vector()
-        self.prediction_sigma = Variable(torch.ones(1))
+        self.prediction_sigma = Variable(torch.ones(1), requires_grad=True)
 
         # Define the LSTM layer
         self.lstm = nn.LSTM(self.input_dim,

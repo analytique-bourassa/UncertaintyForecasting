@@ -4,8 +4,8 @@ import torch.nn.functional as F
 from torch.distributions.normal import Normal
 from torch.distributions.uniform import Uniform
 
-from torch.autograd import Variable
-import numpy as np
+
+from models.LSTM_CorrelatedDropout.distribution_tools import initialize_covariance_matrix
 
 
 class LSTM_correlated_dropout(nn.Module):
@@ -21,9 +21,23 @@ class LSTM_correlated_dropout(nn.Module):
         self.bidirectional = lstm_params.bidirectional
         self.number_of_directions = 1 + 1*self.bidirectional
 
-        self.initialize_covariance_matrix()
-        self.prediction_sigma = Variable(torch.ones(1))
+        dimension = self.hidden_dim + 1
+        number_of_elements_of_triangular_matrix = int(dimension * (dimension + 1) / 2)
 
+        factor_covariance_matrix_temp = torch.zeros(dimension, dimension)
+
+        lower_bound = 0.1
+        upper_bound = 0.2
+
+        distribution = Uniform(torch.Tensor([lower_bound]), torch.Tensor([upper_bound]))
+        vector = distribution.sample(torch.Size([number_of_elements_of_triangular_matrix]))
+
+        factor_covariance_matrix_temp[torch.triu(torch.ones(dimension, dimension)) == 1] = vector.view(-1)
+
+        self.covariance_factor = torch.tensor(factor_covariance_matrix_temp, requires_grad=True, device="cuda")
+
+        self.prediction_sigma = torch.ones(1, requires_grad=True)
+        self.weights_mu = torch.zeros(self.hidden_dim + 1, requires_grad=True,  device="cuda:0")
 
         # Define the LSTM layer
         self.lstm = nn.LSTM(self.input_dim,
@@ -33,11 +47,15 @@ class LSTM_correlated_dropout(nn.Module):
                             bidirectional=self.bidirectional)
 
         # Define the output layer
-        self.linear = nn.Linear(self.hidden_dim*self.number_of_directions, lstm_params.output_dim)
+        #self.linear = nn.Linear(self.hidden_dim*self.number_of_directions, lstm_params.output_dim)
 
     def __del__(self):
 
         torch.cuda.empty_cache()
+
+    @property
+    def covariance_matrix(self):
+        return torch.mm(self.covariance_factor.transpose(0, 1), self.covariance_factor)
 
     def init_hidden(self):
 
@@ -55,12 +73,14 @@ class LSTM_correlated_dropout(nn.Module):
 
         if self.training:
 
-            weights, bias = self.linear.weight, self.linear.bias
             deviation = self.generate_correlated_dropout_noise()
-            noisy_weights = weights.float() + deviation.float()
-            y_pred = F.linear(lstm_out[-1].view(self.batch_size, -1), noisy_weights, bias).view(-1)
+            noisy_weights = self.weights_mu.cuda() + deviation.cuda()
 
-            return noisy_weights.view(-1), weights.view(-1), self.covariance_matrix, y_pred, self.prediction_sigma
+            y_pred = F.linear(lstm_out[-1].view(self.batch_size, -1), noisy_weights[:,:-1], noisy_weights[:,-1]).view(-1)
+
+            return noisy_weights.view(-1).clone(), self.weights_mu.view(-1).clone(), \
+                    self.covariance_matrix.clone(), y_pred, self.prediction_sigma.clone()
+
         else:
 
             number_of_samples = 100
@@ -68,40 +88,27 @@ class LSTM_correlated_dropout(nn.Module):
 
             for sample_index in range(number_of_samples):
 
-                weights, bias = self.linear.weight,  = self.linear.bias
                 deviation = self.generate_correlated_dropout_noise()
-                new_weights = weights.float() + deviation.float()
-                output_value = F.linear(lstm_out[-1].view(self.batch_size, -1), new_weights, bias)
+                noisy_weights = self.weights_mu.cuda() + deviation.cuda()
+                output_value = F.linear(lstm_out[-1].view(self.batch_size, -1), noisy_weights[:,:-1], noisy_weights[:,-1])
+
                 y_pred[:, sample_index] = output_value.reshape(-1)
 
             return y_pred
 
-    def initialize_covariance_matrix(self):
-
-
-        number_of_elements_of_triangular_matrix = int(self.hidden_dim*(self.hidden_dim + 1)/2)
-
-        factor_covariance_matrix = torch.zeros(self.hidden_dim, self.hidden_dim)
-
-        lower_bound = 0.1
-        upper_bound = 0.2
-
-        distribution = Uniform(torch.Tensor([lower_bound]), torch.Tensor([upper_bound]))
-        vector = distribution.sample(torch.Size([number_of_elements_of_triangular_matrix]))
-
-        factor_covariance_matrix[torch.triu(torch.ones(self.hidden_dim, self.hidden_dim)) == 1] = vector.view(-1)
-
-        covariance_matrix = torch.mm(factor_covariance_matrix.transpose(0,1),factor_covariance_matrix)
-
-        self.covariance_matrix = covariance_matrix
-
     def generate_correlated_dropout_noise(self):
 
         noise_generator = Normal(loc=0, scale=1)
-        random_vector = noise_generator.rsample((self.hidden_dim,)).float()
+        random_vector = noise_generator.rsample((self.hidden_dim + 1,)).cuda().float() # +1 for bias
         eigenvalues, eigenvectors = torch.symeig(self.covariance_matrix, eigenvectors=True)
         deviation = torch.mm(torch.mul(torch.sqrt(eigenvalues), random_vector).unsqueeze(0), eigenvectors)
 
         return deviation.cuda()
+
+    def show_summary(self):
+
+        print("weights mu: ", self.weights_mu)
+        print("covariance", self.covariance_matrix)
+        print("sigma", self.prediction_sigma)
 
 

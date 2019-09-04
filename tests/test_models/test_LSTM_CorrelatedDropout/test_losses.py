@@ -33,8 +33,31 @@ class TestLossWithCorrelation(object):
         loss = loss_function(noisy_weights,mu_weights, sigma_matrix_weights, mu_prediction, sigma_prediction, y_true)
 
         # Assert
-        assert loss.shape[0] == 1
-        assert len(loss.shape) == 1
+        assert len(loss.shape) == 0
+        assert loss.device.type == 'cuda'
+
+    def test_given_loss_arguments_batch_size_10_should_return_a_number_for_loss(self):
+        # Prepare
+        number_of_weights = np.random.randint(1, 20)  # the upper limit is only to restrict the computation time
+        noise_generator = Normal(loc=0, scale=1)
+
+        noisy_weights = noise_generator.rsample((number_of_weights,)).float()
+        mu_weights = noise_generator.rsample((number_of_weights,)).float()
+        sigma_matrix_weights = initialize_covariance_matrix(number_of_weights)
+
+        batch_size = 10
+        mu_prediction = noise_generator.rsample((batch_size,)).float().view(-1)
+        sigma_prediction = Variable(torch.ones(1))
+        y_true = Variable(torch.zeros(batch_size))
+
+        loss_function = LossRegressionGaussianWithCorrelations(0.1, number_of_weights)
+
+        # Action
+
+        loss = loss_function(noisy_weights, mu_weights, sigma_matrix_weights, mu_prediction, sigma_prediction, y_true)
+
+        # Assert
+        assert len(loss.shape) == 0
         assert loss.device.type == 'cuda'
 
     def test_given_not_positive_covariance_matrix_should_return_a_value_error(self):
@@ -156,8 +179,32 @@ class TestLossNoCorrelation(object):
         loss = loss_function(noisy_weights,mu_weights, sigma_matrix_weights, mu_prediction, sigma_prediction, y_true)
 
         # Assert
-        assert loss.shape[0] == 1
-        assert len(loss.shape) == 1
+        assert len(loss.shape) == 0
+        assert loss.device.type == 'cuda'
+
+    def test_given_loss_arguments_batch_size_23_should_return_a_number_for_loss(self):
+
+        # Prepare
+        number_of_weights = np.random.randint(1, 20) # the upper limit is only to restrict the computation time
+        noise_generator = Normal(loc=0, scale=1)
+
+        noisy_weights = noise_generator.rsample((number_of_weights,)).float()
+        mu_weights =  noise_generator.rsample((number_of_weights,)).float()
+        sigma_matrix_weights = torch.ones(number_of_weights)
+
+        batch_size = 23
+        mu_prediction = noise_generator.rsample((batch_size,)).float().view(-1)
+        sigma_prediction = Variable(torch.ones(1))
+        y_true = Variable(torch.zeros(batch_size))
+
+        loss_function = LossRegressionGaussianNoCorrelations(0.1, number_of_weights)
+
+        # Action
+
+        loss = loss_function(noisy_weights,mu_weights, sigma_matrix_weights, mu_prediction, sigma_prediction, y_true)
+
+        # Assert
+        assert len(loss.shape) == 0
         assert loss.device.type == 'cuda'
 
     def test_given_not_positive_variance_vector_should_return_a_value_error(self):

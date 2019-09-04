@@ -159,9 +159,8 @@ class BayesianLinearModel(ProbabilisticModelWrapperAbstract):
                                 model=self.linear_model,
                                 samples=self.params.number_of_samples_for_predictions)
 
-        for idx in range(y_test.shape[self.KEY_INDEX_FOR_NUMBER_OF_DATA]):
-            predictions.values[idx] = list(ppc.items())[0][1].T[idx]
-            predictions.true_values[idx] = y_test[idx]
+        predictions.values = list(ppc.items())[0][1].T
+        predictions.true_values = y_test
 
         return predictions
 

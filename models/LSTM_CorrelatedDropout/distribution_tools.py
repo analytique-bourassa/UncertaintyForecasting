@@ -1,5 +1,6 @@
 import torch
 from torch.distributions.uniform import Uniform
+from torch.autograd import Variable
 
 def initialize_covariance_matrix(dimension):
 
@@ -17,5 +18,5 @@ def initialize_covariance_matrix(dimension):
 
     covariance_matrix = torch.mm(factor_covariance_matrix.transpose(0, 1), factor_covariance_matrix)
 
-    return covariance_matrix
+    return Variable(covariance_matrix.cuda(), requires_grad=True)
 
