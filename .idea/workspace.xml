@@ -2,32 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8f142cc-a965-4a6e-b1a8-ece3b04b37ff" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/antichambre/softmax_example.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM_not_correlated_dropout.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/losses.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/scripts/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/scripts/calibration/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/scripts/classification/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/scripts/regression/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/scripts/regression/train_model_one.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/distribution_tools.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_models/test_LSTM_CorrelatedDropout/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_models/test_LSTM_CorrelatedDropout/test_losses.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/LSTM_VAR/BayesianLSTM.py" beforeDir="false" afterPath="$PROJECT_DIR$/antichambre/LSTM_VAR/BayesianLSTM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM_correlated_dropout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/model_data_feeder.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/model_data_feeder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/classification.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/classification/classification.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/classification_iris.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/classification/classification_iris.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/classification_iris_one_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/classification/classification_iris_one_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/compare_calibration_forecaster.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/calibration/compare_calibration_forecaster.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/cumulator.csv" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/results/cumulator.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/cumulator_with_time_and_waic.csv" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/results/cumulator_with_time_and_waic.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/data_accuracy_and_deviation_score.csv" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/results/data_accuracy_and_deviation_score.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/data_accuracy_and_deviation_score_with_time_and_waic.csv" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/results/data_accuracy_and_deviation_score_with_time_and_waic.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/mnist_classification.py" beforeDir="false" afterPath="$PROJECT_DIR$/antichambre/mnist_classification.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/train_model_basic.py" beforeDir="false" afterPath="$PROJECT_DIR$/antichambre/train_model_basic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/train_model_basic_bayesian_lstm_vi.py" beforeDir="false" afterPath="$PROJECT_DIR$/antichambre/train_model_basic_bayesian_lstm_vi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/train_model_basic_bayesian_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/regression/train_model_basic_bayesian_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/train_model_one.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/regression/train_model_lstm_correlated_dropout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_models/test_lstm_params.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models/test_lstm_params.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor___init___py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor_bayesian_linear_regression___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor_bayesian_linear_regression___init___py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor_bayesian_linear_regression_bayesian_linear_regression_parameters_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor_bayesian_linear_regression_bayesian_linear_regression_parameters_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor_bayesian_linear_regression_bayesian_linear_regression_priors_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_LSTM_BayesRegressor_bayesian_linear_regression_bayesian_linear_regression_priors_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_LSTM_CorrelatedDropout___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_LSTM_CorrelatedDropout___init___py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_LSTM_CorrelatedDropout_losses_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_LSTM_CorrelatedDropout_losses_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_lstm_params_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_lstm_params_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_model_data_feeder_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_model_data_feeder_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_visualisations_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_visualisations_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/status.json" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/status.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/tests_test_models_test_lstm_params_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests_test_models_test_lstm_params_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/tests_test_models_test_model_data_feeder_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests_test_models_test_model_data_feeder_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/utils_validator_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/utils_validator_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/losses.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/losses.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/validator.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/validator.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,17 +38,8 @@
       <file leaf-file-name="LSTM_not_correlated_dropout.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM_not_correlated_dropout.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="25" column="41" lean-forward="true" selection-start-line="25" selection-end-line="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="normal.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/distributions/normal.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="75" selection-start-line="75" selection-end-line="75" />
+            <state relative-caret-position="-660">
+              <caret line="25" column="51" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -62,8 +47,17 @@
       <file leaf-file-name="LSTM_correlated_dropout.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM_correlated_dropout.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28">
-              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+            <state relative-caret-position="132">
+              <caret line="6" selection-start-line="6" selection-end-line="6" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="distribution_tools.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/LSTM_CorrelatedDropout/distribution_tools.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -71,45 +65,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="train_model_lstm_correlated_dropout.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/scripts/regression/train_model_lstm_correlated_dropout.py">
+      <file leaf-file-name="losses.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/LSTM_CorrelatedDropout/losses.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="90" column="12" lean-forward="true" selection-start-line="90" selection-start-column="12" selection-end-line="90" selection-end-column="12" />
+            <state relative-caret-position="-594">
+              <caret line="15" column="50" lean-forward="true" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="50" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
+                <element signature="e#0#12#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="module.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/modules/module.py">
+      <file leaf-file-name="test_losses.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/test_models/test_LSTM_CorrelatedDropout/test_losses.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="538" selection-start-line="538" selection-end-line="538" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="model_data_feeder.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/model_data_feeder.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2125">
-              <caret line="107" column="41" selection-start-line="107" selection-start-column="41" selection-end-line="107" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="losses.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/models/LSTM_CorrelatedDropout/losses.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="39" column="56" selection-start-line="39" selection-start-column="56" selection-end-line="39" selection-end-column="56" />
+            <state relative-caret-position="484">
+              <caret line="256" column="16" selection-start-line="256" selection-start-column="16" selection-end-line="256" selection-end-column="16" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#249#1559#0" />
-                <element signature="e#1624#2641#0" />
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="validator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/validator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="494">
+              <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_lstm_params.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_models/test_lstm_params.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="295">
+              <caret line="153" column="55" selection-start-line="152" selection-start-column="8" selection-end-line="153" selection-end-column="55" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -143,8 +138,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression_parameters.py" />
-        <option value="$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression.py" />
         <option value="$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression_priors.py" />
         <option value="$PROJECT_DIR$/models/LSTM_BayesRegressor/LSTM.py" />
         <option value="$PROJECT_DIR$/models/lstm_params.py" />
@@ -165,7 +158,6 @@
         <option value="$PROJECT_DIR$/tests/test_probabilistic_predictions/test_probabilistic_predictions_classification.py" />
         <option value="$PROJECT_DIR$/tests/tet_calibration/test_diagnostic.py" />
         <option value="$PROJECT_DIR$/requirements.yml" />
-        <option value="$PROJECT_DIR$/utils/validator.py" />
         <option value="$PROJECT_DIR$/data_handling/train_test_split.py" />
         <option value="$PROJECT_DIR$/models/information_metrics.py" />
         <option value="$PROJECT_DIR$/models/visualisations.py" />
@@ -193,7 +185,10 @@
         <option value="$PROJECT_DIR$/models/scripts/regression/train_model_lstm_correlated_dropout.py" />
         <option value="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM_not_correlated_dropout.py" />
         <option value="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM_correlated_dropout.py" />
+        <option value="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/distribution_tools.py" />
+        <option value="$PROJECT_DIR$/utils/validator.py" />
         <option value="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/losses.py" />
+        <option value="$PROJECT_DIR$/tests/test_models/test_LSTM_CorrelatedDropout/test_losses.py" />
       </list>
     </option>
   </component>
@@ -262,6 +257,20 @@
               <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
               <item name="test_models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
+              <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="test_models" type="462c0819:PsiDirectoryNode" />
+              <item name="test_LSTM_BayesRegressor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
+              <item name="UncertaintyForecasting" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="test_models" type="462c0819:PsiDirectoryNode" />
+              <item name="test_LSTM_CorrelatedDropout" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="UncertaintyForecasting" type="b2602c69:ProjectViewProjectNode" />
@@ -505,13 +514,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49833333" visible="true" weight="0.23205613" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49833333" visible="true" weight="0.23205613" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.32910052" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32991803" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3100529" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3100529" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" sideWeight="0.50166667" side_tool="true" weight="0.25849974" />
@@ -522,7 +533,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32910052" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -558,11 +568,6 @@
           <url>file://$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM_not_correlated_dropout.py</url>
           <line>75</line>
           <option name="timeStamp" value="63" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/models/LSTM_CorrelatedDropout/losses.py</url>
-          <line>60</line>
-          <option name="timeStamp" value="73" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -605,27 +610,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/models/LSTM_BayesRegressor/LSTM.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="16" column="27" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/validator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="902">
-          <caret line="41" column="33" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/envs/env_HMM/lib/python3.6/site-packages/pymc3/sampling.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -792,13 +776,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_models/test_model_data_feeder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2750">
-          <caret line="133" column="46" selection-start-line="133" selection-start-column="46" selection-end-line="133" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/antichambre/softmax_example.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -816,13 +793,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="11" column="43" lean-forward="true" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_models/test_lstm_params.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3586">
-          <caret line="166" column="51" selection-start-line="166" selection-start-column="51" selection-end-line="166" selection-end-column="51" />
         </state>
       </provider>
     </entry>
@@ -875,43 +845,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/model_data_feeder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2125">
-          <caret line="107" column="41" selection-start-line="107" selection-start-column="41" selection-end-line="107" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/scripts/regression/train_model_lstm_correlated_dropout.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="90" column="12" lean-forward="true" selection-start-line="90" selection-start-column="12" selection-end-line="90" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/modules/module.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="538" selection-start-line="538" selection-end-line="538" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM_not_correlated_dropout.py">
+    <entry file="file://$PROJECT_DIR$/tests/test_models/test_model_data_feeder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
-          <caret line="25" column="41" lean-forward="true" selection-start-line="25" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM_correlated_dropout.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+          <caret line="66" column="51" lean-forward="true" selection-end-line="66" selection-end-column="51" />
           <folding>
-            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -923,14 +862,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/LSTM_CorrelatedDropout/losses.py">
+    <entry file="file://$PROJECT_DIR$/models/model_data_feeder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="39" column="56" selection-start-line="39" selection-start-column="56" selection-end-line="39" selection-end-column="56" />
+        <state relative-caret-position="-132">
+          <caret line="107" column="41" selection-start-line="107" selection-start-column="41" selection-end-line="107" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/modules/module.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="538" selection-start-line="538" selection-end-line="538" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/scripts/regression/train_model_lstm_correlated_dropout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="90" column="12" selection-start-line="90" selection-start-column="12" selection-end-line="90" selection-end-column="12" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#249#1559#0" />
-            <element signature="e#1624#2641#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_models/test_lstm_params.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="153" column="55" selection-start-line="152" selection-start-column="8" selection-end-line="153" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/LSTM_CorrelatedDropout/distribution_tools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/validator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM_not_correlated_dropout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-660">
+          <caret line="25" column="51" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM_correlated_dropout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" selection-start-line="6" selection-end-line="6" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/LSTM_CorrelatedDropout/losses.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-594">
+          <caret line="15" column="50" lean-forward="true" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_models/test_LSTM_CorrelatedDropout/test_losses.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="256" column="16" selection-start-line="256" selection-start-column="16" selection-end-line="256" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
