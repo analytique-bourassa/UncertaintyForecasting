@@ -56,7 +56,8 @@ class LossRegressionGaussianNoCorrelations(nn.Module):
 
         loss_term_from_variational_approximation = log_prob_vector.sum()
 
-        total_loss = loss_term_from_variational_approximation - loss_term_from_prior - loss_term_from_likelihood
+        total_loss = (1 / size_of_batch) * (loss_term_from_variational_approximation - loss_term_from_prior)
+        total_loss -= loss_term_from_likelihood
 
         return total_loss
 
@@ -120,10 +121,12 @@ class LossRegressionGaussianWithCorrelations(nn.Module):
         loss_term_from_likelihood = log_prob_vector.sum()
 
         # Loss term from variational distribution
-        normal_function_for_weights = MultivariateNormal(mu_weights.cuda(), sigma_matrix_weights.cuda())
+        normal_function_for_weights = MultivariateNormal(mu_weights.cuda(),
+                                                         covariance_matrix=sigma_matrix_weights.cuda())
         loss_term_from_variational_approximation = normal_function_for_weights.log_prob(noisy_weights.cuda())
 
-        total_loss = loss_term_from_variational_approximation - loss_term_from_prior - loss_term_from_likelihood
+        total_loss = (1/size_of_batch)*(loss_term_from_variational_approximation - loss_term_from_prior)
+        total_loss -= loss_term_from_likelihood
 
         return total_loss
 

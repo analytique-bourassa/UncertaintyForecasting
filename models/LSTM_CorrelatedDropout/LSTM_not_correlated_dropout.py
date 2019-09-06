@@ -7,10 +7,11 @@ from torch.distributions.uniform import Uniform
 from torch.autograd import Variable
 import numpy as np
 
+from utils.validator import Validator
 
 class LSTM_not_correlated_dropout(nn.Module):
 
-    def __init__(self, lstm_params):
+    def __init__(self, lstm_params, is_pretraining=True):
 
         super(LSTM_not_correlated_dropout, self).__init__()
 
@@ -23,7 +24,9 @@ class LSTM_not_correlated_dropout(nn.Module):
         self.output_dim = 1
 
         self.initialize_variance_vector()
-        self.prediction_sigma = Variable(torch.ones(1), requires_grad=True)
+
+        self.prediction_sigma = torch.tensor([0.01], requires_grad=True, device="cuda:0")
+        self.weights_mu = torch.zeros(self.hidden_dim + 1, requires_grad=True, device="cuda:0")
 
         # Define the LSTM layer
         self.lstm = nn.LSTM(self.input_dim,
@@ -35,9 +38,29 @@ class LSTM_not_correlated_dropout(nn.Module):
         # Define the output layer
         self.linear = nn.Linear(self.hidden_dim*self.number_of_directions, self.output_dim)
 
+        self.is_pretraining = is_pretraining
+
     def __del__(self):
 
         torch.cuda.empty_cache()
+
+    @property
+    def is_pretraining(self):
+        return self._is_pretraining
+
+    @is_pretraining.setter
+    def is_pretraining(self, value):
+
+        Validator.check_type(value, bool)
+
+        if not value:
+            for param in self.lstm.parameters():
+                param.requires_grad = False
+        else:
+            for param in self.lstm.parameters():
+                param.requires_grad = True
+
+        self._is_pretraining = value
 
     def init_hidden(self):
         # This is what we'll initialise our hidden state as
@@ -54,12 +77,21 @@ class LSTM_not_correlated_dropout(nn.Module):
 
         if self.training:
 
-            weights, bias = self.linear.weight, self.linear.bias
-            deviation = self.generate_dropout_noise()
-            noisy_weights = weights.float() + deviation.float()
-            y_pred = F.linear(lstm_out[-1].view(self.batch_size, -1), noisy_weights, bias).view(-1)
+            if self.is_pretraining:
 
-            return noisy_weights.view(-1), weights.view(-1), self.covariance_vector.view(-1), y_pred, self.prediction_sigma
+                y_pred = F.linear(lstm_out[-1].view(self.batch_size, -1),
+                                  self.weights_mu[None,:-1], self.weights_mu[None,-1]).view(-1)
+
+                return y_pred
+
+            else:
+
+                weights, bias = self.linear.weight, self.linear.bias
+                deviation = self.generate_dropout_noise()
+                noisy_weights = weights.float() + deviation.float()
+                y_pred = F.linear(lstm_out[-1].view(self.batch_size, -1), noisy_weights, bias).view(-1)
+
+                return noisy_weights.view(-1), weights.view(-1), self.covariance_vector.view(-1), y_pred, self.prediction_sigma
 
 
         else:
@@ -98,5 +130,13 @@ class LSTM_not_correlated_dropout(nn.Module):
         random_vector = torch.mul(noise_generated, self.covariance_vector.view(-1).double())
 
         return random_vector.cuda().float()
+
+    def show_summary(self):
+
+        print("**************************************")
+        print("weights mu: ", self.weights_mu)
+        print("covariance: ", self.covariance_vector)
+        print("sigma: ", self.prediction_sigma)
+        print("**************************************")
 
 

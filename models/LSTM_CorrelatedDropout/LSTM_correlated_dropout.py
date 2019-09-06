@@ -4,13 +4,13 @@ import torch.nn.functional as F
 from torch.distributions.normal import Normal
 from torch.distributions.uniform import Uniform
 
-
+from utils.validator import Validator
 from models.LSTM_CorrelatedDropout.distribution_tools import initialize_covariance_matrix
 
 
 class LSTM_correlated_dropout(nn.Module):
 
-    def __init__(self, lstm_params):
+    def __init__(self, lstm_params, is_pretraining=True):
 
         super(LSTM_correlated_dropout, self).__init__()
 
@@ -26,17 +26,18 @@ class LSTM_correlated_dropout(nn.Module):
 
         factor_covariance_matrix_temp = torch.zeros(dimension, dimension)
 
-        lower_bound = 0.1
-        upper_bound = 0.2
+        lower_bound = 0.05
+        upper_bound = 0.07
 
         distribution = Uniform(torch.Tensor([lower_bound]), torch.Tensor([upper_bound]))
-        vector = distribution.sample(torch.Size([number_of_elements_of_triangular_matrix]))
+        matrix = distribution.sample(torch.Size([dimension, dimension])).view(dimension,dimension)
 
-        factor_covariance_matrix_temp[torch.triu(torch.ones(dimension, dimension)) == 1] = vector.view(-1)
 
-        self.covariance_factor = torch.tensor(factor_covariance_matrix_temp, requires_grad=True, device="cuda")
+        #factor_covariance_matrix_temp[torch.triu(torch.ones(dimension, dimension)) == 1] = vector.view(-1)
 
-        self.prediction_sigma = torch.ones(1, requires_grad=True)
+        self.covariance_factor = matrix.clone().detach().cuda().requires_grad_(True)
+
+        self.prediction_sigma = torch.tensor([0.01], requires_grad=True, device="cuda:0")
         self.weights_mu = torch.zeros(self.hidden_dim + 1, requires_grad=True,  device="cuda:0")
 
         # Define the LSTM layer
@@ -49,13 +50,34 @@ class LSTM_correlated_dropout(nn.Module):
         # Define the output layer
         #self.linear = nn.Linear(self.hidden_dim*self.number_of_directions, lstm_params.output_dim)
 
+        self.is_pretraining = is_pretraining
+
     def __del__(self):
 
         torch.cuda.empty_cache()
 
     @property
     def covariance_matrix(self):
-        return torch.mm(self.covariance_factor.transpose(0, 1), self.covariance_factor)
+        M = torch.mm(self.covariance_factor.transpose(0, 1), self.covariance_factor)
+        return F.relu(M).view(self.hidden_dim + 1, self.hidden_dim +1)
+
+    @property
+    def is_pretraining(self):
+        return self._is_pretraining
+
+    @is_pretraining.setter
+    def is_pretraining(self, value):
+
+        Validator.check_type(value, bool)
+
+        if not value:
+            for param in self.lstm.parameters():
+                param.requires_grad = False
+        else:
+            for param in self.lstm.parameters():
+                param.requires_grad = True
+
+        self._is_pretraining = value
 
     def init_hidden(self):
 
@@ -73,13 +95,21 @@ class LSTM_correlated_dropout(nn.Module):
 
         if self.training:
 
-            deviation = self.generate_correlated_dropout_noise()
-            noisy_weights = self.weights_mu.cuda() + deviation.cuda()
+            if self.is_pretraining:
 
-            y_pred = F.linear(lstm_out[-1].view(self.batch_size, -1), noisy_weights[:,:-1], noisy_weights[:,-1]).view(-1)
+                y_pred = F.linear(lstm_out[-1].view(self.batch_size, -1),
+                                  self.weights_mu[None,:-1], self.weights_mu[None,-1]).view(-1)
 
-            return noisy_weights.view(-1).clone(), self.weights_mu.view(-1).clone(), \
-                    self.covariance_matrix.clone(), y_pred, self.prediction_sigma.clone()
+                return y_pred
+
+            else:
+                deviation = self.generate_correlated_dropout_noise()
+                noisy_weights = self.weights_mu.cuda() + deviation.cuda()
+
+                y_pred = F.linear(lstm_out[-1].view(self.batch_size, -1), noisy_weights[:,:-1], noisy_weights[:,-1]).view(-1)
+
+                return noisy_weights.view(-1).clone(), self.weights_mu.view(-1).clone(), \
+                        self.covariance_matrix.clone(), y_pred, self.prediction_sigma.clone()
 
         else:
 
@@ -108,7 +138,7 @@ class LSTM_correlated_dropout(nn.Module):
     def show_summary(self):
 
         print("weights mu: ", self.weights_mu)
-        print("covariance", self.covariance_matrix)
-        print("sigma", self.prediction_sigma)
+        print("covariance: ", self.covariance_matrix)
+        print("sigma: ", self.prediction_sigma)
 
 

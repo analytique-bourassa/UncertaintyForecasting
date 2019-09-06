@@ -30,9 +30,9 @@
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
 
         <h2 class="stats">
-            78 statements &nbsp;
+            77 statements &nbsp;
             <span class="run hide_run shortkey_r button_toggle_run">0 run</span>
-            <span class="mis shortkey_m button_toggle_mis">78 missing</span>
+            <span class="mis shortkey_m button_toggle_mis">77 missing</span>
             <span class="exc shortkey_x button_toggle_exc">0 excluded</span>
 
             
@@ -230,10 +230,9 @@
 <p id="n161" class="pln"><a href="#n161">161</a></p>
 <p id="n162" class="stm mis"><a href="#n162">162</a></p>
 <p id="n163" class="stm mis"><a href="#n163">163</a></p>
-<p id="n164" class="stm mis"><a href="#n164">164</a></p>
-<p id="n165" class="pln"><a href="#n165">165</a></p>
-<p id="n166" class="stm mis"><a href="#n166">166</a></p>
-<p id="n167" class="pln"><a href="#n167">167</a></p>
+<p id="n164" class="pln"><a href="#n164">164</a></p>
+<p id="n165" class="stm mis"><a href="#n165">165</a></p>
+<p id="n166" class="pln"><a href="#n166">166</a></p>
 
             </td>
             <td class="text">
@@ -398,12 +397,11 @@
 <p id="t159" class="pln">                                <span class="nam">model</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">linear_model</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
 <p id="t160" class="pln">                                <span class="nam">samples</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">params</span><span class="op">.</span><span class="nam">number_of_samples_for_predictions</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t161" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t162" class="stm mis">        <span class="key">for</span> <span class="nam">idx</span> <span class="key">in</span> <span class="nam">range</span><span class="op">(</span><span class="nam">y_test</span><span class="op">.</span><span class="nam">shape</span><span class="op">[</span><span class="nam">self</span><span class="op">.</span><span class="nam">KEY_INDEX_FOR_NUMBER_OF_DATA</span><span class="op">]</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t163" class="stm mis">            <span class="nam">predictions</span><span class="op">.</span><span class="nam">values</span><span class="op">[</span><span class="nam">idx</span><span class="op">]</span> <span class="op">=</span> <span class="nam">list</span><span class="op">(</span><span class="nam">ppc</span><span class="op">.</span><span class="nam">items</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">[</span><span class="num">1</span><span class="op">]</span><span class="op">.</span><span class="nam">T</span><span class="op">[</span><span class="nam">idx</span><span class="op">]</span><span class="strut">&nbsp;</span></p>
-<p id="t164" class="stm mis">            <span class="nam">predictions</span><span class="op">.</span><span class="nam">true_values</span><span class="op">[</span><span class="nam">idx</span><span class="op">]</span> <span class="op">=</span> <span class="nam">y_test</span><span class="op">[</span><span class="nam">idx</span><span class="op">]</span><span class="strut">&nbsp;</span></p>
-<p id="t165" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t166" class="stm mis">        <span class="key">return</span> <span class="nam">predictions</span><span class="strut">&nbsp;</span></p>
-<p id="t167" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t162" class="stm mis">        <span class="nam">predictions</span><span class="op">.</span><span class="nam">values</span> <span class="op">=</span> <span class="nam">list</span><span class="op">(</span><span class="nam">ppc</span><span class="op">.</span><span class="nam">items</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">[</span><span class="num">1</span><span class="op">]</span><span class="op">.</span><span class="nam">T</span><span class="strut">&nbsp;</span></p>
+<p id="t163" class="stm mis">        <span class="nam">predictions</span><span class="op">.</span><span class="nam">true_values</span> <span class="op">=</span> <span class="nam">y_test</span><span class="strut">&nbsp;</span></p>
+<p id="t164" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t165" class="stm mis">        <span class="key">return</span> <span class="nam">predictions</span><span class="strut">&nbsp;</span></p>
+<p id="t166" class="pln"><span class="strut">&nbsp;</span></p>
 
             </td>
         </tr>
@@ -414,7 +412,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.5.3</a>,
-            created at 2019-09-04 09:16
+            created at 2019-09-06 10:43
         </p>
     </div>
 </div>
