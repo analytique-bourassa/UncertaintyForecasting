@@ -2,162 +2,64 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8f142cc-a965-4a6e-b1a8-ece3b04b37ff" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/visualisations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.coveragerc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/LSTM_Bayesian/LSTM.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/LSTM_Bayesian/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/LSTM_VAR/BayesianLSTM.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/LSTM_VAR/LSTM_decoder.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/LSTM_VAR/LSTM_encoder.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/MCMC_pyro.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/bayesian_linear_regression/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/data.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/mnist_classification.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/softmax_example.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/test_gpu.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/train_model_basic.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/train_model_basic_bayesian.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/train_model_basic_bayesian_lstm_vi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/train_model_basic_bayesian_mcmc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/train_model_basic_bayesian_svi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/antichambre/train_model_basic_bayesian_svi_ar5.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/data_generation___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/data_generation___init___py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/data_generation_data_generator_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/data_generation_data_generator_py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/data_generation_data_generators_switcher_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/data_generation_data_generators_switcher_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/data_handling_data_reshaping_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/data_handling_data_reshaping_py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_ProbabilisticModelWrapperAbstract_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_ProbabilisticModelWrapperAbstract_py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/models___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models___init___py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/models_calibration_diagnostics_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_calibration_diagnostics_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_disk_reader_and_writer_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_disk_reader_and_writer_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_dummy_forecasters___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_dummy_forecasters___init___py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_dummy_forecasters_forecasters_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_dummy_forecasters_forecasters_py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/models_lstm_params_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_lstm_params_py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/models_model_data_feeder_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_model_data_feeder_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_regression_LSTM_BayesRegressor_LSTM_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_regression_LSTM_BayesRegressor_LSTM_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_regression_LSTM_BayesRegressor___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_regression_LSTM_BayesRegressor___init___py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_regression_LSTM_BayesRegressor_bayesian_linear_regression___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_regression_LSTM_BayesRegressor_bayesian_linear_regression___init___py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_regression_LSTM_BayesRegressor_bayesian_linear_regression_bayesian_linear_regression_parameters_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_regression_LSTM_BayesRegressor_bayesian_linear_regression_bayesian_linear_regression_parameters_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_regression_LSTM_BayesRegressor_bayesian_linear_regression_bayesian_linear_regression_priors_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_regression_LSTM_BayesRegressor_bayesian_linear_regression_bayesian_linear_regression_priors_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_regression_LSTM_BayesRegressor_bayesian_linear_regression_bayesian_linear_regression_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_regression_LSTM_BayesRegressor_bayesian_linear_regression_bayesian_linear_regression_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_regression_LSTM_BayesRegressor_experiment_results_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_regression_LSTM_BayesRegressor_experiment_results_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_regression_LSTM_CorrelatedDropout_LSTM_correlated_dropout_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_regression_LSTM_CorrelatedDropout_LSTM_correlated_dropout_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_regression_LSTM_CorrelatedDropout_LSTM_not_correlated_dropout_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_regression_LSTM_CorrelatedDropout_LSTM_not_correlated_dropout_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_regression_LSTM_CorrelatedDropout___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_regression_LSTM_CorrelatedDropout___init___py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_regression_LSTM_CorrelatedDropout_distribution_tools_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_regression_LSTM_CorrelatedDropout_distribution_tools_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_regression_LSTM_CorrelatedDropout_losses_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_regression_LSTM_CorrelatedDropout_losses_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_regression___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_regression___init___py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_scripts___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_scripts___init___py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_scripts_calibration___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_scripts_calibration___init___py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_scripts_calibration_compare_calibration_forecaster_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_scripts_calibration_compare_calibration_forecaster_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_scripts_classification___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_scripts_classification___init___py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/models_scripts_classification_classification_iris_one_model_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_scripts_classification_classification_iris_one_model_py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/models_scripts_classification_classification_iris_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_scripts_classification_classification_iris_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_scripts_classification_classification_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_scripts_classification_classification_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_scripts_regression___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_scripts_regression___init___py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_scripts_regression_train_model_basic_bayesian_main_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_scripts_regression_train_model_basic_bayesian_main_py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/models_scripts_regression_train_model_lstm_correlated_dropout_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_scripts_regression_train_model_lstm_correlated_dropout_py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/models_scripts_regression_train_model_one_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_scripts_regression_train_model_one_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/models_tools_pymc_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/models_tools_pymc_py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/probabilitic_predictions_probabilistic_predictions_classification_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/probabilitic_predictions_probabilistic_predictions_classification_py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/probabilitic_predictions_probabilistic_predictions_regression_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/probabilitic_predictions_probabilistic_predictions_regression_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/setup_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/setup_py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/status.json" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/status.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cov_html/tests_test_calibration_test_diagnostic_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests_test_calibration_test_diagnostic_py.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cov_html/tests_test_models_test_LSTM_BayesRegressor_bayesian_linear_regression_test_bayesian_linear_regression_parameters_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests_test_models_test_LSTM_BayesRegressor_bayesian_linear_regression_test_bayesian_linear_regression_parameters_py.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cov_html/tests_test_models_test_LSTM_BayesRegressor_bayesian_linear_regression_test_bayesian_linear_regression_priors_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests_test_models_test_LSTM_BayesRegressor_bayesian_linear_regression_test_bayesian_linear_regression_priors_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/tests___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests___init___py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/tests_test_models___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests_test_models___init___py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/tests_test_models_test_LSTM_CorrelatedDropout___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests_test_models_test_LSTM_CorrelatedDropout___init___py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/tests_test_models_test_LSTM_CorrelatedDropout_test_LSTM_correlated_dropout_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests_test_models_test_LSTM_CorrelatedDropout_test_LSTM_correlated_dropout_py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/tests_test_models_test_LSTM_CorrelatedDropout_test_losses_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests_test_models_test_LSTM_CorrelatedDropout_test_losses_py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/tests_test_models_test_lstm_params_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests_test_models_test_lstm_params_py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/tests_test_models_test_model_data_feeder_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests_test_models_test_model_data_feeder_py.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cov_html/tests_test_probabilistic_predictions_test_probabilistic_predictions_classification_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests_test_probabilistic_predictions_test_probabilistic_predictions_classification_py.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cov_html/tests_test_probabilistic_predictions_test_probabilistic_predictions_regression_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/tests_test_probabilistic_predictions_test_probabilistic_predictions_regression_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/utils_distances_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/utils_distances_py.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cov_html/utils_validator_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/utils_validator_py.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/lstm_params_feature_extractor_sin_v0.0.1.json" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/lstm_params_feature_extractor_sin_v0.0.1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/model_feature_extractor_autoregressive-5_v0.0.1" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/model_feature_extractor_autoregressive-5_v0.0.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/model_feature_extractor_autoregressive-5_v0.0.2" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/model_feature_extractor_autoregressive-5_v0.0.2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/model_feature_extractor_autoregressive-5_v0.0.3" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/model_feature_extractor_autoregressive-5_v0.0.3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/model_feature_extractor_autoregressive-5_v0.0.4" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/model_feature_extractor_autoregressive-5_v0.0.4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/model_feature_extractor_autoregressive-5_v0.0.5" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/model_feature_extractor_autoregressive-5_v0.0.5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/model_feature_extractor_autoregressive-5_v0.0.6" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/model_feature_extractor_autoregressive-5_v0.0.6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/model_feature_extractor_autoregressive-5_v0.0.7" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/model_feature_extractor_autoregressive-5_v0.0.7" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/model_feature_extractor_depression_trend_v0.0.1" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/model_feature_extractor_depression_trend_v0.0.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/model_feature_extractor_sin_v0.0.1" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/model_feature_extractor_sin_v0.0.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/model_feature_extractor_sinus_v0.0.1" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/model_feature_extractor_sinus_v0.0.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/optimizer_feature_extractor_autoregressive-5_v0.0.1" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/optimizer_feature_extractor_autoregressive-5_v0.0.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/optimizer_feature_extractor_autoregressive-5_v0.0.2" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/optimizer_feature_extractor_autoregressive-5_v0.0.2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/optimizer_feature_extractor_autoregressive-5_v0.0.3" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/optimizer_feature_extractor_autoregressive-5_v0.0.3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/optimizer_feature_extractor_autoregressive-5_v0.0.4" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/optimizer_feature_extractor_autoregressive-5_v0.0.4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/optimizer_feature_extractor_autoregressive-5_v0.0.5" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/optimizer_feature_extractor_autoregressive-5_v0.0.5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/optimizer_feature_extractor_autoregressive-5_v0.0.6" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/optimizer_feature_extractor_autoregressive-5_v0.0.6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/optimizer_feature_extractor_autoregressive-5_v0.0.7" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/optimizer_feature_extractor_autoregressive-5_v0.0.7" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/optimizer_feature_extractor_depression_trend_v0.0.1" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/optimizer_feature_extractor_depression_trend_v0.0.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/optimizer_feature_extractor_sin_v0.0.1" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/optimizer_feature_extractor_sin_v0.0.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/optimizer_feature_extractor_sinus_v0.0.1" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/optimizer_feature_extractor_sinus_v0.0.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/results_n_100.csv" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/results_n_100.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/results_n_100_ar5.csv" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/results_n_100_ar5.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/results_smoke_test.csv" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/results_smoke_test.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/v0.0.1_lstm_params.json" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/v0.0.1_lstm_params.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/v0.0.2_lstm_params.json" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/v0.0.2_lstm_params.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/v0.0.3_lstm_params.json" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/v0.0.3_lstm_params.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/v0.0.4_lstm_params.json" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/v0.0.4_lstm_params.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/v0.0.5_lstm_params.json" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/v0.0.5_lstm_params.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/v0.0.6_lstm_params.json" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/v0.0.6_lstm_params.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/.models/v0.0.7_lstm_params.json" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/.models/v0.0.7_lstm_params.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/LSTM.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/LSTM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression/bayesian_linear_regression.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/bayesian_linear_regression/bayesian_linear_regression.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression/bayesian_linear_regression_parameters.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/bayesian_linear_regression/bayesian_linear_regression_parameters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/bayesian_linear_regression/bayesian_linear_regression_priors.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/bayesian_linear_regression/bayesian_linear_regression_priors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/experiment_results.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_BayesRegressor/experiment_results.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_mcmc_pyro.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_svi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM_correlated_dropout.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/LSTM_correlated_dropout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/LSTM_not_correlated_dropout.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/LSTM_not_correlated_dropout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models/test_LSTM_CorrelatedDropout/test_LSTM_correlated_dropout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/distribution_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/distribution_tools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_CorrelatedDropout/losses.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/losses.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_VI/LSTM.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_VI/LSTM_VI_model.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM_VI/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/distances.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/classification/classification_bayesian_softmax.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/classification/classification_bayesian_softmax.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/classification/classification_bayesian_softmax_temperature.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/classification/classification_bayesian_softmax_temperature.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/data.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/data.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/data_v0.0.2.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/data_v0.0.2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/equation_mu.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/equation_mu.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/errors.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/errors.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/loss.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/loss.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/model_graphique.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/model_graphique.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/posterior.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/posterior.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/prediction_train.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/prediction_train.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/predictions.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/predictions.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/traces.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/traces.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.3/ar5_data.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.3/ar5_data.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.3/ar5_data_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.3/ar5_data_2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.3/dist_errors.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.3/dist_errors.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.3/prediction_test.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.3/prediction_test.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.3/prediction_train.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.3/prediction_train.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.3/traces.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.3/traces.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.5/data.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.5/data.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.5/errors.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.5/errors.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.5/loss.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.5/loss.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.5/training_set_predictions.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.5/training_set_predictions.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.6/data.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.6/data.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.6/errors_distribution.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.6/errors_distribution.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.6/preddiction_training.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.6/preddiction_training.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.6/preds.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.6/preds.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.6/preds_all.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.6/preds_all.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.6/traces.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.6/traces.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.7/data.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.7/data.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.7/errors.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.7/errors.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.7/loss.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.7/loss.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.7/prediction_test.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.7/prediction_test.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.7/predictions_on_training_set.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.7/predictions_on_training_set.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Autoregressive/v0.0.7/traces.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Autoregressive/v0.0.7/traces.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Figure_1-1.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Figure_1-1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Figure_1-2.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Figure_1-2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Figure_1-3.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Figure_1-3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/Figure_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/Figure_1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/asymetric_unfocused_forecaster/cdf_calibration.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/asymetric_unfocused_forecaster/cdf_calibration.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/asymetric_unfocused_forecaster/confidence_interval_calibration.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/asymetric_unfocused_forecaster/confidence_interval_calibration.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/asymetric_unfocused_forecaster/data.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/asymetric_unfocused_forecaster/data.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/asymetric_unfocused_forecaster/marginal_calibration.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/asymetric_unfocused_forecaster/marginal_calibration.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/ideal_forecaster/cdf_calibration.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/ideal_forecaster/cdf_calibration.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/ideal_forecaster/confidence_interval.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/ideal_forecaster/confidence_interval.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/ideal_forecaster/data.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/ideal_forecaster/data.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/ideal_forecaster/marginal_calibration.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/ideal_forecaster/marginal_calibration.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/sinus_preds.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/sinus_preds.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/trace_2s.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/trace_2s.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/traces.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/traces.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/unfocused_forecaster/cdf_calibration.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/unfocused_forecaster/cdf_calibration.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/unfocused_forecaster/confidence_interval_calibration.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/unfocused_forecaster/confidence_interval_calibration.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/unfocused_forecaster/data.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/unfocused_forecaster/data.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/figures/unfocused_forecaster/marginal_calibration.png" beforeDir="false" afterPath="$PROJECT_DIR$/figures/figures_models/unfocused_forecaster/marginal_calibration.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/information_metrics.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/model_data_feeder.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/model_data_feeder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/classification/classification_iris.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/classification/classification_iris.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/classification/classification_iris_one_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/classification/classification_iris_one_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/regression/train_model_lstm_correlated_dropout.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/regression/train_model_lstm_correlated_dropout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/scripts/regression/train_model_one.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/scripts/regression/train_model_one.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/visualisations.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualisations/visualisations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/probabilitic_predictions/probabilistic_predictions_regression.py" beforeDir="false" afterPath="$PROJECT_DIR$/probabilitic_predictions/probabilistic_predictions_regression.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_models/test_LSTM_BayesRegressor/bayesian_linear_regression/test_bayesian_linear_regression_parameters.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models/test_LSTM_BayesRegressor/bayesian_linear_regression/test_bayesian_linear_regression_parameters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_models/test_LSTM_BayesRegressor/bayesian_linear_regression/test_bayesian_linear_regression_priors.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models/test_LSTM_BayesRegressor/bayesian_linear_regression/test_bayesian_linear_regression_priors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_models/test_LSTM_CorrelatedDropout/test_losses.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models/test_LSTM_CorrelatedDropout/test_losses.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/visualisations___init___py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/visualisations___init___py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cov_html/visualisations_visualisations_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/cov_html/visualisations_visualisations_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/Example_3_LSTM_with_dropout.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/Example_3_LSTM_with_dropout.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/LSTM_correlated_dropout.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/LSTM_correlated_dropout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_models/test_LSTM_CorrelatedDropout/test_LSTM_correlated_dropout.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models/test_LSTM_CorrelatedDropout/test_LSTM_correlated_dropout.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -174,8 +76,8 @@
       <file leaf-file-name="test_losses.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test_models/test_LSTM_CorrelatedDropout/test_losses.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="154">
+              <caret line="82" selection-start-line="82" selection-end-line="82" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -183,13 +85,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_LSTM_correlated_dropout.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="losses.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/losses.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".coveragerc" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.coveragerc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_LSTM_correlated_dropout.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test_models/test_LSTM_CorrelatedDropout/test_LSTM_correlated_dropout.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="180" column="36" selection-start-line="180" selection-start-column="36" selection-end-line="180" selection-end-column="36" />
+            <state relative-caret-position="1731">
+              <caret line="84" column="28" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="train_model_one.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/scripts/regression/train_model_one.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="101" column="46" selection-start-line="101" selection-start-column="46" selection-end-line="101" selection-end-column="46" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -219,7 +154,7 @@
       <file leaf-file-name="train_model_lstm_correlated_dropout.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/scripts/regression/train_model_lstm_correlated_dropout.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
+            <state relative-caret-position="594">
               <caret line="96" column="26" selection-start-line="96" selection-end-line="97" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -231,8 +166,20 @@
       <file leaf-file-name="LSTM_correlated_dropout.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/LSTM_correlated_dropout.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="130" column="83" selection-start-line="130" selection-start-column="83" selection-end-line="130" selection-end-column="83" />
+            <state relative-caret-position="-1043">
+              <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LSTM_not_correlated_dropout.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/LSTM_not_correlated_dropout.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-414">
+              <caret line="98" selection-start-line="98" selection-end-line="98" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -268,7 +215,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/tests/test_models/test_LSTM_BayesRegressor/bayesian_linear_regression/__init__.py" />
         <option value="$PROJECT_DIR$/probabilitic_predictions/probabilistic_predictions.py" />
         <option value="$PROJECT_DIR$/models/tools_pymc.py" />
         <option value="$PROJECT_DIR$/models/LSTM_BayesRegressor/gaussian_model_svi.py" />
@@ -317,8 +263,9 @@
         <option value="$PROJECT_DIR$/models/scripts/regression/train_model_lstm_correlated_dropout.py" />
         <option value="$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/losses.py" />
         <option value="$PROJECT_DIR$/utils/distances.py" />
-        <option value="$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/LSTM_correlated_dropout.py" />
         <option value="$PROJECT_DIR$/tests/test_models/test_LSTM_CorrelatedDropout/test_LSTM_correlated_dropout.py" />
+        <option value="$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/LSTM_correlated_dropout.py" />
+        <option value="$PROJECT_DIR$/.coveragerc" />
       </list>
     </option>
   </component>
@@ -603,16 +550,16 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49833333" visible="true" weight="0.2746897" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49833333" visible="true" weight="0.2746897" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32991803" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2857143" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2857143" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" sideWeight="0.50166667" side_tool="true" weight="0.25849974" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.42857143" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.25608465" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -664,7 +611,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="100" />
+      <option name="time" value="102" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -702,7 +649,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/antichambre/LSTM_VAR/BayesianLSTM.py" />
     <entry file="file://$USER_HOME$/anaconda3/envs/env_HMM/lib/python3.6/site-packages/torch/__init__.pyi">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -905,13 +851,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/scripts/regression/train_model_one.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" column="42" selection-start-line="13" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/envs/env_HMM/lib/python3.6/site-packages/torch/distributions/normal.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="633">
@@ -940,42 +879,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/LSTM_not_correlated_dropout.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="98" selection-start-line="98" selection-end-line="98" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_models/test_model_data_feeder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="11" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/losses.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3153">
-          <caret line="14" column="8" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_models/test_LSTM_CorrelatedDropout/test_losses.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -990,16 +899,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/LSTM_correlated_dropout.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="130" column="83" selection-start-line="130" selection-start-column="83" selection-end-line="130" selection-end-column="83" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data_generation/data_generators_switcher.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -1007,9 +906,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/LSTM_not_correlated_dropout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-414">
+          <caret line="98" selection-start-line="98" selection-end-line="98" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/models/scripts/regression/train_model_lstm_correlated_dropout.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
+        <state relative-caret-position="594">
           <caret line="96" column="26" selection-start-line="96" selection-end-line="97" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
@@ -1019,11 +928,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_models/test_LSTM_CorrelatedDropout/test_LSTM_correlated_dropout.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="180" column="36" selection-start-line="180" selection-start-column="36" selection-end-line="180" selection-end-column="36" />
+        <state relative-caret-position="1731">
+          <caret line="84" column="28" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/scripts/regression/train_model_one.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="101" column="46" selection-start-line="101" selection-start-column="46" selection-end-line="101" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/LSTM_correlated_dropout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1043">
+          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_models/test_LSTM_CorrelatedDropout/test_losses.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="82" selection-start-line="82" selection-end-line="82" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/regression/LSTM_CorrelatedDropout/losses.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.coveragerc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
         </state>
       </provider>
     </entry>

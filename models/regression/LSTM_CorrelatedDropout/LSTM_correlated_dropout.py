@@ -16,38 +16,33 @@ class LSTM_correlated_dropout(nn.Module):
 
         super(LSTM_correlated_dropout, self).__init__()
 
-        self.input_dim = lstm_params.input_dim
-        self.hidden_dim = lstm_params.hidden_dim
-        self.batch_size = lstm_params.batch_size
-        self.num_layers = lstm_params.num_layers
-        self.bidirectional = lstm_params.bidirectional
-        self.number_of_directions = 1 + 1*self.bidirectional
+        self.params = lstm_params
+        self.number_of_directions = 1 + 1*self.params.bidirectional
 
-        dimension = self.hidden_dim + 1
-        number_of_elements_of_triangular_matrix = int(dimension * (dimension + 1) / 2)
+        dimension = self.params.hidden_dim + 1
 
-        factor_covariance_matrix_temp = torch.zeros(dimension, dimension)
-
-        lower_bound = 0.05
-        upper_bound = 0.07
+        lower_bound = 0.3
+        upper_bound = 0.8
+        n_values = int(dimension*(dimension+1)/2)
 
         distribution = Uniform(torch.Tensor([lower_bound]), torch.Tensor([upper_bound]))
-        matrix = distribution.sample(torch.Size([dimension, dimension])).view(dimension,dimension)
+        values = distribution.sample(torch.Size([n_values, ])).view(-1)
+        matrix = torch.zeros(dimension,dimension)
+        matrix[torch.triu(torch.ones(dimension, dimension)) == 1] = values
 
-
-        #factor_covariance_matrix_temp[torch.triu(torch.ones(dimension, dimension)) == 1] = vector.view(-1)
+        #normed = self.normalize_cov_factor(matrix)
 
         self.covariance_factor = matrix.clone().detach().cuda().requires_grad_(True)
 
         self.prediction_sigma = torch.tensor([0.01], requires_grad=True, device="cuda:0")
-        self.weights_mu = torch.zeros(self.hidden_dim + 1, requires_grad=True,  device="cuda:0")
+        self.weights_mu = torch.zeros(self.params.hidden_dim + 1, requires_grad=True,  device="cuda:0")
 
         # Define the LSTM layer
-        self.lstm = nn.LSTM(self.input_dim,
-                            self.hidden_dim,
-                            self.num_layers,
-                            dropout=lstm_params.dropout,
-                            bidirectional=self.bidirectional)
+        self.lstm = nn.LSTM(self.params.input_dim,
+                            self.params.hidden_dim,
+                            self.params.num_layers,
+                            dropout=self.params.dropout,
+                            bidirectional=self.params.bidirectional)
 
 
         self.is_pretraining = is_pretraining
@@ -59,7 +54,8 @@ class LSTM_correlated_dropout(nn.Module):
     @property
     def covariance_matrix(self):
         M = torch.mm(self.covariance_factor.transpose(0, 1), self.covariance_factor)
-        return F.relu(M).view(self.hidden_dim + 1, self.hidden_dim +1)
+        activation = nn.Softplus()
+        return 0.1*activation(M).view(self.params.hidden_dim + 1, self.params.hidden_dim +1)
 
     @property
     def is_pretraining(self):
@@ -82,8 +78,12 @@ class LSTM_correlated_dropout(nn.Module):
     def init_hidden(self):
 
         # This is what we'll initialise our hidden state as
-        zeros_1 = torch.zeros(self.num_layers*self.number_of_directions, self.batch_size, self.hidden_dim)
-        zeros_2 = torch.zeros(self.num_layers*self.number_of_directions, self.batch_size, self.hidden_dim)
+        zeros_1 = torch.zeros(self.params.num_layers*self.number_of_directions,
+                              self.params.batch_size, self.params.hidden_dim)
+
+        zeros_2 = torch.zeros(self.params.num_layers*self.number_of_directions,
+                              self.params.batch_size, self.params.hidden_dim)
+
         hidden = (zeros_1,
                   zeros_2)
 
@@ -91,14 +91,13 @@ class LSTM_correlated_dropout(nn.Module):
 
     def forward(self, input):
 
-        lstm_out, self.hidden = self.lstm(input.view(len(input), self.batch_size, -1))
+        lstm_out, self.hidden = self.lstm(input.view(len(input), self.params.batch_size, -1))
 
         if self.training:
 
             if self.is_pretraining:
 
-                y_pred = F.linear(lstm_out[-1].view(self.batch_size, -1),
-                                  self.weights_mu[None,:-1], self.weights_mu[None,-1]).view(-1)
+                y_pred = self.make_linear_product(self.weights_mu, lstm_out)
 
                 return y_pred
 
@@ -106,22 +105,24 @@ class LSTM_correlated_dropout(nn.Module):
                 deviation = self.generate_correlated_dropout_noise()
                 noisy_weights = self.weights_mu.cuda() + deviation.cuda()
 
-                y_pred = F.linear(lstm_out[-1].view(self.batch_size, -1),
-                                  noisy_weights[None,:-1], noisy_weights[None,-1]).view(-1)
+                y_pred_mean = self.make_linear_product(noisy_weights,lstm_out)
+                #y_pred = self.add_noise_to_predictions_means(y_pred_mean)
 
                 return noisy_weights.view(-1).clone(), self.weights_mu.view(-1).clone(), \
-                        self.covariance_matrix.clone(), y_pred, self.prediction_sigma.clone()
+                        self.covariance_matrix.clone(), y_pred_mean, self.prediction_sigma.clone()
 
         else:
 
             number_of_samples = 100
-            y_pred = torch.ones((self.batch_size, number_of_samples))
+            y_pred = torch.ones((self.params.batch_size, number_of_samples))
 
             for sample_index in range(number_of_samples):
 
                 deviation = self.generate_correlated_dropout_noise()
                 noisy_weights = self.weights_mu.cuda() + deviation.cuda()
-                output_value = F.linear(lstm_out[-1].view(self.batch_size, -1), noisy_weights[:,:-1], noisy_weights[:,-1])
+
+                y_pred_mean = self.make_linear_product(noisy_weights, lstm_out)
+                output_value = self.add_noise_to_predictions_means(y_pred_mean)
 
                 y_pred[:, sample_index] = output_value.reshape(-1)
 
@@ -129,7 +130,8 @@ class LSTM_correlated_dropout(nn.Module):
 
     def generate_correlated_dropout_noise(self):
 
-        noise_generator = MultivariateNormal(torch.zeros(self.hidden_dim + 1).cuda(), self.covariance_matrix)
+        noise_generator = MultivariateNormal(torch.zeros(self.params.hidden_dim + 1).cuda(),
+                                             self.covariance_matrix)
         deviation = noise_generator.rsample()
 
         return deviation.cuda()
@@ -139,5 +141,17 @@ class LSTM_correlated_dropout(nn.Module):
         print("weights mu: ", self.weights_mu)
         print("covariance: ", self.covariance_matrix)
         print("sigma: ", self.prediction_sigma)
+
+    def make_linear_product(self, weights, lstm_out):
+
+        return F.linear(lstm_out[-1].view(self.params.batch_size, -1),
+                 weights[None, :-1], weights[None, -1]).view(-1)
+
+    def add_noise_to_predictions_means(self, y_pred_mean):
+
+        noise_generator = Normal(0, self.prediction_sigma)
+        noise = noise_generator.rsample(torch.Size([self.params.batch_size, ]))
+
+        return y_pred_mean + noise.view(-1)
 
 

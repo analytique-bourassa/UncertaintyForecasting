@@ -71,19 +71,21 @@ class TestLSTM_CorrelatedDropout(object):
         # Prepare
         n_data = 100
         length_of_sequences = 7
+        learning_rate = 1e-3
+        num_epochs_pretraining = 20
 
         data = np.random.normal(0, 1, size=n_data)
         sequences = reshape_into_sequences(data, length_of_sequences)
         data_train = reshape_data_for_LSTM(sequences)
 
-
         lstm_params = LSTM_parameters()
         model = LSTM_correlated_dropout(lstm_params)
         model.cuda()
-        num_epochs_pretraining = 20
-        original_weights_lstm = get_lstm_weights(model.lstm)
-        learning_rate= 1e-3
 
+        # Original value used to comparison
+        original_weights_lstm = get_lstm_weights(model.lstm)
+
+        # Action
         optimizer_1 = torch.optim.Adam(itertools.chain(model.parameters(), [model.weights_mu]),
                                        lr=learning_rate)
 
@@ -99,7 +101,7 @@ class TestLSTM_CorrelatedDropout(object):
             losses.backward()
             optimizer_1.step()
 
-        # Action
+        # New value
         new_weights_lstm = get_lstm_weights(model.lstm)
 
         # Assert
@@ -131,6 +133,7 @@ class TestLSTM_CorrelatedDropout(object):
         original_weights_mu = model.weights_mu.cpu().detach().numpy()
         learning_rate = 1e-3
 
+        # Action
         optimizer = torch.optim.Adam(itertools.chain(model.parameters(), [model.weights_mu]),
                                        lr=learning_rate)
 
@@ -146,7 +149,7 @@ class TestLSTM_CorrelatedDropout(object):
             losses.backward()
             optimizer.step()
 
-        # Action
+        # New value
         new_weights_mu = model.weights_mu.cpu().detach().numpy()
 
         # Assert
@@ -168,7 +171,7 @@ class TestLSTM_CorrelatedDropout(object):
         model = LSTM_correlated_dropout(lstm_params)
         model.cuda()
 
-        # Value use to comparison
+        # Value used to comparison
         original_covariance_matrix = model.covariance_matrix.cpu().detach().numpy()
 
         # Action
@@ -189,7 +192,7 @@ class TestLSTM_CorrelatedDropout(object):
             losses.backward()
             optimizer.step()
 
-        # Action
+            # New value
         new_covariance_matrix = model.covariance_matrix.cpu().detach().numpy()
 
         # Assert
@@ -213,7 +216,7 @@ class TestLSTM_CorrelatedDropout(object):
         model = LSTM_correlated_dropout(lstm_params)
         model.cuda()
 
-        # Value use to comparison
+        # Value used to comparison
         original_prediction_sigma = model.prediction_sigma.cpu().detach().numpy()
 
         # Action
@@ -234,7 +237,7 @@ class TestLSTM_CorrelatedDropout(object):
             losses.backward()
             optimizer.step()
 
-        # Action
+        # New value
         new_prediction_sigma = model.prediction_sigma.cpu().detach().numpy()
 
         # Assert
