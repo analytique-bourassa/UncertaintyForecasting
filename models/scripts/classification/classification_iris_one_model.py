@@ -1,9 +1,7 @@
 import seaborn as sns
 import numpy as np
-import pandas as pd
 import pymc3 as pm
 
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 from models.calibration.diagnostics import calculate_static_calibration_error
@@ -12,7 +10,7 @@ from utils.timers import TimerContext
 from models.classification.classification_bayesian_softmax_temperature import \
     BayesianSoftmaxClassificationWithTemperatures
 from models.classification.classification_bayesian_softmax import BayesianSoftmaxClassification
-from models.visualisations import Visualisator
+from visualisations.visualisations import Visualisator
 
 from data_handling.train_test_split import return_train_test_split_indexes
 from utils.time_profiler_logging import TimeProfilerLogger

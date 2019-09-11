@@ -4,26 +4,29 @@ from sklearn.metrics import r2_score
 
 from data_generation.data_generators_switcher import DatageneratorsSwitcher
 from data_handling.data_reshaping import reshape_data_for_LSTM, reshape_into_sequences
-from models.LSTM_BayesRegressor.LSTM import LSTM
+
+from models.regression.LSTM_BayesRegressor.LSTM import LSTM
+from models.regression.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression import BayesianLinearModel
+
 from models.model_data_feeder import *
-from models.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression import BayesianLinearModel
 from models.lstm_params import LSTM_parameters
 from models.disk_reader_and_writer import save_checkpoint, load_checkpoint
 from models.calibration.analysis import show_analysis
 from models.script_parameters.parameters import ExperimentParameters
 from models.calibration.diagnostics import calculate_one_sided_cumulative_calibration, calculate_confidence_interval_calibration, calculate_marginal_calibration
-from models.visualisations import Visualisator
 from models.training_tools.early_stopping import EarlyStopping
+
+from visualisations.visualisations import Visualisator
 
 early_stopper = EarlyStopping(patience=4, verbose=True)
 
 experiment_params = ExperimentParameters()
 
-experiment_params.path = "/home/louis/Documents/ConsultationSimpliphAI/" \
-           "AnalytiqueBourassaGit/UncertaintyForecasting/models/LSTM_BayesRegressor/.models/"
+experiment_params.path = "/home/louis/Dropbox/ConsultationSimpliphAI/" \
+           "AnalytiqueBourassaGit/UncertaintyForecasting/models/regression/LSTM_BayesRegressor/.models/"
 
-path_results = "/home/louis/Documents/ConsultationSimpliphAI/" \
-           "AnalytiqueBourassaGit/UncertaintyForecasting/models/LSTM_BayesRegressor/"
+path_results = "/home/louis/Dropbox/ConsultationSimpliphAI/" \
+           "AnalytiqueBourassaGit/UncertaintyForecasting/models/regression/LSTM_BayesRegressor/"
 
 
 experiment_params.version = "v0.0.7"
@@ -35,8 +38,6 @@ experiment_params.type_of_data = "autoregressive-5" # options are sin or "autore
 experiment_params.name = "feature_extractor_" + experiment_params.type_of_data
 
 
-
-# Network params
 lstm_params = LSTM_parameters()
 lstm_params.batch_size = 50
 lstm_params.hidden_dim = 5
@@ -86,7 +87,6 @@ model.cuda()
 loss_fn = torch.nn.MSELoss(size_average=False)
 optimizer = torch.optim.Adam(model.parameters(),
                              lr=learning_rate)
-
 
 
 if experiment_params.train_lstm:

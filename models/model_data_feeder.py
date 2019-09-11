@@ -134,7 +134,7 @@ def extract_features(data_loader, model, training_data, batch_size):
         features = model.return_last_layer(X_train)
 
         if is_on_gpu:
-            y_pred, y_train = features.cpu(), y_train.cpu()
+            features, y_train = features.cpu(), y_train.cpu()
 
         if features_all is None:
             features_all = features.detach().numpy()

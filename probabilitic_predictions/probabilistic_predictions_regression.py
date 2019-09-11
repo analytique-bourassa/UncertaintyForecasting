@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from models.visualisations import Visualisator
+from visualisations.visualisations import Visualisator
 from utils.validator import Validator
 
 DEFAULT_LEGEND_SIZE = 19

@@ -1,7 +1,7 @@
 import random
 import pytest
 
-from models.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression_parameters \
+from models.regression.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression_parameters \
     import BayesianLinearRegressionParameters
 
 INTEGER_GENERATION_UPPER_LIMIT = 100

@@ -1,16 +1,11 @@
 from tqdm import tqdm
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import r2_score
 import itertools
 
 from data_generation.data_generators_switcher import DatageneratorsSwitcher
 from data_handling.data_reshaping import reshape_data_for_LSTM, reshape_into_sequences
 
-from models.LSTM_CorrelatedDropout.LSTM_not_correlated_dropout import LSTM_not_correlated_dropout
-from models.LSTM_CorrelatedDropout.losses import LossRegressionGaussianNoCorrelations
-
-from models.LSTM_CorrelatedDropout.LSTM_correlated_dropout import LSTM_correlated_dropout
-from models.LSTM_CorrelatedDropout.losses import LossRegressionGaussianWithCorrelations
+from models.regression.LSTM_CorrelatedDropout.LSTM_not_correlated_dropout import LSTM_not_correlated_dropout
+from models.regression.LSTM_CorrelatedDropout.losses import LossRegressionGaussianNoCorrelations
 
 from models.model_data_feeder import *
 
@@ -18,8 +13,11 @@ from models.lstm_params import LSTM_parameters
 from models.disk_reader_and_writer import save_checkpoint, load_checkpoint
 from models.script_parameters.parameters import ExperimentParameters
 
+from models.calibration.diagnostics import calculate_one_sided_cumulative_calibration, calculate_confidence_interval_calibration, calculate_marginal_calibration
+from models.calibration.analysis import show_analysis
+
 from probabilitic_predictions.probabilistic_predictions_regression import ProbabilisticPredictionsRegression
-from models.visualisations import Visualisator
+from visualisations.visualisations import Visualisator
 from models.training_tools.early_stopping import EarlyStopping
 
 early_stopper = EarlyStopping(patience=4, verbose=True)
@@ -52,8 +50,8 @@ if experiment_params.train_lstm is False:
     lstm_params.load("lstm_params_" + experiment_params.name + "_" + experiment_params.version, experiment_params.path)
 
 learning_rate = 1e-3
-num_epochs = 500 if not experiment_params.smoke_test else 1
-num_epochs_pretraining = 2000 if not experiment_params.smoke_test else 1
+num_epochs = 20 if not experiment_params.smoke_test else 1
+num_epochs_pretraining = 500 if not experiment_params.smoke_test else 1
 
 n_data = 1000
 length_of_sequences = 7 + 1
@@ -96,7 +94,7 @@ model.show_summary()
 
 
 #loss_fn = LossRegressionGaussianWithCorrelations(0.1, lstm_params.hidden_dim)
-loss_fn = LossRegressionGaussianNoCorrelations(0.1, lstm_params.hidden_dim)
+loss_fn = LossRegressionGaussianNoCorrelations(1.0, lstm_params.hidden_dim)
 
 params = list(model.parameters()) + list(model.prediction_sigma)
 
@@ -104,7 +102,7 @@ optimizer_1 = torch.optim.Adam(itertools.chain(model.parameters(),[model.weights
                              lr=learning_rate)
 
 optimizer_2 = torch.optim.Adam(itertools.chain( [model.weights_mu,
-                                                                  # model.prediction_sigma,
+                                                                   model.prediction_sigma,
                                                                   model.covariance_vector]),
                              lr=5e-3)
 
@@ -152,6 +150,9 @@ if experiment_params.save_lstm:
 
 y_pred, y_true = make_predictions(data_loader_sequences, model, all_data, lstm_params.batch_size)
 
+number_of_train_data = floor(0.7*n_data)
+y_train, y_test = y_true[:number_of_train_data], y_true[number_of_train_data:]
+
 model.show_summary()
 
 if experiment_params.show_figures:
@@ -168,6 +169,7 @@ if experiment_params.show_figures:
                                             title="Loss convergence curve for the LSTM training",
                                             number_of_burned_step=0)
 
+
 predictions = ProbabilisticPredictionsRegression()
 predictions.number_of_predictions = y_pred.shape[0]
 predictions.number_of_samples = y_pred.shape[1]
@@ -176,4 +178,14 @@ predictions.initialize_to_zeros()
 predictions.values = y_pred
 predictions.true_values = y_true
 predictions.show_predictions_with_confidence_interval(0.95)
+
+deviation_score_probabilistic_calibration = calculate_confidence_interval_calibration(predictions.values, predictions.true_values)
+deviation_score_exceedance_calibration = calculate_one_sided_cumulative_calibration(predictions.values, predictions.true_values)
+deviation_score_marginal_calibration = calculate_marginal_calibration(predictions.values, predictions.true_values)
+
+predictions.train_data = y_train
+predictions.show_predictions_with_training_data(confidence_interval=0.95)
+
+show_analysis(predictions.values, predictions.true_values, name="LSTM + dropout")
+
 
