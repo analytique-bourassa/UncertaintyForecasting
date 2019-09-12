@@ -11,7 +11,7 @@ objectives are to provide:
 ## pytest
 
 ```
-python -m pytest --cov-report html:cov_html --cov=. tests/
+python -m pytest -vv --cov-config=.coveragerc --cov-report html:cov_html --cov=. tests/
 ```
 
 # 1 - Probabilistic models

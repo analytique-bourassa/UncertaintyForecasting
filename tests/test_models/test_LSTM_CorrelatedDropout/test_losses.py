@@ -19,10 +19,15 @@ class TestLossWithCorrelation(object):
         number_of_weights = np.random.randint(1, 20) # the upper limit is only to restrict the computation time
         noise_generator = Normal(loc=0, scale=1)
 
-        noisy_weights = noise_generator.rsample((number_of_weights,)).float()
-        mu_weights =  noise_generator.rsample((number_of_weights,)).float()
+        batch_size = 1
+        number_of_samples = 100
+
+        noisy_weights = noise_generator.rsample((number_of_samples,number_of_weights)).float()
+        mu_prediction = noise_generator.rsample((number_of_samples,)).float().view(batch_size,number_of_samples)
+
+        mu_weights = noise_generator.rsample((number_of_weights,)).float()
+
         sigma_matrix_weights = initialize_covariance_matrix(number_of_weights)
-        mu_prediction = noise_generator.rsample((1,)).float().view(-1)
         sigma_prediction = Variable(torch.ones(1))
         y_true = Variable(torch.zeros(1))
 
@@ -41,14 +46,17 @@ class TestLossWithCorrelation(object):
         number_of_weights = np.random.randint(1, 20)  # the upper limit is only to restrict the computation time
         noise_generator = Normal(loc=0, scale=1)
 
-        noisy_weights = noise_generator.rsample((number_of_weights,)).float()
+        number_of_samples = 100
+
+        noisy_weights = noise_generator.rsample((number_of_samples, number_of_weights)).float()
+
         mu_weights = noise_generator.rsample((number_of_weights,)).float()
         sigma_matrix_weights = initialize_covariance_matrix(number_of_weights)
 
         batch_size = 10
-        mu_prediction = noise_generator.rsample((batch_size,)).float().view(-1)
         sigma_prediction = Variable(torch.ones(1))
         y_true = Variable(torch.zeros(batch_size))
+        mu_prediction = noise_generator.rsample((batch_size, number_of_samples)).float().view(batch_size, number_of_samples)
 
         loss_function = LossRegressionGaussianWithCorrelations(0.1, number_of_weights)
 
@@ -66,10 +74,13 @@ class TestLossWithCorrelation(object):
         number_of_weights = np.random.randint(1, 20) # the upper limit is only to restrict the computation time
         noise_generator = Normal(loc=0, scale=1)
 
-        noisy_weights = noise_generator.rsample((number_of_weights,)).float()
+        number_of_samples = 100
+
+        noisy_weights = noise_generator.rsample((number_of_samples, number_of_weights)).float()
+        mu_prediction = noise_generator.rsample((number_of_samples,)).float().view(number_of_samples)
+
         mu_weights = noise_generator.rsample((number_of_weights,)).float()
         sigma_matrix_weights = -1*torch.ones((number_of_weights,number_of_weights))
-        mu_prediction = noise_generator.rsample((1,)).float().view(-1)
         sigma_prediction = Variable(torch.ones(1))
         y_true = Variable(torch.zeros(1))
 
@@ -89,10 +100,14 @@ class TestLossWithCorrelation(object):
         number_of_weights = np.random.randint(1, 20) # the upper limit is only to restrict the computation time
         noise_generator = Normal(loc=0, scale=1)
 
-        noisy_weights = noise_generator.rsample((number_of_weights,)).float()
+        number_of_samples = 100
+        batch_size = 1
+
+        noisy_weights = noise_generator.rsample((number_of_samples, number_of_weights)).float()
+        mu_prediction = noise_generator.rsample((number_of_samples,)).float().view(batch_size,number_of_samples)
+
         mu_weights = noise_generator.rsample((number_of_weights,)).float()
-        sigma_matrix_weights = -1*np.ones((number_of_weights,number_of_weights))
-        mu_prediction = noise_generator.rsample((1,)).float().view(-1)
+        sigma_matrix_weights = -1*np.ones((number_of_weights, number_of_weights))
         sigma_prediction = Variable(torch.ones(1))
         y_true = Variable(torch.zeros(1))
 
@@ -112,12 +127,16 @@ class TestLossWithCorrelation(object):
         number_of_weights = np.random.randint(1, 20) # the upper limit is only to restrict the computation time
         noise_generator = Normal(loc=0, scale=1)
 
-        noisy_weights = noise_generator.rsample((number_of_weights
-                                                 + np.random.randint(1, 5),)).float()
+        batch_size = 1
+
+        number_of_samples = 100
+
+        noisy_weights = noise_generator.rsample((number_of_samples, number_of_weights
+                                                 + np.random.randint(1, 5))).float()
+        mu_prediction = noise_generator.rsample((number_of_samples,)).float().view(batch_size,number_of_samples)
 
         mu_weights = noise_generator.rsample((number_of_weights,)).float()
         sigma_matrix_weights = initialize_covariance_matrix(number_of_weights)
-        mu_prediction = noise_generator.rsample((1,)).float().view(-1)
         sigma_prediction = Variable(torch.ones(1))
         y_true = Variable(torch.zeros(1))
 
@@ -137,11 +156,14 @@ class TestLossWithCorrelation(object):
         number_of_weights = np.random.randint(1, 20) # the upper limit is only to restrict the computation time
         noise_generator = Normal(loc=0, scale=1)
 
-        noisy_weights = noise_generator.rsample((number_of_weights,)).float()
+        number_of_samples = 100
+
+        noisy_weights = noise_generator.rsample((number_of_samples, number_of_weights)).float()
+        mu_prediction = noise_generator.rsample((number_of_samples,)).float().view(number_of_samples)
 
         mu_weights = noise_generator.rsample((number_of_weights,)).float()
         sigma_matrix_weights = initialize_covariance_matrix(number_of_weights + np.random.randint(1, 5))
-        mu_prediction = noise_generator.rsample((1,)).float().view(-1)
+
         sigma_prediction = Variable(torch.ones(1))
         y_true = Variable(torch.zeros(1))
 

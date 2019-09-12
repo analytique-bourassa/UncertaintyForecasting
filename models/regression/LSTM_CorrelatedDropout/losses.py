@@ -87,8 +87,11 @@ class LossRegressionGaussianNoCorrelations(nn.Module):
         return loss_term_from_variational_approximation
 
 
-
 class LossRegressionGaussianWithCorrelations(nn.Module):
+
+    INDEX_NOISY_WEIGHTS_FOR_SAMPLES = 0
+    INDEX_NOISY_WEIGHTS_FOR_WEIGHTS = 1
+    INDEX_MU_PREDICTION_FOR_SAMPLES = 1
 
     def __init__(self, prior_sigma, number_of_weights, use_gpu=True):
         super(LossRegressionGaussianWithCorrelations, self).__init__()
@@ -109,14 +112,54 @@ class LossRegressionGaussianWithCorrelations(nn.Module):
 
         self._use_gpu = value
 
-    def forward(self, noisy_weights, mu_weights, sigma_matrix_weights, mu_prediction, sigma_prediction, y_true):
+    def forward(self, noisy_weights,
+                      mu_weights,
+                      sigma_matrix_weights,
+                      mu_prediction,
+                      sigma_prediction,
+                      y_true):
+        """
+
+        variable                    dimensions
+        --------                    ----------
+
+        noisy_weights               [n_samples, number_of_weights]
+        mu_weights                  [number_of_weights]
+        sigma_matrix_weights        [number_of_weights, number_of_weights]
+        mu_prediction               [batch_size, n_samples]
+        y_true                      [batch_size]
+
+        :param noisy_weights:
+        :param mu_weights:
+        :param sigma_matrix_weights:
+        :param mu_prediction:
+        :param sigma_prediction:
+        :param y_true:
+        :return:
+        """
+
 
         Validator.check_torch_matrix_is_positive(sigma_matrix_weights)
-        Validator.check_matching_dimensions(len(noisy_weights), len(mu_weights))
-        Validator.check_matching_dimensions(len(mu_weights), sigma_matrix_weights.shape[0])
+        number_of_weights = len(mu_weights)
+        Validator.check_matching_dimensions(number_of_weights, sigma_matrix_weights.shape[0])
+
+        Validator.check_matching_dimensions(noisy_weights.shape[self.INDEX_NOISY_WEIGHTS_FOR_WEIGHTS],
+                                            number_of_weights)
 
         Validator.check_is_torch_tensor_single_value(sigma_prediction)
-        Validator.check_matching_dimensions(len(y_true), len(mu_prediction))
+
+
+        number_of_samples_for_mu_prediction = mu_prediction.shape[1]
+        number_of_samples_for_weights = noisy_weights.shape[0]
+
+        Validator.check_matching_dimensions(number_of_samples_for_mu_prediction,
+                                            number_of_samples_for_weights)
+
+        if len(noisy_weights.shape) != 2:
+            raise ValueError("The expected shape for the noisy weight is [number_of_samples x number_of_weights]")
+
+        if len(mu_prediction.shape) != 2:
+            raise ValueError("The expected shape for the mu_prediction is [batch_size x number_of_samples]")
 
         if self.use_gpu:
             move_to_gpu(noisy_weights)
@@ -127,12 +170,13 @@ class LossRegressionGaussianWithCorrelations(nn.Module):
             move_to_gpu(y_true)
 
         size_of_batch = len(y_true)
+        number_of_samples = noisy_weights.shape[0]
 
         # Loss term from prior
-        loss_term_from_prior = self.prior_function.log_prob(noisy_weights).sum()
+        loss_term_from_prior = self.calculate_loss_term_from_prior(noisy_weights)
 
         # Loss term from likelihood
-        loss_term_from_likelihood = self.calculate_likelihood_loss_term(y_true, mu_prediction, sigma_prediction)
+        loss_term_from_likelihood = self.calculate_loss_term_from_likelihood(y_true, mu_prediction, sigma_prediction)
 
         # Loss term from variational distribution
         loss_term_from_variational_approximation = self.calculate_loss_term_from_variation_distribution(noisy_weights,
@@ -144,32 +188,60 @@ class LossRegressionGaussianWithCorrelations(nn.Module):
 
         return total_loss
 
-    def calculate_likelihood_loss_term(self, y_true, mu_prediction, sigma_prediction):
+    def calculate_loss_term_from_prior(self, noisy_weights):
+
+        number_of_samples = noisy_weights.shape[self.INDEX_NOISY_WEIGHTS_FOR_SAMPLES]
+        log_prob_vector = Variable(torch.ones((number_of_samples,)).cuda()) \
+            if self.use_gpu else Variable(torch.ones((number_of_samples,)))
+
+        for index_sample in range(number_of_samples):
+
+            weights = noisy_weights[index_sample]
+            log_prob_vector[index_sample] = self.prior_function.log_prob(weights).sum()
+
+        loss_term_from_likelihood = log_prob_vector.sum().cuda()/number_of_samples
+
+        return loss_term_from_likelihood
+
+    def calculate_loss_term_from_likelihood(self, y_true, mu_prediction, sigma_prediction):
 
         size_of_batch = len(y_true)
         log_prob_vector = Variable(torch.ones((size_of_batch,)).cuda()) \
             if self.use_gpu else Variable(torch.ones((size_of_batch,)))
 
-        for i in range(size_of_batch):
-            mu = mu_prediction[i].cuda() if self.use_gpu else mu_prediction[i]
-            sigma = sigma_prediction.cuda() if self.use_gpu else sigma_prediction
-            y_expected = y_true[i].cuda() if self.use_gpu else y_true[i]
+        number_of_samples = mu_prediction.shape[self.INDEX_MU_PREDICTION_FOR_SAMPLES]
 
-            normal_function_for_likelihood = Normal(mu, sigma)
-            log_prob_vector[i] = normal_function_for_likelihood.log_prob(y_expected)
+        for index_in_batch in range(size_of_batch):
+            mu = mu_prediction[index_in_batch,].cuda() if self.use_gpu else mu_prediction[i]
+            sigma = sigma_prediction.cuda() if self.use_gpu else sigma_prediction
+            y_expected = y_true[index_in_batch].cuda() if self.use_gpu else y_true[index_in_batch]
+
+            normal_function_for_likelihood = MultivariateNormal(mu, sigma*torch.eye(number_of_samples).cuda())
+            log_prob_vector[index_in_batch] = normal_function_for_likelihood.log_prob(y_expected)
 
         log_prob_vector = log_prob_vector.cuda()
 
-        loss_term_from_likelihood = log_prob_vector.sum()
+        loss_term_from_likelihood = log_prob_vector.sum()/number_of_samples
 
         return loss_term_from_likelihood
 
     def calculate_loss_term_from_variation_distribution(self, noisy_weights, mu_weights, sigma_matrix_weights):
 
-        normal_function_for_weights = MultivariateNormal(mu_weights.cuda(),
-                                                         covariance_matrix=sigma_matrix_weights.cuda())
+        number_of_samples = noisy_weights.shape[self.INDEX_NOISY_WEIGHTS_FOR_SAMPLES]
+        log_prob_vector = Variable(torch.ones((number_of_samples,)).cuda()) \
+            if self.use_gpu else Variable(torch.ones((number_of_samples,)))
 
-        loss_term_from_variational_approximation = normal_function_for_weights.log_prob(noisy_weights.cuda())
+        for index_sample in range(number_of_samples):
+
+            weights = noisy_weights[index_sample]
+            normal_function_for_weights = MultivariateNormal(mu_weights.cuda(),
+                                                             covariance_matrix=sigma_matrix_weights.cuda())
+
+            log_prob_vector[index_sample] = normal_function_for_weights.log_prob(weights.cuda())
+            #weights = noisy_weights[index_sample]
+            #log_prob_vector[index_sample] = self.prior_function.log_prob(weights).sum()
+
+        loss_term_from_variational_approximation = log_prob_vector.sum().cuda() / number_of_samples
 
         return loss_term_from_variational_approximation
 

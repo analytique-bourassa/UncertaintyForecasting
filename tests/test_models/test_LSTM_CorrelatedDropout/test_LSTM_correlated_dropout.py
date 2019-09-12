@@ -86,7 +86,7 @@ class TestLSTM_CorrelatedDropout(object):
         original_weights_lstm = get_lstm_weights(model.lstm)
 
         # Action
-        optimizer_1 = torch.optim.Adam(itertools.chain(model.parameters(), [model.weights_mu]),
+        optimizer_1 = torch.optim.Adam(model.pretraining_parameters_for_optimization,
                                        lr=learning_rate)
 
         loss_function_pretraining = torch.nn.MSELoss(size_average=False)
@@ -134,7 +134,7 @@ class TestLSTM_CorrelatedDropout(object):
         learning_rate = 1e-3
 
         # Action
-        optimizer = torch.optim.Adam(itertools.chain(model.parameters(), [model.weights_mu]),
+        optimizer = torch.optim.Adam(model.pretraining_parameters_for_optimization,
                                        lr=learning_rate)
 
         loss_function_pretraining = torch.nn.MSELoss(size_average=False)
@@ -175,8 +175,7 @@ class TestLSTM_CorrelatedDropout(object):
         original_covariance_matrix = model.covariance_matrix.cpu().detach().numpy()
 
         # Action
-        optimizer = torch.optim.Adam([model.weights_mu, model.prediction_sigma,
-                                                                  model.covariance_factor],
+        optimizer = torch.optim.Adam(model.training_parameters_for_optimization,
                                        lr=learning_rate)
 
         loss_training = LossRegressionGaussianWithCorrelations(1.0, lstm_params.hidden_dim)
@@ -220,8 +219,7 @@ class TestLSTM_CorrelatedDropout(object):
         original_prediction_sigma = model.prediction_sigma.cpu().detach().numpy()
 
         # Action
-        optimizer = torch.optim.Adam([model.weights_mu, model.prediction_sigma,
-                                      model.covariance_factor],
+        optimizer = torch.optim.Adam(model.training_parameters_for_optimization,
                                      lr=learning_rate)
 
         loss_training = LossRegressionGaussianWithCorrelations(1.0, lstm_params.hidden_dim)
