@@ -7,6 +7,12 @@ from torch.distributions.multivariate_normal import MultivariateNormal
 
 from utils.validator import Validator
 
+
+from time_profile_logger.time_profiler_logging import TimeProfilerLogger
+from time_profile_logger.timers import TimerContext, timer_decorator
+
+logger = TimeProfilerLogger.getInstance()
+
 class LossRegressionGaussianNoCorrelations(nn.Module):
 
     def __init__(self, prior_sigma, number_of_weights, use_gpu=True):
@@ -54,6 +60,7 @@ class LossRegressionGaussianNoCorrelations(nn.Module):
 
         return total_loss
 
+    @timer_decorator(show_time_elapsed=False, logger=logger)
     def calculate_likelihood_loss_term(self, y_true, mu_prediction, sigma_prediction):
 
         size_of_batch = len(y_true)
@@ -73,6 +80,7 @@ class LossRegressionGaussianNoCorrelations(nn.Module):
 
         return loss_term_from_likelihood
 
+    @timer_decorator(show_time_elapsed=False, logger=logger)
     def calculate_loss_term_from_variation_distribution(self, noisy_weights, mu_weights, sigma_weights):
 
         number_of_weights = noisy_weights.shape[0]
@@ -99,6 +107,7 @@ class LossRegressionGaussianWithCorrelations(nn.Module):
         assert torch.cuda.is_available(), "The current loss implementation need cuda"
 
         self.prior_function = Normal(0, prior_sigma)
+        self.prior_sigma = torch.Tensor([prior_sigma])
         self.number_of_weights = number_of_weights
         self._use_gpu = use_gpu
 
@@ -170,7 +179,6 @@ class LossRegressionGaussianWithCorrelations(nn.Module):
             move_to_gpu(y_true)
 
         size_of_batch = len(y_true)
-        number_of_samples = noisy_weights.shape[0]
 
         # Loss term from prior
         loss_term_from_prior = self.calculate_loss_term_from_prior(noisy_weights)
@@ -188,21 +196,18 @@ class LossRegressionGaussianWithCorrelations(nn.Module):
 
         return total_loss
 
+    @timer_decorator(show_time_elapsed=False, logger=logger)
     def calculate_loss_term_from_prior(self, noisy_weights):
 
         number_of_samples = noisy_weights.shape[self.INDEX_NOISY_WEIGHTS_FOR_SAMPLES]
-        log_prob_vector = Variable(torch.ones((number_of_samples,)).cuda()) \
-            if self.use_gpu else Variable(torch.ones((number_of_samples,)))
 
-        for index_sample in range(number_of_samples):
+        log_probabilities = self.prior_function.log_prob(noisy_weights.cuda())
 
-            weights = noisy_weights[index_sample]
-            log_prob_vector[index_sample] = self.prior_function.log_prob(weights).sum()
-
-        loss_term_from_likelihood = log_prob_vector.sum().cuda()/number_of_samples
+        loss_term_from_likelihood = log_probabilities.sum().cuda()/number_of_samples
 
         return loss_term_from_likelihood
 
+    @timer_decorator(show_time_elapsed=False, logger=logger)
     def calculate_loss_term_from_likelihood(self, y_true, mu_prediction, sigma_prediction):
 
         size_of_batch = len(y_true)
@@ -211,13 +216,16 @@ class LossRegressionGaussianWithCorrelations(nn.Module):
 
         number_of_samples = mu_prediction.shape[self.INDEX_MU_PREDICTION_FOR_SAMPLES]
 
+        sigma = sigma_prediction.cuda() if self.use_gpu else sigma_prediction
+
         for index_in_batch in range(size_of_batch):
-            mu = mu_prediction[index_in_batch,].cuda() if self.use_gpu else mu_prediction[i]
-            sigma = sigma_prediction.cuda() if self.use_gpu else sigma_prediction
+
+            mu = mu_prediction[index_in_batch].cuda() if self.use_gpu else mu_prediction[index_in_batch]
             y_expected = y_true[index_in_batch].cuda() if self.use_gpu else y_true[index_in_batch]
 
-            normal_function_for_likelihood = MultivariateNormal(mu, sigma*torch.eye(number_of_samples).cuda())
-            log_prob_vector[index_in_batch] = normal_function_for_likelihood.log_prob(y_expected)
+            normal_function = Normal(y_expected, sigma)
+            log_prob_vector_samples = normal_function.log_prob(mu.cuda())
+            log_prob_vector[index_in_batch] = log_prob_vector_samples.sum()
 
         log_prob_vector = log_prob_vector.cuda()
 
@@ -225,22 +233,15 @@ class LossRegressionGaussianWithCorrelations(nn.Module):
 
         return loss_term_from_likelihood
 
+
+    @timer_decorator(show_time_elapsed=False, logger=logger)
     def calculate_loss_term_from_variation_distribution(self, noisy_weights, mu_weights, sigma_matrix_weights):
 
         number_of_samples = noisy_weights.shape[self.INDEX_NOISY_WEIGHTS_FOR_SAMPLES]
-        log_prob_vector = Variable(torch.ones((number_of_samples,)).cuda()) \
-            if self.use_gpu else Variable(torch.ones((number_of_samples,)))
-
-        for index_sample in range(number_of_samples):
-
-            weights = noisy_weights[index_sample]
-            normal_function_for_weights = MultivariateNormal(mu_weights.cuda(),
+        normal_function_for_weights = MultivariateNormal(mu_weights.cuda(),
                                                              covariance_matrix=sigma_matrix_weights.cuda())
 
-            log_prob_vector[index_sample] = normal_function_for_weights.log_prob(weights.cuda())
-            #weights = noisy_weights[index_sample]
-            #log_prob_vector[index_sample] = self.prior_function.log_prob(weights).sum()
-
+        log_prob_vector = normal_function_for_weights.log_prob(noisy_weights.cuda())
         loss_term_from_variational_approximation = log_prob_vector.sum().cuda() / number_of_samples
 
         return loss_term_from_variational_approximation
