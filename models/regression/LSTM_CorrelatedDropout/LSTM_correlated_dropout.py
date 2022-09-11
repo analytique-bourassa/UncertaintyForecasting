@@ -9,6 +9,10 @@ from torch.distributions.uniform import Uniform
 from utils.validator import Validator
 #from models.regression.LSTM_CorrelatedDropout.distribution_tools import initialize_covariance_matrix
 from torch.distributions.multivariate_normal import MultivariateNormal
+from time_profile_logger.time_profiler_logging import TimeProfilerLogger
+from time_profile_logger.timers import TimerContext, timer_decorator
+
+logger = TimeProfilerLogger.getInstance()
 
 class LSTM_correlated_dropout(nn.Module):
 
@@ -168,28 +172,32 @@ class LSTM_correlated_dropout(nn.Module):
 
             if self.is_pretraining:
 
-                y_pred = self.make_linear_product(self.weights_mu, lstm_out)
+                with TimerContext(name="pretraining_forward",show_time_when_exit=False, logger=logger):
 
-                return y_pred
+                    y_pred = self.make_linear_product(self.weights_mu, lstm_out)
 
-            else:
+                    return y_pred
 
-                y_pred_mean_samples = torch.ones((self.params.batch_size, self.number_of_samples_for_training))
-                noisy_weights_samples = torch.ones((self.number_of_samples_for_training,
-                                                    self.params.hidden_dim + 1))
+            else: # training of variational parameters
 
-                for sample_index in range(self.number_of_samples_for_training):
+                with TimerContext(name="training_forward", show_time_when_exit=False, logger=logger):
 
-                    deviation = self.generate_correlated_dropout_noise()
-                    noisy_weights = self.weights_mu.cuda() + deviation.cuda()
+                    y_pred_mean_samples = torch.ones((self.params.batch_size, self.number_of_samples_for_training))
+                    noisy_weights_samples = torch.ones((self.number_of_samples_for_training,
+                                                        self.params.hidden_dim + 1))
 
-                    y_pred_mean = self.make_linear_product(noisy_weights, lstm_out)
+                    for sample_index in range(self.number_of_samples_for_training):
 
-                    y_pred_mean_samples[:, sample_index] = y_pred_mean.reshape(-1)
-                    noisy_weights_samples[sample_index, :] = noisy_weights.view(-1).clone()
+                        deviation = self.generate_correlated_dropout_noise()
+                        noisy_weights = self.weights_mu.cuda() + deviation.cuda()
 
-                return noisy_weights_samples, self.weights_mu.view(-1).clone(), \
-                        self.covariance_matrix.clone(), y_pred_mean_samples, self.prediction_sigma.clone()
+                        y_pred_mean = self.make_linear_product(noisy_weights, lstm_out)
+
+                        y_pred_mean_samples[:, sample_index] = y_pred_mean.reshape(-1)
+                        noisy_weights_samples[sample_index, :] = noisy_weights.view(-1).clone()
+
+                    return noisy_weights_samples, self.weights_mu.view(-1).clone(), \
+                            self.covariance_matrix.clone(), y_pred_mean_samples, self.prediction_sigma.clone()
 
         else:
 
@@ -210,10 +218,9 @@ class LSTM_correlated_dropout(nn.Module):
 
             else:
 
+                y_pred = torch.ones((self.params.batch_size, self.number_of_samples_for_predictions))
 
-                y_pred = torch.ones((self.params.batch_size, self.number_of_samples))
-
-                for sample_index in range(self.number_of_samples):
+                for sample_index in range(self.number_of_samples_for_predictions):
 
                     deviation = self.generate_correlated_dropout_noise()
                     noisy_weights = self.weights_mu.cuda() + deviation.cuda()
@@ -225,6 +232,7 @@ class LSTM_correlated_dropout(nn.Module):
 
                 return y_pred
 
+    #@timer_decorator(show_time_elapsed=False, logger=logger)
     def generate_correlated_dropout_noise(self):
 
         noise_generator = MultivariateNormal(torch.zeros(self.params.hidden_dim + 1).cuda(),
@@ -239,11 +247,13 @@ class LSTM_correlated_dropout(nn.Module):
         print("covariance: ", self.covariance_matrix)
         print("sigma: ", self.prediction_sigma)
 
+    #@timer_decorator(show_time_elapsed=False, logger=logger)
     def make_linear_product(self, weights, lstm_out):
 
         return F.linear(lstm_out[-1].view(self.params.batch_size, -1),
                  weights[None, :-1], weights[None, -1]).view(-1)
 
+    #@timer_decorator(show_time_elapsed=False, logger=logger)
     def add_noise_to_predictions_means(self, y_pred_mean):
 
         noise_generator = Normal(0, self.prediction_sigma)

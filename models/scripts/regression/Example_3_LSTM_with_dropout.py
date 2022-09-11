@@ -1,15 +1,8 @@
 
-# coding: utf-8
-
-# In[1]:
-
 
 import sys
-PATH_FOR_PROJECT = "/home/louis/Dropbox/ConsultationSimpliphAI/"            "AnalytiqueBourassaGit/UncertaintyForecasting/"
+PATH_FOR_PROJECT = "/home/louis/Dropbox/ConsultationSimpliphAI/AnalytiqueBourassaGit/UncertaintyForecasting/"
 sys.path.append(PATH_FOR_PROJECT)
-
-
-# In[2]:
 
 
 from tqdm import tqdm
@@ -18,16 +11,14 @@ from models.model_data_feeder import *
 from visualisations.visualisations import Visualisator
 from models.training_tools.early_stopping import EarlyStopping
 
+from time_profile_logger.time_profiler_logging import TimeProfilerLogger
+
+logger = TimeProfilerLogger.getInstance()
 
 # # 0. Define experiment parameters
 
-# In[3]:
-
 
 from models.script_parameters.parameters import ExperimentParameters
-
-
-# In[4]:
 
 
 IS_DROPOUT_WITH_CORRELATION = True
@@ -35,9 +26,9 @@ early_stopper = EarlyStopping(patience=4, verbose=True)
 
 experiment_params = ExperimentParameters()
 
-experiment_params.path = "/home/louis/Documents/ConsultationSimpliphAI/"            "AnalytiqueBourassaGit/UncertaintyForecasting/models/LSTM_BayesRegressor/.models/"
+experiment_params.path = "/home/louis/Documents/ConsultationSimpliphAI/AnalytiqueBourassaGit/UncertaintyForecasting/models/LSTM_BayesRegressor/.models/"
 
-path_results = "/home/louis/Documents/ConsultationSimpliphAI/"            "AnalytiqueBourassaGit/UncertaintyForecasting/models/LSTM_BayesRegressor/"
+path_results = "/home/louis/Documents/ConsultationSimpliphAI/AnalytiqueBourassaGit/UncertaintyForecasting/models/LSTM_BayesRegressor/"
 
 
 experiment_params.version = "v0.1.0"
@@ -48,9 +39,6 @@ experiment_params.save_lstm = False
 experiment_params.type_of_data = "autoregressive-5" # options are sin or "autoregressive-5"
 experiment_params.name = "feature_extractor_" + experiment_params.type_of_data
 
-
-
-
 # # 1.  generate data from ARMA process
 
 # In[5]:
@@ -59,15 +47,8 @@ experiment_params.name = "feature_extractor_" + experiment_params.type_of_data
 from data_handling.data_reshaping import reshape_data_for_LSTM, reshape_into_sequences
 from data_generation.data_generators_switcher import DatageneratorsSwitcher
 
-
-# In[6]:
-
-
 n_data = 1000
 length_of_sequences = 7 + 1
-
-
-# In[7]:
 
 
 data_generator = DatageneratorsSwitcher(experiment_params.type_of_data)
@@ -93,8 +74,6 @@ if experiment_params.show_figures:
 
 # ## 2.1 Define parameters of model and optimizer
 
-# In[8]:
-
 
 from models.regression.LSTM_CorrelatedDropout.LSTM_not_correlated_dropout import LSTM_not_correlated_dropout
 from models.regression.LSTM_CorrelatedDropout.losses import LossRegressionGaussianNoCorrelations
@@ -103,10 +82,6 @@ from models.regression.LSTM_CorrelatedDropout.LSTM_correlated_dropout import LST
 from models.regression.LSTM_CorrelatedDropout.losses import LossRegressionGaussianWithCorrelations
 
 from models.lstm_params import LSTM_parameters
-
-
-# In[9]:
-
 
 lstm_params = LSTM_parameters()
 lstm_params.batch_size = 20
@@ -205,13 +180,10 @@ if experiment_params.train_lstm:
 
 # ## 2.2 Training of bayesian parameters with variational loss
 
-
-
 if experiment_params.train_lstm:
     
-    early_stopper_2 = EarlyStopping(patience=10, verbose=True)
+    early_stopper_2 = EarlyStopping(patience=4, verbose=True)
 
-    
     hist = np.zeros(num_epochs)
     for epoch in tqdm(range(num_epochs)):
         model.hidden = model.init_hidden()
@@ -235,8 +207,6 @@ if experiment_params.train_lstm:
                                                            loss_fn,
                                                            data_train,
                                                            lstm_params.batch_size)
-        
-        
                 
         hist[epoch] = losses
 
@@ -264,8 +234,6 @@ if experiment_params.save_lstm:
 
 
 # # 3. Anlysis of results
-
-
 
 y_pred, y_true = make_predictions(data_loader_sequences, model, all_data, lstm_params.batch_size)
 
@@ -325,7 +293,7 @@ deviation_score_marginal_calibration = calculate_marginal_calibration(prediction
 
 show_analysis(predictions.values, predictions.true_values, name="LSTM + dropout")
 
-
 predictions.train_data = y_train
 predictions.show_predictions_with_training_data(confidence_interval=0.95)
 
+logger.show_times()
