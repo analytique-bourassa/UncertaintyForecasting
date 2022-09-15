@@ -1,7 +1,7 @@
 import numpy as np
 
-from probabilitic_predictions.probabilistic_predictions_classification import ProbabilisticPredictionsClassification
-from models.calibration.diagnostics import calculate_static_calibration_error
+from uncertainty_forecasting.probabilitic_predictions.probabilistic_predictions_classification import ProbabilisticPredictionsClassification
+from uncertainty_forecasting.models.calibration.diagnostics import calculate_static_calibration_error
 class TestDiagnostics():
 
     def test_if_shape_of_predictions_is_good_should_return_calibration_curve(self):

@@ -1,0 +1,312 @@
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/bin/python /home/louis/Dropbox/ConsultationSimpliphAI/AnalytiqueBourassaGit/UncertaintyForecasting/models/scripts/regression/finding_best_seed.py
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 0
+PDS: 0.06162448979591836
+DEC: 0.03014489795918366
+MCS: 0.03855476884631402
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 1
+PDS: 0.2650612244897959
+DEC: 0.13359183673469385
+MCS: 0.03376197417742607
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 2
+PDS: 0.24232653061224493
+DEC: 0.1190204081632653
+MCS: 0.04155768429820907
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 3
+PDS: 0.15278571428571427
+DEC: 0.08304897959183674
+MCS: 0.033225739275301966
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 4
+PDS: 0.2027448979591837
+DEC: 0.09868775510204084
+MCS: 0.04211266139108705
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 5
+PDS: 0.057551020408163255
+DEC: 0.03964285714285714
+MCS: 0.04296543107038735
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 6
+PDS: 0.05405102040816326
+DEC: 0.027259183673469387
+MCS: 0.038389212827988344
+------------------------
+seed: 7
+PDS: 0.0720734693877551
+DEC: 0.04179591836734693
+MCS: 0.041029779258642235
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 8
+PDS: 0.23395918367346935
+DEC: 0.11393265306122449
+MCS: 0.04072886297376094
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 9
+PDS: 0.02426734693877551
+DEC: 0.017151020408163263
+MCS: 0.03907538525614328
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 10
+PDS: 0.10963265306122448
+DEC: 0.05296326530612246
+MCS: 0.03839858392336527
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 11
+PDS: 0.05060204081632655
+DEC: 0.023718367346938777
+MCS: 0.03830070803831738
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 12
+PDS: 0.04828775510204081
+DEC: 0.028787755102040805
+MCS: 0.046220324864639735
+------------------------
+seed: 13
+PDS: 0.0191673469387755
+DEC: 0.01074897959183673
+MCS: 0.03915660141607663
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 14
+PDS: 0.06154081632653062
+DEC: 0.028663265306122458
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+MCS: 0.034474177426072464
+------------------------
+seed: 15
+PDS: 0.1400204081632653
+DEC: 0.07241836734693877
+MCS: 0.03576114119117034
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 16
+PDS: 0.15681632653061223
+DEC: 0.08263265306122448
+MCS: 0.033818200749687624
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 17
+PDS: 0.11106122448979593
+DEC: 0.05394285714285713
+MCS: 0.038984798000832994
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 18
+PDS: 0.22938775510204082
+DEC: 0.12032653061224488
+MCS: 0.05158059142024156
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 19
+PDS: 0.19418367346938778
+DEC: 0.09307551020408161
+MCS: 0.040286339025406084
+------------------------
+seed: 20
+PDS: 0.12789795918367347
+DEC: 0.07537755102040816
+MCS: 0.0443075801749271
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 21
+PDS: 0.24230612244897962
+DEC: 0.12101020408163261
+MCS: 0.036180758017492716
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 22
+PDS: 0.1916326530612245
+DEC: 0.09387755102040819
+MCS: 0.043247605164514785
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 23
+PDS: 0.2947142857142857
+DEC: 0.14965918367346936
+MCS: 0.03591003748438153
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 24
+PDS: 0.07892244897959183
+DEC: 0.043397959183673465
+MCS: 0.03653790087463557
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 25
+PDS: 0.12548979591836734
+DEC: 0.06593673469387754
+MCS: 0.04000520616409828
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 26
+PDS: 0.10018367346938777
+DEC: 0.04901428571428573
+MCS: 0.0419158683881716
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 27
+PDS: 0.20166326530612247
+DEC: 0.10221224489795916
+MCS: 0.042778009162848823
+------------------------
+seed: 28
+PDS: 0.2066836734693878
+DEC: 0.10722244897959182
+MCS: 0.03750728862973761
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 29
+PDS: 0.07424489795918368
+DEC: 0.03378979591836735
+MCS: 0.03790920449812579
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 30
+PDS: 0.31545918367346937
+DEC: 0.1650163265306122
+MCS: 0.046631611828404834
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 31
+PDS: 0.13531020408163266
+DEC: 0.06574489795918369
+MCS: 0.040554977092877975
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 32
+PDS: 0.3095204081632653
+DEC: 0.1572204081632653
+MCS: 0.042204289879217004
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 33
+PDS: 0.1776326530612245
+DEC: 0.09415306122448977
+MCS: 0.03913681799250313
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 34
+PDS: 0.0899387755102041
+DEC: 0.044738775510204096
+MCS: 0.043599541857559355
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 35
+PDS: 0.256295918367347
+DEC: 0.1293469387755102
+MCS: 0.03295189504373179
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 36
+PDS: 0.13180612244897957
+DEC: 0.06186122448979592
+MCS: 0.03939920866305705
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 37
+PDS: 0.16977551020408163
+DEC: 0.08275918367346939
+MCS: 0.0412411495210329
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 38
+PDS: 0.17353061224489794
+DEC: 0.08439183673469389
+MCS: 0.03577780091628488
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 39
+PDS: 0.12353061224489795
+DEC: 0.06294489795918366
+MCS: 0.043577675968346524
+------------------------
+seed: 40
+PDS: 0.07888775510204081
+DEC: 0.04428571428571427
+MCS: 0.0418107038733861
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 41
+PDS: 0.016869387755102036
+DEC: 0.010183673469387755
+MCS: 0.038557892544773
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+------------------------
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+seed: 42
+PDS: 0.19662244897959183
+DEC: 0.09577551020408162
+MCS: 0.03962411495210329
+  warnings.warn(warning.format(ret))
+------------------------
+seed: 43
+PDS: 0.09922857142857144
+DEC: 0.04635918367346939
+MCS: 0.04391087047063724
+/home/louis/anaconda3/envs/env_UncertaintyForecasting/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+

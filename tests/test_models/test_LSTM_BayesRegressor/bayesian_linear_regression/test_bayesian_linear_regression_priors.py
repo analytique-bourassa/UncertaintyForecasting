@@ -1,7 +1,7 @@
 import random
 import pytest
 
-from models.regression.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression_priors \
+from uncertainty_forecasting.models.regression.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression_priors \
     import BayesianLinearRegressionPriors
 
 INTEGER_GENERATION_UPPER_LIMIT = 100
