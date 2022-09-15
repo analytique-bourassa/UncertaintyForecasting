@@ -7,7 +7,7 @@ from uncertainty_forecasting.models.regression.LSTM_BayesRegressor.bayesian_line
 INTEGER_GENERATION_UPPER_LIMIT = 100
 
 
-class TestBayesianLinearRegressionParameters():
+class TestBayesianLinearRegressionParameters:
 
     """
     self.number_of_samples_for_predictions = 1000 if not SMOKE_TEST else 1
@@ -92,7 +92,7 @@ class TestBayesianLinearRegressionParameters():
 
         # Action
         with pytest.raises(ValueError):
-            params.number_of_iterations = invalid_number_of_iterations
+            BayesianLinearRegressionParameters(number_of_iterations=invalid_number_of_iterations)
 
         # Assert
 
