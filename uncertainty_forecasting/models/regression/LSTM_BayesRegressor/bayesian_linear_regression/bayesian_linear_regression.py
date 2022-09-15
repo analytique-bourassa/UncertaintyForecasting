@@ -39,8 +39,11 @@ class BayesianLinearModel(ProbabilisticModelWrapperAbstract):
         self.shared_y = shared(y_train)
         ################################
 
-        self.params = BayesianLinearRegressionParameters(SMOKE_TEST)
-        self.priors = BayesianLinearRegressionPriors(priors_thetas)
+        self.params = BayesianLinearRegressionParameters()
+        if SMOKE_TEST:
+            self.params.set_for_smoke_test()
+
+        self.priors = BayesianLinearRegressionPriors()
 
 
         self.linear_model = pm.Model()

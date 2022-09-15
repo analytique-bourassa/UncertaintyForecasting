@@ -1,5 +1,6 @@
 import random
 import pytest
+from pydantic import ValidationError
 
 from uncertainty_forecasting.models.regression.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression_priors \
     import BayesianLinearRegressionPriors
@@ -25,7 +26,7 @@ class TestBayesianLinearRegressionParameters():
         invalid_mean_theta_0 = "I'm a string"
 
         # Action
-        with pytest.raises(TypeError):
+        with pytest.raises(ValidationError):
             priors.mean_theta_0 = invalid_mean_theta_0
 
         # Assert
@@ -48,7 +49,7 @@ class TestBayesianLinearRegressionParameters():
         invalid_mean_thetas = "I'm a string"
 
         # Action
-        with pytest.raises(TypeError):
+        with pytest.raises(ValidationError):
             priors.mean_thetas = invalid_mean_thetas
 
         # Assert
@@ -71,7 +72,7 @@ class TestBayesianLinearRegressionParameters():
         invalid_standard_deviation_theta_0 = "I'm a string"
 
         # Action
-        with pytest.raises(TypeError):
+        with pytest.raises(ValidationError):
             priors.standard_deviation_theta_0 = invalid_standard_deviation_theta_0
 
         # Assert
@@ -104,7 +105,7 @@ class TestBayesianLinearRegressionParameters():
         invalid_standard_deviation_thetas = "I'm a string"
 
         # Action
-        with pytest.raises(TypeError):
+        with pytest.raises(ValidationError):
             priors.standard_deviation_thetas = invalid_standard_deviation_thetas
 
         # Assert
@@ -137,7 +138,7 @@ class TestBayesianLinearRegressionParameters():
         invalid_standard_deviation_sigma = "I'm a string"
 
         # Action
-        with pytest.raises(TypeError):
+        with pytest.raises(ValidationError):
             priors.standard_deviation_sigma = invalid_standard_deviation_sigma
 
         # Assert
