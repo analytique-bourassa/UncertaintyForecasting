@@ -8,7 +8,7 @@ from uncertainty_forecasting.models.regression.LSTM_BayesRegressor.bayesian_line
 INTEGER_GENERATION_UPPER_LIMIT = 100
 
 
-class TestBayesianLinearRegressionParameters():
+class TestBayesianLinearRegressionParameters:
     """
     self.mean_theta_0 = 1.0
     if priors_thetas is not None:
