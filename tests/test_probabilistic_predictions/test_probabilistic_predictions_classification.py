@@ -1,6 +1,6 @@
 import numpy as np
 
-from probabilitic_predictions.probabilistic_predictions_classification import ProbabilisticPredictionsClassification
+from uncertainty_forecasting.probabilitic_predictions.probabilistic_predictions_classification import ProbabilisticPredictionsClassification
 
 class TestProbabilisticPredictions(object):
 

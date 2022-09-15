@@ -5,9 +5,9 @@ import numpy as np
 from torch.distributions.normal import Normal
 from torch.autograd import Variable
 
-from models.regression.LSTM_CorrelatedDropout.distribution_tools import initialize_covariance_matrix
-from models.regression.LSTM_CorrelatedDropout.losses import LossRegressionGaussianWithCorrelations
-from models.regression.LSTM_CorrelatedDropout.losses import LossRegressionGaussianNoCorrelations
+from uncertainty_forecasting.models.regression.LSTM_CorrelatedDropout.distribution_tools import initialize_covariance_matrix
+from uncertainty_forecasting.models.regression.LSTM_CorrelatedDropout.losses import LossRegressionGaussianWithCorrelations
+from uncertainty_forecasting.models.regression.LSTM_CorrelatedDropout.losses import LossRegressionGaussianNoCorrelations
 
 
 class TestLossWithCorrelation(object):

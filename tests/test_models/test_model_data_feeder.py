@@ -3,10 +3,10 @@ import numpy as np
 import torch.nn as nn
 import torch
 
-from models.model_data_feeder import data_loader_sequences
-from models.model_data_feeder import make_forward_pass
-from models.model_data_feeder import make_predictions
-from models.model_data_feeder import extract_features
+from uncertainty_forecasting.models.model_data_feeder import data_loader_sequences
+from uncertainty_forecasting.models.model_data_feeder import make_forward_pass
+from uncertainty_forecasting.models.model_data_feeder import make_predictions
+from uncertainty_forecasting.models.model_data_feeder import extract_features
 
 class TestModelDataFeeder(object):
 

@@ -2,17 +2,17 @@ import numpy as np
 import torch
 import itertools
 
-from models.regression.LSTM_CorrelatedDropout.LSTM_correlated_dropout import LSTM_correlated_dropout
-from models.regression.LSTM_CorrelatedDropout.losses import LossRegressionGaussianWithCorrelations
-from models.lstm_params import LSTM_parameters
+from uncertainty_forecasting.models.regression.LSTM_CorrelatedDropout.LSTM_correlated_dropout import LSTM_correlated_dropout
+from uncertainty_forecasting.models.regression.LSTM_CorrelatedDropout.losses import LossRegressionGaussianWithCorrelations
+from uncertainty_forecasting.models.lstm_params import LSTM_parameters
 
-from data_generation.data_generators_switcher import DatageneratorsSwitcher
-from data_handling.data_reshaping import reshape_data_for_LSTM, reshape_into_sequences
-from models.model_data_feeder import *
+from uncertainty_forecasting.data_generation.data_generators_switcher import DatageneratorsSwitcher
+from uncertainty_forecasting.data_handling.data_reshaping import reshape_data_for_LSTM, reshape_into_sequences
+from uncertainty_forecasting.models.model_data_feeder import *
 
 
-from utils.validator import Validator
-from utils.distances import calculate_Kullback_Leibler_divergence_covariance_matrix
+from uncertainty_forecasting.utils.validator import Validator
+from uncertainty_forecasting.utils.distances import calculate_Kullback_Leibler_divergence_covariance_matrix
 
 
 def check_mean_absolute_difference_bigger_than_learning_rate(value_1, value_2, learning_rate):
@@ -162,6 +162,7 @@ class TestLSTM_CorrelatedDropout(object):
         length_of_sequences = 7
         num_epochs_pretraining = 20
         learning_rate = 1e-3
+        min_change = 0.00001
 
         data = np.random.normal(0, 1, size=n_data)
         sequences = reshape_into_sequences(data, length_of_sequences)
@@ -197,7 +198,7 @@ class TestLSTM_CorrelatedDropout(object):
         # Assert
         assert check_mean_absolute_difference_bigger_than_learning_rate(original_covariance_matrix,
                                                                         new_covariance_matrix,
-                                                                        learning_rate)
+                                                                        min_change)
 
     def test_if_training_modify_sigma_prediction(self):
 

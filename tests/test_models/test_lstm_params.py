@@ -1,7 +1,7 @@
 import pytest
 import random
 
-from models.lstm_params import LSTM_parameters
+from uncertainty_forecasting.models.lstm_params import LSTM_parameters
 
 INTEGER_GENERATION_UPPER_LIMIT = 100
 

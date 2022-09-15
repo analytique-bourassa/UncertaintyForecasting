@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from probabilitic_predictions.probabilistic_predictions_regression import ProbabilisticPredictionsRegression
+from uncertainty_forecasting.probabilitic_predictions.probabilistic_predictions_regression import ProbabilisticPredictionsRegression
 
 class TestProbabilisticPredictions(object):
 
