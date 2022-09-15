@@ -10,6 +10,8 @@ from uncertainty_forecasting.models.regression.LSTM_BayesRegressor.bayesian_line
 from uncertainty_forecasting.models.regression.LSTM_BayesRegressor.bayesian_linear_regression.bayesian_linear_regression_priors import BayesianLinearRegressionPriors
 from uncertainty_forecasting.models.tools_pymc import from_posterior
 
+from .sampling_method_enum import SamplingMethod
+
 
 class BayesianLinearModel(ProbabilisticModelWrapperAbstract):
     """
@@ -18,16 +20,14 @@ class BayesianLinearModel(ProbabilisticModelWrapperAbstract):
     mu = sum_i=1 theta_i*z_i + theta_0
     """
 
-    POSSIBLE_OPTION_FOR_POSTERIOR_CALCULATION = ["NUTS",
-                                                 "ADVI-Mean-Field",
-                                                 "ADVI-full-rank",
-                                                 "Hybrid"]
+    POSSIBLE_OPTION_FOR_POSTERIOR_CALCULATION = [e.value for e in SamplingMethod]
+
 
     KEY_INDEX_FOR_NUMBER_OF_DATA = 0
 
     def __init__(self, X_train, y_train, priors_thetas=None, SMOKE_TEST=False):
 
-        self.option = "ADVI-Mean-Field"
+        self.option = SamplingMethod.ADVI_MEAN_FIELD.value
 
         ################################
         self.X_data = X_train
@@ -66,7 +66,7 @@ class BayesianLinearModel(ProbabilisticModelWrapperAbstract):
 
     def sample(self):
 
-        if self.option == "NUTS":
+        if self.option == SamplingMethod.NUTS.value:
             with self.linear_model:
 
                 step = pm.NUTS()
@@ -74,7 +74,7 @@ class BayesianLinearModel(ProbabilisticModelWrapperAbstract):
                                        step,
                                        tune=self.params.number_of_tuning_steps)
 
-        elif self.option == "ADVI-Mean-Field":
+        elif self.option == SamplingMethod.ADVI_MEAN_FIELD.value:
             with self.linear_model:
 
                 self.advi_fit = pm.fit(method=pm.ADVI(),
@@ -82,14 +82,14 @@ class BayesianLinearModel(ProbabilisticModelWrapperAbstract):
 
                 self.trace = self.advi_fit.sample(self.params.number_of_samples_for_posterior)
 
-        elif self.option == "ADVI-full-rank":
+        elif self.option == SamplingMethod.ADVI_FULL_RANK.value:
             with self.linear_model:
                 self.advi_fit = pm.fit(method='fullrank_advi',
                                        n=self.params.number_of_iterations)
 
                 self.trace = self.advi_fit.sample(self.params.number_of_samples_for_posterior)
 
-        elif self.option == "Hybrid":
+        elif self.option == SamplingMethod.HYBRID.value:
             with self.linear_model:
 
                 self.advi_fit = pm.fit(method=pm.ADVI(),
@@ -149,7 +149,7 @@ class BayesianLinearModel(ProbabilisticModelWrapperAbstract):
         zeros = np.zeros(X_test.shape[0], dtype=np.float32)
         self.shared_y.set_value(zeros)
 
-        if self.option == "Hybrid":
+        if self.option == SamplingMethod.HYBRID.value:
             ppc = pm.sample_ppc(self.trace,
                                 model=self.linear_model_2,
                                 samples=self.params.number_of_samples_for_predictions)
